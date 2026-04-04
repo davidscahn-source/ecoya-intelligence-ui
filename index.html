@@ -4,284 +4,414 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>ECOYA Intelligence Terminal</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#050a14;color:#e2e8f0;font-family:'DM Mono',monospace;height:100vh;display:flex;flex-direction:column;overflow:hidden}
-.hdr{display:flex;align-items:center;justify-content:space-between;padding:10px 18px;background:#0a1628;border-bottom:1px solid #00c9a720;flex-shrink:0}
-.logo{display:flex;align-items:center;gap:9px}
-.lm{width:24px;height:24px;background:linear-gradient(135deg,#00c9a7,#0066ff);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:#fff}
-.lt{font-size:13px;font-weight:700;letter-spacing:.12em;color:#00c9a7}
-.ls{font-size:8px;color:#475569;letter-spacing:.14em}
+body{background:#07111f;color:#f1f5f9;font-family:'DM Sans',sans-serif;height:100vh;display:flex;flex-direction:column;overflow:hidden}
+
+/* ── HEADER ── */
+.hdr{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;background:#0b1a2e;border-bottom:2px solid #00c9a7;flex-shrink:0;z-index:10}
+.logo{display:flex;align-items:center;gap:10px}
+.lm{width:28px;height:28px;background:linear-gradient(135deg,#00c9a7,#0066ff);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fff}
+.lt{font-size:14px;font-weight:700;letter-spacing:.1em;color:#00c9a7;font-family:'DM Mono',monospace}
+.ls{font-size:9px;color:#64748b;letter-spacing:.12em}
 .hr{display:flex;align-items:center;gap:12px}
-.live{display:flex;align-items:center;gap:4px;font-size:9px;color:#00c9a7;letter-spacing:.1em}
-.dot{width:5px;height:5px;border-radius:50%;background:#00c9a7;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.clk{font-size:10px;color:#475569}
-.ver{font-size:9px;color:#1e3a5f;padding:2px 6px;border:1px solid #1e3a5f;border-radius:3px}
-.tkr-wrap{background:#0a1628;border-bottom:1px solid #0f2040;padding:5px 0;overflow:hidden;flex-shrink:0}
-.tkr{display:flex;gap:24px;animation:scroll 55s linear infinite;white-space:nowrap}
-@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-.ti{display:flex;align-items:center;gap:5px;font-size:10px}
-.tl{color:#64748b}.tv{color:#e2e8f0;font-weight:600}.tu{color:#00c9a7}.td{color:#ef4444}
-.body{display:flex;flex:1;overflow:hidden}
-.feed-col{flex:1;display:flex;flex-direction:column;border-right:1px solid #0f2040;overflow:hidden}
-.fhdr{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;flex-shrink:0;border-bottom:1px solid #0f204060}
-.ftitle{font-size:9px;color:#64748b;letter-spacing:.12em}
-.fctrl{display:flex;gap:4px;flex-wrap:wrap}
-.fb{padding:2px 7px;border-radius:3px;font-size:8px;letter-spacing:.06em;border:1px solid #0f2040;background:transparent;color:#64748b;cursor:pointer;transition:all .15s;font-family:'DM Mono',monospace}
-.fb.a,.fb:hover{border-color:#00c9a7;color:#00c9a7;background:#00c9a710}
-.feed{flex:1;overflow-y:auto;padding:10px 12px}
-.sc{background:#0a1628;border:1px solid #0f2040;border-radius:6px;padding:10px 10px 10px 13px;margin-bottom:7px;cursor:pointer;transition:all .15s;position:relative;overflow:hidden}
-.sc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px}
-.sc.uh::before{background:#ef4444}.sc.um::before{background:#f59e0b}.sc.ul::before{background:#00c9a7}
-.sc:hover{border-color:#00c9a740;transform:translateX(2px)}.sc.sel{border-color:#00c9a7}
-.stop{display:flex;align-items:flex-start;justify-content:space-between;gap:6px;margin-bottom:6px}
-.smeta{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
-.scat{font-size:7px;letter-spacing:.1em;padding:1px 5px;border-radius:2px;background:#0f2040;color:#64748b}
-.scat.MACRO{color:#8b5cf6;background:#8b5cf610}.scat.COMMODITY{color:#f59e0b;background:#f59e0b10}
-.scat.SHIPPING{color:#3b82f6;background:#3b82f610}.scat.GEOPOLITICAL{color:#ef4444;background:#ef444410}
-.scat.CLIMATE{color:#00c9a7;background:#00c9a710}.scat.REGULATORY{color:#ec4899;background:#ec489910}
-.scat.SENTIMENT{color:#6366f1;background:#6366f110}
-.ssrc{font-size:7px;color:#334155;padding:1px 4px;border:1px solid #1e2940;border-radius:2px}
-.stime{font-size:8px;color:#475569}
-.ub{font-size:9px;font-weight:700;padding:1px 6px;border-radius:3px;min-width:22px;text-align:center;flex-shrink:0}
-.u9,.u10{background:#ef444420;color:#ef4444;border:1px solid #ef444440}
-.u7,.u8{background:#f59e0b20;color:#f59e0b;border:1px solid #f59e0b40}
-.u5,.u6{background:#00c9a715;color:#00c9a7;border:1px solid #00c9a730}
-.u1,.u2,.u3,.u4{background:#1e2940;color:#475569;border:1px solid #0f2040}
-.shl{font-size:12px;color:#e2e8f0;font-weight:600;line-height:1.35;margin-bottom:4px;font-family:'DM Sans',sans-serif}
-.ssum{font-size:10px;color:#94a3b8;line-height:1.4}
-.strade{font-size:9px;color:#00c9a7;margin-top:5px;padding:3px 7px;background:#00c9a708;border-radius:3px;border-left:2px solid #00c9a740}
-.sast{display:flex;gap:3px;flex-wrap:wrap;margin-top:5px}
-.at{font-size:8px;padding:1px 4px;border-radius:2px;background:#0f2040;color:#475569;border:1px solid #1e2940}
-.panel{width:290px;background:#080f1e;overflow-y:auto;flex-shrink:0}
-.ps{padding:12px;border-bottom:1px solid #0f2040}
-.ptitle{font-size:9px;color:#64748b;letter-spacing:.12em;margin-bottom:9px}
-.sg{display:grid;grid-template-columns:1fr 1fr;gap:6px}
-.sb{background:#0a1628;border:1px solid #0f2040;border-radius:5px;padding:8px}
-.sv{font-size:18px;font-weight:700;color:#00c9a7}.sl{font-size:8px;color:#64748b;letter-spacing:.08em;margin-top:1px}
-.fx-grid{display:flex;flex-direction:column;gap:5px}
-.fx-row{display:flex;align-items:center;justify-content:space-between;padding:4px 0;border-bottom:1px solid #0f204040}
-.fx-row:last-child{border:none}
-.fx-pair{font-size:10px;color:#94a3b8}.fx-val{font-size:11px;font-weight:700;color:#e2e8f0}
-.fx-chg{font-size:9px}.fx-up{color:#00c9a7}.fx-dn{color:#ef4444}
-.src-grid{display:flex;flex-direction:column;gap:4px}
-.src-row{display:flex;align-items:center;justify-content:space-between}
-.src-name{font-size:9px;color:#94a3b8}.src-cnt{font-size:9px;color:#00c9a7;font-weight:700}
-.src-bar{height:3px;background:#0f2040;border-radius:2px;margin-top:2px;width:100%}
-.src-fill{height:3px;background:#00c9a7;border-radius:2px}
-.ir{display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #0f204040}
+.live-pill{display:flex;align-items:center;gap:5px;background:#00c9a715;border:1px solid #00c9a740;padding:3px 10px;border-radius:20px;font-size:10px;color:#00c9a7;font-weight:600;font-family:'DM Mono',monospace}
+.ldot{width:6px;height:6px;border-radius:50%;background:#00c9a7;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
+.clk{font-size:11px;color:#94a3b8;font-family:'DM Mono',monospace;font-weight:500}
+
+/* ── TRADINGVIEW TICKER ── */
+.tv-wrap{flex-shrink:0;background:#0b1a2e;border-bottom:1px solid #1e3a5f}
+.tradingview-widget-container{height:44px}
+.tradingview-widget-container__widget{height:44px}
+
+/* ── MAIN LAYOUT ── */
+.body{display:flex;flex:1;overflow:hidden;min-height:0}
+
+/* ── SIGNAL FEED ── */
+.feed-col{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
+.fhdr{display:flex;align-items:center;justify-content:space-between;padding:10px 16px 8px;flex-shrink:0;gap:8px;flex-wrap:wrap}
+.ftitle{font-size:10px;color:#64748b;letter-spacing:.12em;font-family:'DM Mono',monospace;font-weight:500;flex-shrink:0}
+.fctrl{display:flex;gap:5px;flex-wrap:wrap}
+.fb{padding:4px 10px;border-radius:4px;font-size:11px;font-weight:600;border:1px solid #1e3a5f;background:transparent;color:#64748b;cursor:pointer;transition:all .15s;font-family:'DM Mono',monospace;letter-spacing:.04em}
+.fb:hover{border-color:#00c9a760;color:#00c9a7;background:#00c9a708}
+.fb.a{border-color:#00c9a7;color:#00c9a7;background:#00c9a715;font-weight:700}
+.fb.high-btn.a{border-color:#ef4444;color:#ef4444;background:#ef444415}
+.fb.paper-btn.a{border-color:#f59e0b;color:#f59e0b;background:#f59e0b15}
+.feed{flex:1;overflow-y:auto;padding:8px 12px;display:flex;flex-direction:column;gap:7px}
+
+/* ── SIGNAL CARDS ── */
+.sc{border-radius:8px;padding:12px 14px;cursor:pointer;transition:all .15s;position:relative;overflow:hidden;border:1px solid transparent}
+/* urgency backgrounds */
+.sc.uh{background:#1a0a0a;border-color:#ef444430}
+.sc.uh:hover{border-color:#ef4444;background:#1f0c0c}
+.sc.um{background:#19150a;border-color:#f59e0b30}
+.sc.um:hover{border-color:#f59e0b;background:#1e190c}
+.sc.ul{background:#0a1a15;border-color:#00c9a720}
+.sc.ul:hover{border-color:#00c9a7;background:#0c1f19}
+.sc.udim{background:#0d1726;border-color:#1e3a5f20}
+.sc:hover.udim{border-color:#1e3a5f}
+.sc.sel{box-shadow:0 0 0 2px #00c9a7}
+/* left urgency bar */
+.sc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:8px 0 0 8px}
+.sc.uh::before{background:#ef4444}
+.sc.um::before{background:#f59e0b}
+.sc.ul::before{background:#00c9a7}
+.sc.udim::before{background:#334155}
+
+.stop{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:6px}
+.smeta{display:flex;align-items:center;gap:5px;flex-wrap:wrap;flex:1}
+.scat{font-size:9px;letter-spacing:.08em;padding:2px 7px;border-radius:3px;font-weight:700;font-family:'DM Mono',monospace}
+.scat.MACRO{color:#a78bfa;background:#7c3aed20;border:1px solid #7c3aed30}
+.scat.COMMODITY{color:#fbbf24;background:#d9770620;border:1px solid #d9770630}
+.scat.SHIPPING{color:#60a5fa;background:#2563eb20;border:1px solid #2563eb30}
+.scat.GEOPOLITICAL{color:#f87171;background:#dc262620;border:1px solid #dc262630}
+.scat.CLIMATE{color:#34d399;background:#05966920;border:1px solid #05966930}
+.scat.REGULATORY{color:#f472b6;background:#db277720;border:1px solid #db277730}
+.scat.SENTIMENT{color:#818cf8;background:#4338ca20;border:1px solid #4338ca30}
+.ssrc{font-size:8px;color:#475569;padding:1px 5px;border:1px solid #1e3a5f;border-radius:3px;font-family:'DM Mono',monospace}
+.stime{font-size:9px;color:#475569;font-family:'DM Mono',monospace}
+
+/* urgency badge - big and clear */
+.ub{font-size:11px;font-weight:700;padding:3px 9px;border-radius:5px;min-width:30px;text-align:center;flex-shrink:0;font-family:'DM Mono',monospace}
+.u9,.u10{background:#ef4444;color:#fff}
+.u7,.u8{background:#f59e0b;color:#07111f}
+.u5,.u6{background:#00c9a7;color:#07111f}
+.u1,.u2,.u3,.u4{background:#1e3a5f;color:#64748b}
+
+.shl{font-size:14px;color:#f1f5f9;font-weight:700;line-height:1.35;margin-bottom:5px;cursor:pointer}
+.shl:hover{color:#00c9a7;text-decoration:underline}
+.shl a{color:inherit;text-decoration:none}
+.shl a:hover{color:#00c9a7;text-decoration:underline}
+.ssum{font-size:12px;color:#94a3b8;line-height:1.5}
+.strade{font-size:11px;color:#00c9a7;margin-top:6px;padding:5px 10px;background:#00c9a710;border-radius:4px;border-left:3px solid #00c9a7;font-weight:500}
+.sast{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px}
+.at{font-size:9px;padding:2px 6px;border-radius:3px;background:#0d1f38;color:#64748b;border:1px solid #1e3a5f;font-family:'DM Mono',monospace}
+
+/* ── RIGHT PANEL ── */
+.panel{width:280px;background:#0b1626;overflow-y:auto;flex-shrink:0;border-left:1px solid #1e3a5f}
+.ps{padding:14px;border-bottom:1px solid #1e3a5f20}
+.ptitle{font-size:9px;color:#64748b;letter-spacing:.14em;margin-bottom:10px;font-family:'DM Mono',monospace;font-weight:500}
+
+/* stats grid */
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.sb{background:#0d1f38;border:1px solid #1e3a5f;border-radius:6px;padding:10px}
+.sv{font-size:20px;font-weight:700;color:#00c9a7;font-family:'DM Mono',monospace}
+.sh-val{color:#ef4444!important}
+.sl{font-size:9px;color:#64748b;letter-spacing:.08em;margin-top:2px;font-family:'DM Mono',monospace}
+
+/* implications */
+.ir{display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid #1e3a5f20}
 .ir:last-child{border:none}
-.ia{font-size:9px;color:#94a3b8}
-.ib{font-size:8px;font-weight:700;padding:1px 5px;border-radius:2px}
-.ib.BULLISH{color:#00c9a7;background:#00c9a715}.ib.BEARISH{color:#ef4444;background:#ef444415}
-.ib.NEUTRAL{color:#64748b;background:#1e2940}.ib.WATCH{color:#f59e0b;background:#f59e0b15}
-.rb{width:100%;padding:8px;background:linear-gradient(135deg,#00c9a7,#0066ff);border:none;border-radius:5px;color:#fff;font-size:10px;font-weight:700;letter-spacing:.08em;cursor:pointer;font-family:'DM Mono',monospace;transition:all .2s}
-.rb:hover{opacity:.85}.rb:disabled{opacity:.4;cursor:not-allowed}
-.rb.run{animation:blink .8s infinite}
-@keyframes blink{50%{opacity:.5}}
-.rst{font-size:9px;color:#64748b;text-align:center;margin-top:6px;min-height:12px;letter-spacing:.08em}
-.dbox{font-size:10px;color:#94a3b8;line-height:1.5}
-.did{font-size:9px;color:#475569;margin-bottom:4px;letter-spacing:.05em}
-.dhl{font-size:12px;font-weight:700;color:#e2e8f0;margin-bottom:6px;font-family:'DM Sans',sans-serif;line-height:1.35}
-.dtrade{padding:5px 8px;background:#00c9a710;border-radius:3px;border-left:2px solid #00c9a760;color:#00c9a7;font-size:9px;margin-bottom:7px}
-.dlabel{font-size:8px;color:#64748b;letter-spacing:.08em;margin:5px 0 2px}
-.alert-badge{position:fixed;top:16px;right:20px;background:#ef4444;color:#fff;font-size:10px;font-weight:700;padding:6px 12px;border-radius:6px;letter-spacing:.06em;animation:fadeIn .3s;z-index:999;cursor:pointer}
-@keyframes fadeIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
-.loading{display:flex;flex-direction:column;align-items:center;justify-content:center;height:150px;gap:8px;color:#64748b;font-size:10px;letter-spacing:.1em}
-.spinner{width:18px;height:18px;border:2px solid #1e2940;border-top-color:#00c9a7;border-radius:50%;animation:spin .7s linear infinite}
+.ia{font-size:11px;color:#94a3b8;font-weight:500}
+.ib{font-size:10px;font-weight:700;padding:2px 8px;border-radius:3px;font-family:'DM Mono',monospace}
+.ib.BULLISH{color:#00c9a7;background:#00c9a720;border:1px solid #00c9a740}
+.ib.BEARISH{color:#ef4444;background:#ef444420;border:1px solid #ef444440}
+.ib.NEUTRAL{color:#64748b;background:#1e3a5f;border:1px solid #1e3a5f}
+.ib.WATCH{color:#f59e0b;background:#f59e0b20;border:1px solid #f59e0b40}
+
+/* source bars */
+.src-item{margin-bottom:7px}
+.src-top{display:flex;justify-content:space-between;margin-bottom:3px}
+.src-name{font-size:10px;color:#94a3b8;font-family:'DM Mono',monospace}
+.src-cnt{font-size:10px;color:#00c9a7;font-weight:700;font-family:'DM Mono',monospace}
+.src-bar{height:4px;background:#1e3a5f;border-radius:2px}
+.src-fill{height:4px;background:linear-gradient(90deg,#00c9a7,#0066ff);border-radius:2px;transition:width .5s}
+
+/* pipeline button */
+.rb{width:100%;padding:10px;background:linear-gradient(135deg,#00c9a7,#0066ff);border:none;border-radius:6px;color:#fff;font-size:12px;font-weight:700;letter-spacing:.06em;cursor:pointer;font-family:'DM Mono',monospace;transition:all .2s}
+.rb:hover{opacity:.85;transform:translateY(-1px)}
+.rb:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.rb.run{animation:blink .9s infinite}
+@keyframes blink{50%{opacity:.55}}
+.rst{font-size:10px;color:#64748b;text-align:center;margin-top:7px;min-height:14px;font-family:'DM Mono',monospace}
+
+/* detail panel */
+.dhl-detail{font-size:13px;font-weight:700;color:#f1f5f9;margin-bottom:6px;line-height:1.35}
+.dsum{font-size:11px;color:#94a3b8;line-height:1.5;margin-bottom:8px}
+.dtrade{padding:6px 10px;background:#00c9a710;border-radius:4px;border-left:3px solid #00c9a7;color:#00c9a7;font-size:11px;margin-bottom:8px;font-weight:500}
+.dlabel{font-size:9px;color:#475569;letter-spacing:.1em;margin:6px 0 3px;font-family:'DM Mono',monospace}
+.dlink{font-size:10px;color:#0066ff;word-break:break-all;text-decoration:none}
+.dlink:hover{text-decoration:underline}
+.did{font-size:9px;color:#334155;font-family:'DM Mono',monospace;margin-bottom:4px}
+
+/* high urgency flash alert */
+.alert-bar{position:fixed;top:0;left:0;right:0;background:#ef4444;color:#fff;text-align:center;padding:8px;font-size:12px;font-weight:700;letter-spacing:.06em;z-index:999;animation:slideDown .3s;cursor:pointer;font-family:'DM Mono',monospace}
+@keyframes slideDown{from{transform:translateY(-100%)}to{transform:translateY(0)}}
+
+/* loading / empty */
+.loading{display:flex;flex-direction:column;align-items:center;justify-content:center;height:200px;gap:10px;color:#475569;font-size:11px;letter-spacing:.1em;font-family:'DM Mono',monospace}
+.spinner{width:20px;height:20px;border:2px solid #1e3a5f;border-top-color:#00c9a7;border-radius:50%;animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:160px;gap:6px;color:#475569;text-align:center;font-size:10px}
-::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:#050a14}::-webkit-scrollbar-thumb{background:#1e2940;border-radius:2px}
+.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:180px;gap:6px;color:#334155;text-align:center;font-size:11px;font-family:'DM Mono',monospace}
+
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:#07111f}
+::-webkit-scrollbar-thumb{background:#1e3a5f;border-radius:2px}
 </style>
 </head>
 <body>
+
+<!-- HEADER -->
 <div class="hdr">
   <div class="logo">
     <div class="lm">E</div>
-    <div><div class="lt">ECOYA INTELLIGENCE</div><div class="ls">HRM CORPORATION · COMMODITY SIGNAL TERMINAL</div></div>
+    <div>
+      <div class="lt">ECOYA INTELLIGENCE</div>
+      <div class="ls">HRM CORPORATION · COMMODITY SIGNAL TERMINAL</div>
+    </div>
   </div>
   <div class="hr">
-    <div class="live"><div class="dot"></div>LIVE</div>
-    <div class="ver" id="ver">v1.2</div>
+    <div class="live-pill"><div class="ldot"></div>LIVE MARKET DATA</div>
     <div class="clk" id="clk"></div>
   </div>
 </div>
-<div class="tkr-wrap">
-  <div class="tkr">
-    <span class="ti"><span class="tl">KRW/USD</span>&nbsp;<span class="tv" id="t-krw">—</span></span>
-    <span class="ti"><span class="tl">CNY/USD</span>&nbsp;<span class="tv" id="t-cny">—</span></span>
-    <span class="ti"><span class="tl">WTI CRUDE</span>&nbsp;<span class="tv" id="t-wti">—</span></span>
-    <span class="ti"><span class="tl">LME AL</span>&nbsp;<span class="tv" id="t-al">$2,387</span>&nbsp;<span class="tu">+0.8%</span></span>
-    <span class="ti"><span class="tl">OCC PAPER</span>&nbsp;<span class="tv">$142/MT</span>&nbsp;<span class="tu">+1.2%</span></span>
-    <span class="ti"><span class="tl">CONTAINER</span>&nbsp;<span class="tv">$2,180</span>&nbsp;<span class="td">-1.1%</span></span>
-    <span class="ti"><span class="tl">KOSPI</span>&nbsp;<span class="tv">6,244</span>&nbsp;<span class="tu">+0.6%</span></span>
-    <span class="ti"><span class="tl">LME COPPER</span>&nbsp;<span class="tv">$9,124</span>&nbsp;<span class="tu">+0.4%</span></span>
-    <span class="ti"><span class="tl">KRW/USD</span>&nbsp;<span class="tv" id="t-krw2">—</span></span>
-    <span class="ti"><span class="tl">CNY/USD</span>&nbsp;<span class="tv" id="t-cny2">—</span></span>
-    <span class="ti"><span class="tl">WTI CRUDE</span>&nbsp;<span class="tv" id="t-wti2">—</span></span>
-    <span class="ti"><span class="tl">LME AL</span>&nbsp;<span class="tv">$2,387</span>&nbsp;<span class="tu">+0.8%</span></span>
-    <span class="ti"><span class="tl">OCC PAPER</span>&nbsp;<span class="tv">$142/MT</span>&nbsp;<span class="tu">+1.2%</span></span>
-    <span class="ti"><span class="tl">CONTAINER</span>&nbsp;<span class="tv">$2,180</span>&nbsp;<span class="td">-1.1%</span></span>
-    <span class="ti"><span class="tl">KOSPI</span>&nbsp;<span class="tv">6,244</span>&nbsp;<span class="tu">+0.6%</span></span>
-    <span class="ti"><span class="tl">LME COPPER</span>&nbsp;<span class="tv">$9,124</span>&nbsp;<span class="tu">+0.4%</span></span>
+
+<!-- TRADINGVIEW LIVE MARKET TICKER -->
+<div class="tv-wrap">
+  <div class="tradingview-widget-container">
+    <div class="tradingview-widget-container__widget"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+    {
+      "symbols": [
+        {"proName":"KRX:KOSPI","title":"KOSPI"},
+        {"proName":"KRX:KOSDAQ","title":"KOSDAQ"},
+        {"proName":"INDEX:SPX","title":"S&P 500"},
+        {"proName":"NASDAQ:NDX","title":"NASDAQ"},
+        {"proName":"INDEX:NKY","title":"NIKKEI 225"},
+        {"proName":"INDEX:HSI","title":"HANG SENG"},
+        {"proName":"SSE:000001","title":"상하이종합"},
+        {"proName":"FX:USDKRW","title":"USD/KRW"},
+        {"proName":"FX:USDCNY","title":"USD/CNY"},
+        {"proName":"FX:USDJPY","title":"USD/JPY"},
+        {"proName":"FX:EURUSD","title":"EUR/USD"},
+        {"proName":"FX:GBPUSD","title":"GBP/USD"},
+        {"proName":"COMEX:GC1!","title":"COMEX Gold"},
+        {"proName":"COMEX:HG1!","title":"COMEX Copper"},
+        {"proName":"COMEX:SI1!","title":"COMEX Silver"},
+        {"proName":"NYMEX:CL1!","title":"WTI Crude"},
+        {"proName":"NYMEX:NG1!","title":"Natural Gas"},
+        {"proName":"SHFE:AL","title":"상하이 알루미늄"},
+        {"proName":"SHFE:CU","title":"상하이 구리"},
+        {"proName":"TVC:STEEL","title":"Steel"},
+        {"proName":"EURONEXT:ENL","title":"LME Alum"}
+      ],
+      "showSymbolLogo": false,
+      "isTransparent": true,
+      "displayMode": "adaptive",
+      "colorTheme": "dark",
+      "locale": "en"
+    }
+    </script>
   </div>
 </div>
+
+<!-- MAIN -->
 <div class="body">
+  <!-- SIGNAL FEED -->
   <div class="feed-col">
     <div class="fhdr">
       <div class="ftitle">SIGNAL FEED</div>
       <div class="fctrl">
         <button class="fb a" onclick="sf('ALL',this)">ALL</button>
         <button class="fb" onclick="sf('MACRO',this)">MACRO</button>
-        <button class="fb" onclick="sf('COMMODITY',this)">COMMODITY</button>
-        <button class="fb" onclick="sf('SHIPPING',this)">SHIPPING</button>
+        <button class="fb paper-btn" onclick="sf('PAPER',this)">📄 PAPER</button>
+        <button class="fb paper-btn" onclick="sf('PACKAGING',this)">📦 PACKAGING</button>
+        <button class="fb" onclick="sf('COMMODITY',this)">METAL</button>
+        <button class="fb" onclick="sf('SHIPPING',this)">FREIGHT</button>
         <button class="fb" onclick="sf('GEOPOLITICAL',this)">GEO</button>
-        <button class="fb" onclick="sf('CLIMATE',this)">CLIMATE</button>
-        <button class="fb" onclick="sf('HIGH',this)">🔴 HIGH</button>
+        <button class="fb high-btn" onclick="sf('HIGH',this)">🔴 HIGH</button>
       </div>
     </div>
-    <div class="feed" id="feed"><div class="loading"><div class="spinner"></div>LOADING SIGNALS...</div></div>
+    <div class="feed" id="feed">
+      <div class="loading"><div class="spinner"></div>LOADING SIGNALS...</div>
+    </div>
   </div>
+
+  <!-- RIGHT PANEL -->
   <div class="panel">
+    <!-- Status -->
     <div class="ps">
       <div class="ptitle">TERMINAL STATUS</div>
       <div class="sg">
         <div class="sb"><div class="sv" id="st">—</div><div class="sl">TOTAL SIGNALS</div></div>
-        <div class="sb"><div class="sv" id="sh" style="color:#ef4444">—</div><div class="sl">HIGH URGENCY</div></div>
-        <div class="sb"><div class="sv" id="ss">6</div><div class="sl">DATA SOURCES</div></div>
+        <div class="sb"><div class="sv sh-val" id="sh">—</div><div class="sl">HIGH URGENCY</div></div>
+        <div class="sb"><div class="sv">6</div><div class="sl">DATA SOURCES</div></div>
         <div class="sb"><div class="sv" style="color:#00c9a7;font-size:13px">CLAUDE</div><div class="sl">AI ENGINE</div></div>
       </div>
     </div>
-    <div class="ps">
-      <div class="ptitle">LIVE FX RATES</div>
-      <div class="fx-grid" id="fx-grid">
-        <div class="fx-row"><span class="fx-pair">KRW/USD</span><span class="fx-val" id="fx-krw">—</span></div>
-        <div class="fx-row"><span class="fx-pair">CNY/USD</span><span class="fx-val" id="fx-cny">—</span></div>
-        <div class="fx-row"><span class="fx-pair">WTI CRUDE</span><span class="fx-val" id="fx-wti">—</span></div>
-      </div>
-    </div>
-    <div class="ps">
-      <div class="ptitle">SOURCES</div>
-      <div class="src-grid" id="src-grid"></div>
-    </div>
+
+    <!-- Trade Implications -->
     <div class="ps">
       <div class="ptitle">TRADE IMPLICATIONS</div>
       <div id="impl">
         <div class="ir"><span class="ia">LME ALUMINUM</span><span class="ib NEUTRAL">NEUTRAL</span></div>
         <div class="ir"><span class="ia">KRW/USD</span><span class="ib NEUTRAL">NEUTRAL</span></div>
         <div class="ir"><span class="ia">OCC PAPER</span><span class="ib NEUTRAL">NEUTRAL</span></div>
-        <div class="ir"><span class="ia">CONTAINER</span><span class="ib NEUTRAL">NEUTRAL</span></div>
+        <div class="ir"><span class="ia">FREIGHT INDEX</span><span class="ib NEUTRAL">NEUTRAL</span></div>
         <div class="ir"><span class="ia">WTI CRUDE</span><span class="ib NEUTRAL">NEUTRAL</span></div>
+        <div class="ir"><span class="ia">PLASTIC SCRAP</span><span class="ib NEUTRAL">NEUTRAL</span></div>
       </div>
     </div>
+
+    <!-- Sources -->
+    <div class="ps">
+      <div class="ptitle">SIGNAL SOURCES</div>
+      <div id="src-grid"></div>
+    </div>
+
+    <!-- Pipeline -->
     <div class="ps">
       <div class="ptitle">PIPELINE CONTROL</div>
       <button class="rb" id="rb" onclick="runPipeline()">⚡ RUN PIPELINE NOW</button>
       <div class="rst" id="rst"></div>
     </div>
+
+    <!-- Detail -->
     <div class="ps" id="dp" style="display:none">
       <div class="ptitle">SIGNAL DETAIL</div>
       <div id="dc"></div>
     </div>
   </div>
 </div>
+
 <script>
 const API='https://ecoya-intelligence-production.up.railway.app';
 let sigs=[],filt='ALL',stats={};
 
-setInterval(()=>document.getElementById('clk').textContent=new Date().toLocaleTimeString('en-US',{hour12:false,timeZone:'Asia/Seoul'})+' KST',1000);
+// Clock KST
+setInterval(()=>document.getElementById('clk').textContent=
+  new Date().toLocaleTimeString('ko-KR',{hour12:false,timeZone:'Asia/Seoul'})+' KST',1000);
 
 async function load(){
   try{
     const [s,st]=await Promise.all([
       fetch(API+'/api/signals?limit=100').then(r=>r.json()),
-      fetch(API+'/api/signals/stats').then(r=>r.json()),
+      fetch(API+'/api/signals/stats').then(r=>r.json()).catch(()=>({}))
     ]);
     sigs=s.signals||[];stats=st||{};
-    render();updateStats();updateFX();updateSources();
-    // 고긴급도 알림
-    const high=sigs.filter(x=>x.urgency_score>=8&&!x._alerted);
-    if(high.length){
-      high.forEach(x=>x._alerted=true);
-      showAlert(high.length+' HIGH URGENCY SIGNAL'+(high.length>1?'S':''));
-    }
-    document.getElementById('ver').textContent='v1.2 · '+sigs.length+'sig';
+    render();updateStats();updateSources();checkHighUrgency();
   }catch(e){
-    document.getElementById('feed').innerHTML='<div class="empty"><div>⚠ API ERROR</div><div style="font-size:9px;margin-top:4px">'+e.message+'</div></div>';
+    document.getElementById('feed').innerHTML=
+      '<div class="empty"><div style="font-size:20px">⚠</div><div>API 연결 오류</div><div style="font-size:10px;margin-top:4px">'+e.message+'</div></div>';
   }
 }
 
-function showAlert(msg){
-  let b=document.querySelector('.alert-badge');
-  if(b)b.remove();
-  b=document.createElement('div');
-  b.className='alert-badge';b.textContent='🔴 '+msg;
-  b.onclick=()=>{b.remove();sf('HIGH',document.querySelector('.fb:last-child'));};
-  document.body.appendChild(b);
-  setTimeout(()=>{if(b.parentNode)b.remove();},5000);
+function checkHighUrgency(){
+  const newHigh=sigs.filter(s=>s.urgency_score>=8&&!s._alerted);
+  if(newHigh.length){
+    newHigh.forEach(s=>s._alerted=true);
+    const bar=document.createElement('div');
+    bar.className='alert-bar';
+    bar.innerHTML='🔴 긴급 시그널 '+newHigh.length+'건 — '+newHigh[0].headline;
+    bar.onclick=()=>{bar.remove();sf('HIGH',document.querySelector('.high-btn'));};
+    document.body.appendChild(bar);
+    setTimeout(()=>{if(bar.parentNode)bar.remove();},5000);
+  }
 }
 
-function updateFX(){
-  const krw=sigs.find(s=>s.headline&&s.headline.includes('Korean Won'));
-  const cny=sigs.find(s=>s.headline&&s.headline.includes('Yuan'));
-  const wti=sigs.find(s=>s.headline&&(s.headline.includes('WTI')||s.headline.includes('Crude')));
-  const nm=t=>t.match(/[\d,]+\.\d+/)?.[0]||t.match(/[\d,]+/)?.[0]||'—';
-  if(krw){const v=nm(krw.headline);['fx-krw','t-krw','t-krw2'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=v;});}
-  if(cny){const v=nm(cny.headline);['fx-cny','t-cny','t-cny2'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=v;});}
-  if(wti){const v=wti.headline.match(/\$[\d.]+/)?.[0]||nm(wti.headline);['fx-wti','t-wti','t-wti2'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=v;});}
-}
+// PAPER/PACKAGING 키워드 분류
+const PAPER_KW=['paper','OCC','SOP','ONP','newsprint','pulp','cardboard','paperboard','corrugated','containerboard'];
+const PKG_KW=['packaging','box','carton','container board','RISI','corrugated','wrapper'];
 
-function updateSources(){
-  const by=stats.by_source||{};
-  const total=Object.values(by).reduce((a,b)=>a+b,0)||1;
-  const order=['FX_LIVE','RSS','GDELT','FRED','WORLDBANK','NASA_FIRMS'];
-  const all=Object.keys(by).filter(k=>!order.includes(k));
-  const sorted=[...order.filter(k=>by[k]),...all.filter(k=>by[k])];
-  document.getElementById('src-grid').innerHTML=sorted.map(k=>{
-    const pct=Math.round((by[k]/total)*100);
-    return`<div class="src-row"><span class="src-name">${k}</span><span class="src-cnt">${by[k]}</span></div>
-<div class="src-bar"><div class="src-fill" style="width:${pct}%"></div></div>`;
-  }).join('');
+function matchesPaper(s){
+  const txt=((s.headline||'')+(s.summary||'')).toLowerCase();
+  return PAPER_KW.some(k=>txt.includes(k.toLowerCase()))||
+    (s.affected_assets||[]).some(a=>a.includes('PAPER')||a.includes('OCC'));
+}
+function matchesPkg(s){
+  const txt=((s.headline||'')+(s.summary||'')).toLowerCase();
+  return PKG_KW.some(k=>txt.includes(k.toLowerCase()));
 }
 
 function render(){
   const feed=document.getElementById('feed');
-  let list=filt==='ALL'?sigs:filt==='HIGH'?sigs.filter(s=>s.urgency_score>=7):sigs.filter(s=>s.category===filt);
-  if(!list.length){feed.innerHTML='<div class="empty"><div>📡 NO SIGNALS</div><div style="margin-top:4px">Click RUN PIPELINE</div></div>';return;}
+  let list;
+  if(filt==='ALL')list=sigs;
+  else if(filt==='HIGH')list=sigs.filter(s=>s.urgency_score>=7);
+  else if(filt==='PAPER')list=sigs.filter(matchesPaper);
+  else if(filt==='PACKAGING')list=sigs.filter(matchesPkg);
+  else list=sigs.filter(s=>s.category===filt);
+
+  if(!list.length){
+    feed.innerHTML='<div class="empty"><div style="font-size:24px">📡</div><div>시그널 없음</div><div style="font-size:10px;margin-top:4px">PIPELINE 실행 또는 필터 변경</div></div>';
+    return;
+  }
+
   feed.innerHTML=list.map(s=>{
     const u=s.urgency_score||5;
-    const uc=u>=7?'uh':u>=5?'um':'ul';
-    const t=s.created_at?new Date(s.created_at).toLocaleTimeString('en-US',{hour12:false,timeZone:'Asia/Seoul'}):'';
-    const ast=(s.affected_assets||[]).slice(0,3).map(a=>`<span class="at">${a}</span>`).join('');
-    const trade=s.trade_implication?`<div class="strade">→ ${s.trade_implication}</div>`:'';
-    const src=s.data_source?`<span class="ssrc">${s.data_source}</span>`:'';
-    return`<div class="sc ${uc}" onclick="selSig('${s.signal_id}')">
-<div class="stop"><div class="smeta"><span class="scat ${s.category||''}">${s.category||'SIG'}</span>${src}<span class="stime">${t}</span></div><div class="ub u${u}">${u}</div></div>
-<div class="shl">${s.headline||'—'}</div>
-<div class="ssum">${(s.summary||'').substring(0,130)}${(s.summary||'').length>130?'...':''}</div>
-${trade}<div class="sast">${ast}</div></div>`;
+    let uc;
+    if(u>=8)uc='uh';
+    else if(u>=6)uc='um';
+    else if(u>=4)uc='ul';
+    else uc='udim';
+
+    const t=s.created_at?new Date(s.created_at).toLocaleTimeString('ko-KR',{hour12:false,timeZone:'Asia/Seoul'}):'';
+    const ast=(s.affected_assets||[]).slice(0,4).map(a=>'<span class="at">'+a.replace('_',' ')+'</span>').join('');
+    const trade=s.trade_implication?'<div class="strade">→ '+s.trade_implication+'</div>':'';
+    const src=s.data_source?'<span class="ssrc">'+s.data_source+'</span>':'';
+    // 원문 링크 (URL이 있는 경우)
+    const url=s.source?.url||s.url||'';
+    const hlContent=url
+      ?'<a href="'+url+'" target="_blank" rel="noopener">'+s.headline+'</a>'
+      :s.headline;
+
+    return '<div class="sc '+uc+'" onclick="selSig(''+s.signal_id+'')">'+
+      '<div class="stop">'+
+        '<div class="smeta">'+
+          '<span class="scat '+(s.category||'')+'">'+( s.category||'SIG')+'</span>'+
+          src+
+          '<span class="stime">'+t+' KST</span>'+
+        '</div>'+
+        '<div class="ub u'+u+'">'+u+'</div>'+
+      '</div>'+
+      '<div class="shl">'+hlContent+'</div>'+
+      '<div class="ssum">'+(s.summary||'').substring(0,150)+((s.summary||'').length>150?'...':'')+'</div>'+
+      trade+
+      '<div class="sast">'+ast+'</div>'+
+    '</div>';
   }).join('');
 }
 
 function updateStats(){
   document.getElementById('st').textContent=sigs.length;
   document.getElementById('sh').textContent=sigs.filter(s=>s.urgency_score>=7).length;
-  const a={LME_ALUMINUM:'NEUTRAL',KRW_USD:'NEUTRAL',OCC_PAPER:'NEUTRAL',CONTAINER:'NEUTRAL',WTI_CRUDE:'NEUTRAL'};
+
+  // implications
+  const a={
+    'LME ALUMINUM':'NEUTRAL','KRW/USD':'NEUTRAL','OCC PAPER':'NEUTRAL',
+    'FREIGHT INDEX':'NEUTRAL','WTI CRUDE':'NEUTRAL','PLASTIC SCRAP':'NEUTRAL'
+  };
   sigs.forEach(s=>{
     if(s.urgency_score>=5&&s.affected_assets){
       s.affected_assets.forEach(x=>{
-        if(x.includes('ALUM'))a.LME_ALUMINUM=s.urgency_score>=8?'BEARISH':'WATCH';
-        if(x.includes('KRW'))a.KRW_USD=s.urgency_score>=7?'WATCH':'NEUTRAL';
-        if(x.includes('PAPER')||x.includes('OCC'))a.OCC_PAPER='WATCH';
-        if(x.includes('FREIGHT')||x.includes('CONTAINER'))a.CONTAINER='WATCH';
-        if(x.includes('CRUDE')||x.includes('WTI'))a.WTI_CRUDE=s.urgency_score>=7?'BEARISH':'WATCH';
+        if(x.includes('ALUM'))a['LME ALUMINUM']=s.urgency_score>=8?'BEARISH':'WATCH';
+        if(x.includes('KRW'))a['KRW/USD']=s.urgency_score>=8?'WATCH':'NEUTRAL';
+        if(x.includes('PAPER')||x.includes('OCC'))a['OCC PAPER']='WATCH';
+        if(x.includes('FREIGHT')||x.includes('CONTAINER'))a['FREIGHT INDEX']='WATCH';
+        if(x.includes('CRUDE')||x.includes('WTI'))a['WTI CRUDE']=s.urgency_score>=7?'BEARISH':'WATCH';
+        if(x.includes('PLASTIC'))a['PLASTIC SCRAP']='WATCH';
       });
     }
   });
   document.getElementById('impl').innerHTML=Object.entries(a).map(([k,v])=>
-    `<div class="ir"><span class="ia">${k.replace(/_/g,' ')}</span><span class="ib ${v}">${v}</span></div>`).join('');
+    '<div class="ir"><span class="ia">'+k+'</span><span class="ib '+v+'">'+v+'</span></div>'
+  ).join('');
+}
+
+function updateSources(){
+  const by=stats.by_source||{};
+  const total=Math.max(Object.values(by).reduce((a,b)=>a+b,0),1);
+  const order=['FX_LIVE','RSS','GDELT','FRED','WORLDBANK','NASA_FIRMS'];
+  const sorted=[...order.filter(k=>by[k]),...Object.keys(by).filter(k=>!order.includes(k)&&by[k])];
+  document.getElementById('src-grid').innerHTML=sorted.map(k=>{
+    const pct=Math.min(Math.round((by[k]/total)*100),100);
+    return '<div class="src-item">'+
+      '<div class="src-top"><span class="src-name">'+k+'</span><span class="src-cnt">'+by[k]+'</span></div>'+
+      '<div class="src-bar"><div class="src-fill" style="width:'+pct+'%"></div></div>'+
+    '</div>';
+  }).join('');
 }
 
 function sf(f,btn){
@@ -297,29 +427,40 @@ function selSig(id){
   document.querySelectorAll('.sc').forEach(c=>c.classList.remove('sel'));
   event.currentTarget.classList.add('sel');
   const dp=document.getElementById('dp');dp.style.display='block';
-  const trade=s.trade_implication?`<div class="dtrade">→ ${s.trade_implication}</div>`:'';
-  const ast=(s.affected_assets||[]).map(a=>`<span class="at" style="font-size:8px;padding:2px 5px">${a}</span>`).join(' ');
+
+  const url=s.source?.url||s.url||'';
+  const trade=s.trade_implication?'<div class="dtrade">→ '+s.trade_implication+'</div>':'';
+  const ast=(s.affected_assets||[]).map(a=>'<span class="at" style="font-size:9px;padding:2px 6px">'+a.replace(/_/g,' ')+'</span>').join(' ');
+  const geo=s.geography?JSON.stringify(s.geography).replace(/[{}"]/g,'').replace(/,/g,' · '):'N/A';
+  const linkSection=url?'<div class="dlabel">원문 링크</div><div><a class="dlink" href="'+url+'" target="_blank" rel="noopener">🔗 기사 원문 열기</a></div>':'';
+
   document.getElementById('dc').innerHTML=
-    `<div class="did">${s.signal_id}</div><div class="dhl">${s.headline}</div>${trade}
-<div class="dbox">
-<div class="dlabel">SUMMARY</div><div style="margin-bottom:7px">${s.summary||''}</div>
-<div class="dlabel">ASSETS</div><div style="margin-bottom:7px;display:flex;gap:3px;flex-wrap:wrap">${ast}</div>
-<div class="dlabel">SOURCE · CONFIDENCE</div><div>${s.data_source||''} · ${s.confidence||'MEDIUM'}</div>
-</div>`;
+    '<div class="did">'+s.signal_id+' · '+s.data_source+'</div>'+
+    '<div class="dhl-detail">'+s.headline+'</div>'+
+    trade+
+    '<div class="dsum">'+(s.summary||'')+'</div>'+
+    '<div class="dlabel">영향 자산</div>'+
+    '<div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:8px">'+ast+'</div>'+
+    '<div class="dlabel">지역</div>'+
+    '<div style="font-size:10px;color:#94a3b8;margin-bottom:8px">'+geo+'</div>'+
+    '<div class="dlabel">신뢰도</div>'+
+    '<div style="font-size:10px;color:#94a3b8;margin-bottom:8px">'+(s.confidence||'MEDIUM')+'</div>'+
+    linkSection;
 }
 
 async function runPipeline(){
   const btn=document.getElementById('rb'),st=document.getElementById('rst');
   btn.disabled=true;btn.classList.add('run');btn.textContent='⚡ RUNNING...';
-  st.textContent='COLLECTING · AI ANALYZING · STORING...';
+  st.textContent='수집중 · AI 분석중 · 저장중...';
   try{
     await fetch(API+'/api/signals/run',{method:'POST'});
-    st.textContent='PIPELINE TRIGGERED — REFRESHING IN 35s...';
-    setTimeout(()=>{load();st.textContent='✓ COMPLETE';},35000);
+    st.textContent='파이프라인 실행 — 35초 후 업데이트...';
+    setTimeout(()=>{load();st.textContent='✓ 완료';},35000);
   }catch(e){st.textContent='ERROR: '+e.message;}
   finally{setTimeout(()=>{btn.disabled=false;btn.classList.remove('run');btn.textContent='⚡ RUN PIPELINE NOW';},7000);}
 }
 
+// 5분마다 자동 새로고침
 setInterval(load,300000);
 load();
 </script>
