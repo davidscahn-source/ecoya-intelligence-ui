@@ -2,134 +2,134 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>ECOYA Intelligence Terminal</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#050a14;color:#e2e8f0;font-family:'DM Mono',monospace;min-height:100vh;overflow:hidden}
-.header{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:#0a1628;border-bottom:1px solid #00c9a720}
-.logo{display:flex;align-items:center;gap:10px}
-.logo-mark{width:26px;height:26px;background:linear-gradient(135deg,#00c9a7,#0066ff);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff}
-.logo-text{font-size:14px;font-weight:700;letter-spacing:.12em;color:#00c9a7}
-.logo-sub{font-size:9px;color:#475569;letter-spacing:.15em}
-.hdr-right{display:flex;align-items:center;gap:14px}
-.live{display:flex;align-items:center;gap:5px;font-size:10px;color:#00c9a7;letter-spacing:.1em}
-.dot{width:6px;height:6px;border-radius:50%;background:#00c9a7;animation:pulse 2s infinite}
+body{background:#050a14;color:#e2e8f0;font-family:'DM Mono',monospace;height:100vh;display:flex;flex-direction:column;overflow:hidden}
+.hdr{display:flex;align-items:center;justify-content:space-between;padding:10px 18px;background:#0a1628;border-bottom:1px solid #00c9a720;flex-shrink:0}
+.logo{display:flex;align-items:center;gap:9px}
+.lm{width:24px;height:24px;background:linear-gradient(135deg,#00c9a7,#0066ff);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:#fff}
+.lt{font-size:13px;font-weight:700;letter-spacing:.12em;color:#00c9a7}
+.ls{font-size:8px;color:#475569;letter-spacing:.14em}
+.hr{display:flex;align-items:center;gap:12px}
+.live{display:flex;align-items:center;gap:4px;font-size:9px;color:#00c9a7;letter-spacing:.1em}
+.dot{width:5px;height:5px;border-radius:50%;background:#00c9a7;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.clock{font-size:11px;color:#475569}
-.ticker-wrap{background:#0a1628;border-bottom:1px solid #0f2040;padding:6px 0;overflow:hidden;height:28px}
-.ticker{display:flex;gap:28px;animation:scroll 50s linear infinite;white-space:nowrap}
+.clk{font-size:10px;color:#475569}
+.ver{font-size:9px;color:#1e3a5f;padding:2px 6px;border:1px solid #1e3a5f;border-radius:3px}
+.tkr-wrap{background:#0a1628;border-bottom:1px solid #0f2040;padding:5px 0;overflow:hidden;flex-shrink:0}
+.tkr{display:flex;gap:24px;animation:scroll 55s linear infinite;white-space:nowrap}
 @keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-.ti{display:flex;align-items:center;gap:6px;font-size:10px}
+.ti{display:flex;align-items:center;gap:5px;font-size:10px}
 .tl{color:#64748b}.tv{color:#e2e8f0;font-weight:600}.tu{color:#00c9a7}.td{color:#ef4444}
-.main{display:grid;grid-template-columns:1fr 320px;height:calc(100vh - 82px)}
-.feed{padding:14px;overflow-y:auto;border-right:1px solid #0f2040}
-.fhdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-.ftitle{font-size:10px;color:#64748b;letter-spacing:.12em}
-.fctrl{display:flex;gap:5px}
-.fb{padding:3px 8px;border-radius:3px;font-size:9px;letter-spacing:.06em;border:1px solid #0f2040;background:transparent;color:#64748b;cursor:pointer;transition:all .15s;font-family:'DM Mono',monospace}
+.body{display:flex;flex:1;overflow:hidden}
+.feed-col{flex:1;display:flex;flex-direction:column;border-right:1px solid #0f2040;overflow:hidden}
+.fhdr{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;flex-shrink:0;border-bottom:1px solid #0f204060}
+.ftitle{font-size:9px;color:#64748b;letter-spacing:.12em}
+.fctrl{display:flex;gap:4px;flex-wrap:wrap}
+.fb{padding:2px 7px;border-radius:3px;font-size:8px;letter-spacing:.06em;border:1px solid #0f2040;background:transparent;color:#64748b;cursor:pointer;transition:all .15s;font-family:'DM Mono',monospace}
 .fb.a,.fb:hover{border-color:#00c9a7;color:#00c9a7;background:#00c9a710}
-.sc{background:#0a1628;border:1px solid #0f2040;border-radius:7px;padding:12px 12px 12px 15px;margin-bottom:8px;cursor:pointer;transition:all .15s;position:relative;overflow:hidden}
+.feed{flex:1;overflow-y:auto;padding:10px 12px}
+.sc{background:#0a1628;border:1px solid #0f2040;border-radius:6px;padding:10px 10px 10px 13px;margin-bottom:7px;cursor:pointer;transition:all .15s;position:relative;overflow:hidden}
 .sc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px}
-.sc.uh::before{background:#ef4444}
-.sc.um::before{background:#f59e0b}
-.sc.ul::before{background:#00c9a7}
-.sc:hover{border-color:#00c9a740;transform:translateX(2px)}
-.sc.sel{border-color:#00c9a7}
-.stop{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:7px}
-.smeta{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.scat{font-size:8px;letter-spacing:.1em;padding:2px 5px;border-radius:2px;background:#0f2040;color:#64748b}
-.scat.MACRO{color:#8b5cf6;background:#8b5cf610}
-.scat.COMMODITY{color:#f59e0b;background:#f59e0b10}
-.scat.SHIPPING{color:#3b82f6;background:#3b82f610}
-.scat.GEOPOLITICAL{color:#ef4444;background:#ef444410}
-.scat.CLIMATE{color:#00c9a7;background:#00c9a710}
-.scat.REGULATORY{color:#ec4899;background:#ec489910}
+.sc.uh::before{background:#ef4444}.sc.um::before{background:#f59e0b}.sc.ul::before{background:#00c9a7}
+.sc:hover{border-color:#00c9a740;transform:translateX(2px)}.sc.sel{border-color:#00c9a7}
+.stop{display:flex;align-items:flex-start;justify-content:space-between;gap:6px;margin-bottom:6px}
+.smeta{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.scat{font-size:7px;letter-spacing:.1em;padding:1px 5px;border-radius:2px;background:#0f2040;color:#64748b}
+.scat.MACRO{color:#8b5cf6;background:#8b5cf610}.scat.COMMODITY{color:#f59e0b;background:#f59e0b10}
+.scat.SHIPPING{color:#3b82f6;background:#3b82f610}.scat.GEOPOLITICAL{color:#ef4444;background:#ef444410}
+.scat.CLIMATE{color:#00c9a7;background:#00c9a710}.scat.REGULATORY{color:#ec4899;background:#ec489910}
 .scat.SENTIMENT{color:#6366f1;background:#6366f110}
-.stime{font-size:9px;color:#475569}
-.ub{font-size:10px;font-weight:700;padding:1px 7px;border-radius:3px;min-width:24px;text-align:center;flex-shrink:0}
+.ssrc{font-size:7px;color:#334155;padding:1px 4px;border:1px solid #1e2940;border-radius:2px}
+.stime{font-size:8px;color:#475569}
+.ub{font-size:9px;font-weight:700;padding:1px 6px;border-radius:3px;min-width:22px;text-align:center;flex-shrink:0}
 .u9,.u10{background:#ef444420;color:#ef4444;border:1px solid #ef444440}
 .u7,.u8{background:#f59e0b20;color:#f59e0b;border:1px solid #f59e0b40}
 .u5,.u6{background:#00c9a715;color:#00c9a7;border:1px solid #00c9a730}
 .u1,.u2,.u3,.u4{background:#1e2940;color:#475569;border:1px solid #0f2040}
-.shl{font-size:12px;color:#e2e8f0;font-weight:600;line-height:1.4;margin-bottom:5px;font-family:'DM Sans',sans-serif}
-.ssum{font-size:10px;color:#94a3b8;line-height:1.5}
-.strade{font-size:10px;color:#00c9a7;margin-top:6px;padding:4px 8px;background:#00c9a708;border-radius:4px;border-left:2px solid #00c9a740}
-.sast{display:flex;gap:4px;flex-wrap:wrap;margin-top:7px}
-.at{font-size:8px;padding:1px 5px;border-radius:2px;background:#0f2040;color:#475569;border:1px solid #1e2940}
-.panel{background:#080f1e;overflow-y:auto}
-.ps{padding:14px;border-bottom:1px solid #0f2040}
-.ptitle{font-size:9px;color:#64748b;letter-spacing:.12em;margin-bottom:10px}
-.sg{display:grid;grid-template-columns:1fr 1fr;gap:7px}
-.sb{background:#0a1628;border:1px solid #0f2040;border-radius:5px;padding:9px}
-.sv{font-size:20px;font-weight:700;color:#00c9a7}
-.sl{font-size:8px;color:#64748b;letter-spacing:.08em;margin-top:2px}
-.ir{display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid #0f204040}
+.shl{font-size:12px;color:#e2e8f0;font-weight:600;line-height:1.35;margin-bottom:4px;font-family:'DM Sans',sans-serif}
+.ssum{font-size:10px;color:#94a3b8;line-height:1.4}
+.strade{font-size:9px;color:#00c9a7;margin-top:5px;padding:3px 7px;background:#00c9a708;border-radius:3px;border-left:2px solid #00c9a740}
+.sast{display:flex;gap:3px;flex-wrap:wrap;margin-top:5px}
+.at{font-size:8px;padding:1px 4px;border-radius:2px;background:#0f2040;color:#475569;border:1px solid #1e2940}
+.panel{width:290px;background:#080f1e;overflow-y:auto;flex-shrink:0}
+.ps{padding:12px;border-bottom:1px solid #0f2040}
+.ptitle{font-size:9px;color:#64748b;letter-spacing:.12em;margin-bottom:9px}
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.sb{background:#0a1628;border:1px solid #0f2040;border-radius:5px;padding:8px}
+.sv{font-size:18px;font-weight:700;color:#00c9a7}.sl{font-size:8px;color:#64748b;letter-spacing:.08em;margin-top:1px}
+.fx-grid{display:flex;flex-direction:column;gap:5px}
+.fx-row{display:flex;align-items:center;justify-content:space-between;padding:4px 0;border-bottom:1px solid #0f204040}
+.fx-row:last-child{border:none}
+.fx-pair{font-size:10px;color:#94a3b8}.fx-val{font-size:11px;font-weight:700;color:#e2e8f0}
+.fx-chg{font-size:9px}.fx-up{color:#00c9a7}.fx-dn{color:#ef4444}
+.src-grid{display:flex;flex-direction:column;gap:4px}
+.src-row{display:flex;align-items:center;justify-content:space-between}
+.src-name{font-size:9px;color:#94a3b8}.src-cnt{font-size:9px;color:#00c9a7;font-weight:700}
+.src-bar{height:3px;background:#0f2040;border-radius:2px;margin-top:2px;width:100%}
+.src-fill{height:3px;background:#00c9a7;border-radius:2px}
+.ir{display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #0f204040}
 .ir:last-child{border:none}
-.ia{font-size:10px;color:#94a3b8}
-.ib{font-size:9px;font-weight:700;padding:1px 6px;border-radius:2px}
-.ib.BULLISH{color:#00c9a7;background:#00c9a715}
-.ib.BEARISH{color:#ef4444;background:#ef444415}
-.ib.NEUTRAL{color:#64748b;background:#1e2940}
-.ib.WATCH{color:#f59e0b;background:#f59e0b15}
-.rb{width:100%;padding:9px;background:linear-gradient(135deg,#00c9a7,#0066ff);border:none;border-radius:5px;color:#fff;font-size:11px;font-weight:700;letter-spacing:.08em;cursor:pointer;font-family:'DM Mono',monospace;transition:all .2s}
-.rb:hover{opacity:.85;transform:translateY(-1px)}
-.rb:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.ia{font-size:9px;color:#94a3b8}
+.ib{font-size:8px;font-weight:700;padding:1px 5px;border-radius:2px}
+.ib.BULLISH{color:#00c9a7;background:#00c9a715}.ib.BEARISH{color:#ef4444;background:#ef444415}
+.ib.NEUTRAL{color:#64748b;background:#1e2940}.ib.WATCH{color:#f59e0b;background:#f59e0b15}
+.rb{width:100%;padding:8px;background:linear-gradient(135deg,#00c9a7,#0066ff);border:none;border-radius:5px;color:#fff;font-size:10px;font-weight:700;letter-spacing:.08em;cursor:pointer;font-family:'DM Mono',monospace;transition:all .2s}
+.rb:hover{opacity:.85}.rb:disabled{opacity:.4;cursor:not-allowed}
 .rb.run{animation:blink .8s infinite}
 @keyframes blink{50%{opacity:.5}}
-.rst{font-size:9px;color:#64748b;text-align:center;margin-top:7px;min-height:12px;letter-spacing:.08em}
-.dbox{font-size:10px;color:#94a3b8;line-height:1.6}
-.did{font-size:9px;color:#475569;margin-bottom:5px;letter-spacing:.06em}
-.dhl{font-size:12px;font-weight:700;color:#e2e8f0;margin-bottom:7px;font-family:'DM Sans',sans-serif;line-height:1.4}
-.dtrade{padding:6px 10px;background:#00c9a710;border-radius:4px;border-left:2px solid #00c9a760;color:#00c9a7;font-size:10px;margin-bottom:8px}
-.dlabel{font-size:9px;color:#64748b;letter-spacing:.08em;margin:6px 0 2px}
-.loading{display:flex;flex-direction:column;align-items:center;justify-content:center;height:180px;gap:10px;color:#64748b;font-size:10px;letter-spacing:.1em}
-.spinner{width:20px;height:20px;border:2px solid #1e2940;border-top-color:#00c9a7;border-radius:50%;animation:spin .7s linear infinite}
+.rst{font-size:9px;color:#64748b;text-align:center;margin-top:6px;min-height:12px;letter-spacing:.08em}
+.dbox{font-size:10px;color:#94a3b8;line-height:1.5}
+.did{font-size:9px;color:#475569;margin-bottom:4px;letter-spacing:.05em}
+.dhl{font-size:12px;font-weight:700;color:#e2e8f0;margin-bottom:6px;font-family:'DM Sans',sans-serif;line-height:1.35}
+.dtrade{padding:5px 8px;background:#00c9a710;border-radius:3px;border-left:2px solid #00c9a760;color:#00c9a7;font-size:9px;margin-bottom:7px}
+.dlabel{font-size:8px;color:#64748b;letter-spacing:.08em;margin:5px 0 2px}
+.alert-badge{position:fixed;top:16px;right:20px;background:#ef4444;color:#fff;font-size:10px;font-weight:700;padding:6px 12px;border-radius:6px;letter-spacing:.06em;animation:fadeIn .3s;z-index:999;cursor:pointer}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.loading{display:flex;flex-direction:column;align-items:center;justify-content:center;height:150px;gap:8px;color:#64748b;font-size:10px;letter-spacing:.1em}
+.spinner{width:18px;height:18px;border:2px solid #1e2940;border-top-color:#00c9a7;border-radius:50%;animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:200px;gap:7px;color:#475569;text-align:center;font-size:10px}
-.ei{font-size:24px;opacity:.25}
-::-webkit-scrollbar{width:3px}
-::-webkit-scrollbar-track{background:#050a14}
-::-webkit-scrollbar-thumb{background:#1e2940;border-radius:2px}
+.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:160px;gap:6px;color:#475569;text-align:center;font-size:10px}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:#050a14}::-webkit-scrollbar-thumb{background:#1e2940;border-radius:2px}
 </style>
 </head>
 <body>
-<div class="header">
+<div class="hdr">
   <div class="logo">
-    <div class="logo-mark">E</div>
-    <div>
-      <div class="logo-text">ECOYA INTELLIGENCE</div>
-      <div class="logo-sub">COMMODITY SIGNAL TERMINAL · HRM CORPORATION</div>
-    </div>
+    <div class="lm">E</div>
+    <div><div class="lt">ECOYA INTELLIGENCE</div><div class="ls">HRM CORPORATION · COMMODITY SIGNAL TERMINAL</div></div>
   </div>
-  <div class="hdr-right">
+  <div class="hr">
     <div class="live"><div class="dot"></div>LIVE</div>
-    <div class="clock" id="clk"></div>
+    <div class="ver" id="ver">v1.2</div>
+    <div class="clk" id="clk"></div>
   </div>
 </div>
-<div class="ticker-wrap">
-  <div class="ticker" id="tkr">
-    <span class="ti"><span class="tl">LME AL</span>&nbsp;<span class="tv" id="t-al">—</span>&nbsp;<span class="tu" id="t-al-c"></span></span>
-    <span class="ti"><span class="tl">KRW/USD</span>&nbsp;<span class="tv" id="t-krw">—</span>&nbsp;<span class="td" id="t-krw-c"></span></span>
+<div class="tkr-wrap">
+  <div class="tkr">
+    <span class="ti"><span class="tl">KRW/USD</span>&nbsp;<span class="tv" id="t-krw">—</span></span>
+    <span class="ti"><span class="tl">CNY/USD</span>&nbsp;<span class="tv" id="t-cny">—</span></span>
+    <span class="ti"><span class="tl">WTI CRUDE</span>&nbsp;<span class="tv" id="t-wti">—</span></span>
+    <span class="ti"><span class="tl">LME AL</span>&nbsp;<span class="tv" id="t-al">$2,387</span>&nbsp;<span class="tu">+0.8%</span></span>
     <span class="ti"><span class="tl">OCC PAPER</span>&nbsp;<span class="tv">$142/MT</span>&nbsp;<span class="tu">+1.2%</span></span>
-    <span class="ti"><span class="tl">WTI CRUDE</span>&nbsp;<span class="tv" id="t-wti">—</span>&nbsp;<span class="tu" id="t-wti-c"></span></span>
-    <span class="ti"><span class="tl">CNY/USD</span>&nbsp;<span class="tv" id="t-cny">—</span>&nbsp;<span class="td" id="t-cny-c"></span></span>
-    <span class="ti"><span class="tl">CONTAINER FREIGHT</span>&nbsp;<span class="tv">$2,180</span>&nbsp;<span class="td">-1.1%</span></span>
+    <span class="ti"><span class="tl">CONTAINER</span>&nbsp;<span class="tv">$2,180</span>&nbsp;<span class="td">-1.1%</span></span>
     <span class="ti"><span class="tl">KOSPI</span>&nbsp;<span class="tv">6,244</span>&nbsp;<span class="tu">+0.6%</span></span>
     <span class="ti"><span class="tl">LME COPPER</span>&nbsp;<span class="tv">$9,124</span>&nbsp;<span class="tu">+0.4%</span></span>
+    <span class="ti"><span class="tl">KRW/USD</span>&nbsp;<span class="tv" id="t-krw2">—</span></span>
+    <span class="ti"><span class="tl">CNY/USD</span>&nbsp;<span class="tv" id="t-cny2">—</span></span>
+    <span class="ti"><span class="tl">WTI CRUDE</span>&nbsp;<span class="tv" id="t-wti2">—</span></span>
     <span class="ti"><span class="tl">LME AL</span>&nbsp;<span class="tv">$2,387</span>&nbsp;<span class="tu">+0.8%</span></span>
-    <span class="ti"><span class="tl">KRW/USD</span>&nbsp;<span class="tv">1,510</span>&nbsp;<span class="td">-0.5%</span></span>
     <span class="ti"><span class="tl">OCC PAPER</span>&nbsp;<span class="tv">$142/MT</span>&nbsp;<span class="tu">+1.2%</span></span>
-    <span class="ti"><span class="tl">WTI CRUDE</span>&nbsp;<span class="tv">$104.69</span>&nbsp;<span class="tu">+3.4%</span></span>
-    <span class="ti"><span class="tl">CNY/USD</span>&nbsp;<span class="tv">6.91</span>&nbsp;<span class="td">-0.2%</span></span>
-    <span class="ti"><span class="tl">CONTAINER FREIGHT</span>&nbsp;<span class="tv">$2,180</span>&nbsp;<span class="td">-1.1%</span></span>
+    <span class="ti"><span class="tl">CONTAINER</span>&nbsp;<span class="tv">$2,180</span>&nbsp;<span class="td">-1.1%</span></span>
     <span class="ti"><span class="tl">KOSPI</span>&nbsp;<span class="tv">6,244</span>&nbsp;<span class="tu">+0.6%</span></span>
     <span class="ti"><span class="tl">LME COPPER</span>&nbsp;<span class="tv">$9,124</span>&nbsp;<span class="tu">+0.4%</span></span>
   </div>
 </div>
-<div class="main">
-  <div class="feed">
+<div class="body">
+  <div class="feed-col">
     <div class="fhdr">
       <div class="ftitle">SIGNAL FEED</div>
       <div class="fctrl">
@@ -139,9 +139,10 @@ body{background:#050a14;color:#e2e8f0;font-family:'DM Mono',monospace;min-height
         <button class="fb" onclick="sf('SHIPPING',this)">SHIPPING</button>
         <button class="fb" onclick="sf('GEOPOLITICAL',this)">GEO</button>
         <button class="fb" onclick="sf('CLIMATE',this)">CLIMATE</button>
+        <button class="fb" onclick="sf('HIGH',this)">🔴 HIGH</button>
       </div>
     </div>
-    <div id="feed"><div class="loading"><div class="spinner"></div>LOADING SIGNALS...</div></div>
+    <div class="feed" id="feed"><div class="loading"><div class="spinner"></div>LOADING SIGNALS...</div></div>
   </div>
   <div class="panel">
     <div class="ps">
@@ -149,14 +150,21 @@ body{background:#050a14;color:#e2e8f0;font-family:'DM Mono',monospace;min-height
       <div class="sg">
         <div class="sb"><div class="sv" id="st">—</div><div class="sl">TOTAL SIGNALS</div></div>
         <div class="sb"><div class="sv" id="sh" style="color:#ef4444">—</div><div class="sl">HIGH URGENCY</div></div>
-        <div class="sb"><div class="sv">3</div><div class="sl">DATA SOURCES</div></div>
+        <div class="sb"><div class="sv" id="ss">6</div><div class="sl">DATA SOURCES</div></div>
         <div class="sb"><div class="sv" style="color:#00c9a7;font-size:13px">CLAUDE</div><div class="sl">AI ENGINE</div></div>
       </div>
     </div>
     <div class="ps">
-      <div class="ptitle">PIPELINE CONTROL</div>
-      <button class="rb" id="rb" onclick="runPipeline()">⚡ RUN PIPELINE NOW</button>
-      <div class="rst" id="rst"></div>
+      <div class="ptitle">LIVE FX RATES</div>
+      <div class="fx-grid" id="fx-grid">
+        <div class="fx-row"><span class="fx-pair">KRW/USD</span><span class="fx-val" id="fx-krw">—</span></div>
+        <div class="fx-row"><span class="fx-pair">CNY/USD</span><span class="fx-val" id="fx-cny">—</span></div>
+        <div class="fx-row"><span class="fx-pair">WTI CRUDE</span><span class="fx-val" id="fx-wti">—</span></div>
+      </div>
+    </div>
+    <div class="ps">
+      <div class="ptitle">SOURCES</div>
+      <div class="src-grid" id="src-grid"></div>
     </div>
     <div class="ps">
       <div class="ptitle">TRADE IMPLICATIONS</div>
@@ -164,9 +172,14 @@ body{background:#050a14;color:#e2e8f0;font-family:'DM Mono',monospace;min-height
         <div class="ir"><span class="ia">LME ALUMINUM</span><span class="ib NEUTRAL">NEUTRAL</span></div>
         <div class="ir"><span class="ia">KRW/USD</span><span class="ib NEUTRAL">NEUTRAL</span></div>
         <div class="ir"><span class="ia">OCC PAPER</span><span class="ib NEUTRAL">NEUTRAL</span></div>
-        <div class="ir"><span class="ia">CONTAINER FREIGHT</span><span class="ib NEUTRAL">NEUTRAL</span></div>
+        <div class="ir"><span class="ia">CONTAINER</span><span class="ib NEUTRAL">NEUTRAL</span></div>
         <div class="ir"><span class="ia">WTI CRUDE</span><span class="ib NEUTRAL">NEUTRAL</span></div>
       </div>
+    </div>
+    <div class="ps">
+      <div class="ptitle">PIPELINE CONTROL</div>
+      <button class="rb" id="rb" onclick="runPipeline()">⚡ RUN PIPELINE NOW</button>
+      <div class="rst" id="rst"></div>
     </div>
     <div class="ps" id="dp" style="display:none">
       <div class="ptitle">SIGNAL DETAIL</div>
@@ -176,90 +189,99 @@ body{background:#050a14;color:#e2e8f0;font-family:'DM Mono',monospace;min-height
 </div>
 <script>
 const API='https://ecoya-intelligence-production.up.railway.app';
-let sigs=[],filt='ALL';
+let sigs=[],filt='ALL',stats={};
 
-setInterval(()=>{
-  document.getElementById('clk').textContent=new Date().toLocaleTimeString('en-US',{hour12:false,timeZone:'Asia/Seoul'})+' KST';
-},1000);
+setInterval(()=>document.getElementById('clk').textContent=new Date().toLocaleTimeString('en-US',{hour12:false,timeZone:'Asia/Seoul'})+' KST',1000);
 
 async function load(){
   try{
-    const r=await fetch(API+'/api/signals?limit=100');
-    const d=await r.json();
-    sigs=d.signals||[];
-    render();
-    updateStats();
-    updateTicker();
+    const [s,st]=await Promise.all([
+      fetch(API+'/api/signals?limit=100').then(r=>r.json()),
+      fetch(API+'/api/signals/stats').then(r=>r.json()),
+    ]);
+    sigs=s.signals||[];stats=st||{};
+    render();updateStats();updateFX();updateSources();
+    // 고긴급도 알림
+    const high=sigs.filter(x=>x.urgency_score>=8&&!x._alerted);
+    if(high.length){
+      high.forEach(x=>x._alerted=true);
+      showAlert(high.length+' HIGH URGENCY SIGNAL'+(high.length>1?'S':''));
+    }
+    document.getElementById('ver').textContent='v1.2 · '+sigs.length+'sig';
   }catch(e){
-    document.getElementById('feed').innerHTML='<div class="empty"><div class="ei">⚠</div><div>API CONNECTION ERROR</div><div style="margin-top:4px;font-size:9px">'+e.message+'</div></div>';
+    document.getElementById('feed').innerHTML='<div class="empty"><div>⚠ API ERROR</div><div style="font-size:9px;margin-top:4px">'+e.message+'</div></div>';
   }
 }
 
-function updateTicker(){
-  // KRW/USD 실시간 업데이트
-  const krwSig = sigs.find(s=>s.headline&&s.headline.includes('Korean Won')||s.headline&&s.headline.includes('KRW'));
-  if(krwSig){
-    const m=krwSig.headline.match(/[d,]+.d+/);
-    if(m){document.getElementById('t-krw').textContent=m[0];}
-  }
-  // WTI 업데이트
-  const wtiSig=sigs.find(s=>s.headline&&s.headline.includes('WTI')||s.headline&&s.headline.includes('Crude'));
-  if(wtiSig){
-    const m=wtiSig.headline.match(/\$[\d.]+/);
-    if(m){document.getElementById('t-wti').textContent=m[0];}
-  }
-  // CNY 업데이트
-  const cnySig=sigs.find(s=>s.headline&&s.headline.includes('Yuan')||s.headline&&s.headline.includes('CNY'));
-  if(cnySig){
-    const m=cnySig.headline.match(/[\d.]+/g);
-    if(m&&m.length>0){document.getElementById('t-cny').textContent=m[m.length-1];}
-  }
+function showAlert(msg){
+  let b=document.querySelector('.alert-badge');
+  if(b)b.remove();
+  b=document.createElement('div');
+  b.className='alert-badge';b.textContent='🔴 '+msg;
+  b.onclick=()=>{b.remove();sf('HIGH',document.querySelector('.fb:last-child'));};
+  document.body.appendChild(b);
+  setTimeout(()=>{if(b.parentNode)b.remove();},5000);
+}
+
+function updateFX(){
+  const krw=sigs.find(s=>s.headline&&s.headline.includes('Korean Won'));
+  const cny=sigs.find(s=>s.headline&&s.headline.includes('Yuan'));
+  const wti=sigs.find(s=>s.headline&&(s.headline.includes('WTI')||s.headline.includes('Crude')));
+  const nm=t=>t.match(/[\d,]+\.\d+/)?.[0]||t.match(/[\d,]+/)?.[0]||'—';
+  if(krw){const v=nm(krw.headline);['fx-krw','t-krw','t-krw2'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=v;});}
+  if(cny){const v=nm(cny.headline);['fx-cny','t-cny','t-cny2'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=v;});}
+  if(wti){const v=wti.headline.match(/\$[\d.]+/)?.[0]||nm(wti.headline);['fx-wti','t-wti','t-wti2'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=v;});}
+}
+
+function updateSources(){
+  const by=stats.by_source||{};
+  const total=Object.values(by).reduce((a,b)=>a+b,0)||1;
+  const order=['FX_LIVE','RSS','GDELT','FRED','WORLDBANK','NASA_FIRMS'];
+  const all=Object.keys(by).filter(k=>!order.includes(k));
+  const sorted=[...order.filter(k=>by[k]),...all.filter(k=>by[k])];
+  document.getElementById('src-grid').innerHTML=sorted.map(k=>{
+    const pct=Math.round((by[k]/total)*100);
+    return`<div class="src-row"><span class="src-name">${k}</span><span class="src-cnt">${by[k]}</span></div>
+<div class="src-bar"><div class="src-fill" style="width:${pct}%"></div></div>`;
+  }).join('');
 }
 
 function render(){
   const feed=document.getElementById('feed');
-  const list=filt==='ALL'?sigs:sigs.filter(s=>s.category===filt);
-  if(!list.length){
-    feed.innerHTML='<div class="empty"><div class="ei">📡</div><div>NO SIGNALS YET</div><div style="margin-top:4px;font-size:9px">CLICK RUN PIPELINE TO COLLECT DATA</div></div>';
-    return;
-  }
+  let list=filt==='ALL'?sigs:filt==='HIGH'?sigs.filter(s=>s.urgency_score>=7):sigs.filter(s=>s.category===filt);
+  if(!list.length){feed.innerHTML='<div class="empty"><div>📡 NO SIGNALS</div><div style="margin-top:4px">Click RUN PIPELINE</div></div>';return;}
   feed.innerHTML=list.map(s=>{
     const u=s.urgency_score||5;
     const uc=u>=7?'uh':u>=5?'um':'ul';
     const t=s.created_at?new Date(s.created_at).toLocaleTimeString('en-US',{hour12:false,timeZone:'Asia/Seoul'}):'';
-    const ast=(s.affected_assets||[]).slice(0,4).map(a=>'<span class="at">'+a+'</span>').join('');
-    const trade=s.trade_implication?'<div class="strade">→ '+s.trade_implication+'</div>':'';
-    return '<div class="sc '+uc+('" onclick="selSig(''+s.signal_id+'')">')+
-      '<div class="stop">'+
-      '<div class="smeta"><span class="scat '+(s.category||'')+'">'+(s.category||'SIG')+'</span><span class="stime">'+t+'</span></div>'+
-      '<div class="ub u'+u+'">'+u+'</div>'+
-      '</div>'+
-      '<div class="shl">'+(s.headline||'—')+'</div>'+
-      '<div class="ssum">'+(s.summary||'').substring(0,140)+(((s.summary||'').length>140)?'...':'')+'</div>'+
-      trade+
-      '<div class="sast">'+ast+'</div>'+
-      '</div>';
+    const ast=(s.affected_assets||[]).slice(0,3).map(a=>`<span class="at">${a}</span>`).join('');
+    const trade=s.trade_implication?`<div class="strade">→ ${s.trade_implication}</div>`:'';
+    const src=s.data_source?`<span class="ssrc">${s.data_source}</span>`:'';
+    return`<div class="sc ${uc}" onclick="selSig('${s.signal_id}')">
+<div class="stop"><div class="smeta"><span class="scat ${s.category||''}">${s.category||'SIG'}</span>${src}<span class="stime">${t}</span></div><div class="ub u${u}">${u}</div></div>
+<div class="shl">${s.headline||'—'}</div>
+<div class="ssum">${(s.summary||'').substring(0,130)}${(s.summary||'').length>130?'...':''}</div>
+${trade}<div class="sast">${ast}</div></div>`;
   }).join('');
 }
 
 function updateStats(){
   document.getElementById('st').textContent=sigs.length;
   document.getElementById('sh').textContent=sigs.filter(s=>s.urgency_score>=7).length;
-  const a={LME_ALUMINUM:'NEUTRAL',KRW_USD:'NEUTRAL',OCC_PAPER:'NEUTRAL',CONTAINER_FREIGHT:'NEUTRAL',WTI_CRUDE:'NEUTRAL'};
+  const a={LME_ALUMINUM:'NEUTRAL',KRW_USD:'NEUTRAL',OCC_PAPER:'NEUTRAL',CONTAINER:'NEUTRAL',WTI_CRUDE:'NEUTRAL'};
   sigs.forEach(s=>{
     if(s.urgency_score>=5&&s.affected_assets){
       s.affected_assets.forEach(x=>{
-        if(x.includes('ALUM')||x==='LME_ALUMINUM')a.LME_ALUMINUM=s.urgency_score>=8?'BEARISH':'WATCH';
+        if(x.includes('ALUM'))a.LME_ALUMINUM=s.urgency_score>=8?'BEARISH':'WATCH';
         if(x.includes('KRW'))a.KRW_USD=s.urgency_score>=7?'WATCH':'NEUTRAL';
         if(x.includes('PAPER')||x.includes('OCC'))a.OCC_PAPER='WATCH';
-        if(x.includes('FREIGHT')||x.includes('CONTAINER'))a.CONTAINER_FREIGHT='WATCH';
-        if(x.includes('CRUDE')||x.includes('WTI')||x.includes('OIL'))a.WTI_CRUDE=s.urgency_score>=7?'BEARISH':'WATCH';
+        if(x.includes('FREIGHT')||x.includes('CONTAINER'))a.CONTAINER='WATCH';
+        if(x.includes('CRUDE')||x.includes('WTI'))a.WTI_CRUDE=s.urgency_score>=7?'BEARISH':'WATCH';
       });
     }
   });
   document.getElementById('impl').innerHTML=Object.entries(a).map(([k,v])=>
-    '<div class="ir"><span class="ia">'+k.replace(/_/g,' ')+'</span><span class="ib '+v+'">'+v+'</span></div>'
-  ).join('');
+    `<div class="ir"><span class="ia">${k.replace(/_/g,' ')}</span><span class="ib ${v}">${v}</span></div>`).join('');
 }
 
 function sf(f,btn){
@@ -274,39 +296,28 @@ function selSig(id){
   if(!s)return;
   document.querySelectorAll('.sc').forEach(c=>c.classList.remove('sel'));
   event.currentTarget.classList.add('sel');
-  const dp=document.getElementById('dp');
-  dp.style.display='block';
-  const trade=s.trade_implication?'<div class="dtrade">→ '+s.trade_implication+'</div>':'';
-  const geo=s.geography?JSON.stringify(s.geography):'N/A';
-  const assets=(s.affected_assets||[]).map(a=>'<span class="at" style="font-size:9px;padding:2px 6px">'+a+'</span>').join(' ');
+  const dp=document.getElementById('dp');dp.style.display='block';
+  const trade=s.trade_implication?`<div class="dtrade">→ ${s.trade_implication}</div>`:'';
+  const ast=(s.affected_assets||[]).map(a=>`<span class="at" style="font-size:8px;padding:2px 5px">${a}</span>`).join(' ');
   document.getElementById('dc').innerHTML=
-    '<div class="did">'+s.signal_id+'</div>'+
-    '<div class="dhl">'+s.headline+'</div>'+
-    trade+
-    '<div class="dbox">'+
-    '<div class="dlabel">SUMMARY</div>'+
-    '<div style="margin-bottom:8px">'+(s.summary||'')+'</div>'+
-    '<div class="dlabel">AFFECTED ASSETS</div>'+
-    '<div style="margin-bottom:8px;display:flex;gap:4px;flex-wrap:wrap">'+assets+'</div>'+
-    '<div class="dlabel">GEOGRAPHY</div>'+
-    '<div style="margin-bottom:8px">'+geo+'</div>'+
-    '<div class="dlabel">SOURCE · CONFIDENCE</div>'+
-    '<div>'+(s.data_source||'')+' · '+(s.confidence||'MEDIUM')+'</div>'+
-    '</div>';
+    `<div class="did">${s.signal_id}</div><div class="dhl">${s.headline}</div>${trade}
+<div class="dbox">
+<div class="dlabel">SUMMARY</div><div style="margin-bottom:7px">${s.summary||''}</div>
+<div class="dlabel">ASSETS</div><div style="margin-bottom:7px;display:flex;gap:3px;flex-wrap:wrap">${ast}</div>
+<div class="dlabel">SOURCE · CONFIDENCE</div><div>${s.data_source||''} · ${s.confidence||'MEDIUM'}</div>
+</div>`;
 }
 
 async function runPipeline(){
-  const btn=document.getElementById('rb');
-  const st=document.getElementById('rst');
-  btn.disabled=true;btn.classList.add('run');
-  btn.textContent='⚡ RUNNING...';
-  st.textContent='COLLECTING · ANALYZING · STORING...';
+  const btn=document.getElementById('rb'),st=document.getElementById('rst');
+  btn.disabled=true;btn.classList.add('run');btn.textContent='⚡ RUNNING...';
+  st.textContent='COLLECTING · AI ANALYZING · STORING...';
   try{
     await fetch(API+'/api/signals/run',{method:'POST'});
-    st.textContent='PIPELINE TRIGGERED — LOADING IN 30s...';
-    setTimeout(()=>{load();st.textContent='✓ COMPLETE';},30000);
+    st.textContent='PIPELINE TRIGGERED — REFRESHING IN 35s...';
+    setTimeout(()=>{load();st.textContent='✓ COMPLETE';},35000);
   }catch(e){st.textContent='ERROR: '+e.message;}
-  finally{setTimeout(()=>{btn.disabled=false;btn.classList.remove('run');btn.textContent='⚡ RUN PIPELINE NOW';},6000);}
+  finally{setTimeout(()=>{btn.disabled=false;btn.classList.remove('run');btn.textContent='⚡ RUN PIPELINE NOW';},7000);}
 }
 
 setInterval(load,300000);
