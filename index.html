@@ -3,286 +3,313 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ECOYA Intelligence</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<title>ECOYA Intelligence Terminal</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { background: #050a14; color: #e2e8f0; font-family: 'DM Mono', monospace; min-height: 100vh; }
-.header { display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; background: #0a1628; border-bottom: 1px solid #00c9a722; }
-.logo { display: flex; align-items: center; gap: 10px; }
-.logo-mark { width: 28px; height: 28px; background: linear-gradient(135deg, #00c9a7, #0066ff); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 900; color: white; }
-.logo-text { font-size: 15px; font-weight: 700; letter-spacing: 0.12em; color: #00c9a7; }
-.logo-sub { font-size: 10px; color: #64748b; letter-spacing: 0.15em; }
-.header-right { display: flex; align-items: center; gap: 16px; }
-.live-badge { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #00c9a7; letter-spacing: 0.1em; }
-.live-dot { width: 7px; height: 7px; border-radius: 50%; background: #00c9a7; animation: pulse 2s infinite; }
-@keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.3} }
-.time-display { font-size: 12px; color: #64748b; }
-.ticker { background: #0a1628; border-bottom: 1px solid #0f2040; padding: 8px 0; overflow: hidden; }
-.ticker-inner { display: flex; gap: 32px; animation: scroll 40s linear infinite; white-space: nowrap; }
-@keyframes scroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
-.ticker-item { display: flex; align-items: center; gap: 8px; font-size: 11px; }
-.ticker-label { color: #64748b; }
-.ticker-value { color: #e2e8f0; font-weight: 600; }
-.ticker-up { color: #00c9a7; }
-.ticker-down { color: #ef4444; }
-.main { display: grid; grid-template-columns: 1fr 340px; height: calc(100vh - 92px); }
-.feed { padding: 16px; overflow-y: auto; border-right: 1px solid #0f2040; }
-.feed-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
-.feed-title { font-size: 11px; color: #64748b; letter-spacing: 0.12em; }
-.feed-controls { display: flex; gap: 6px; }
-.filter-btn { padding: 3px 9px; border-radius: 4px; font-size: 10px; letter-spacing: 0.06em; border: 1px solid #0f2040; background: transparent; color: #64748b; cursor: pointer; transition: all 0.15s; font-family: 'DM Mono', monospace; }
-.filter-btn.active,.filter-btn:hover { border-color: #00c9a7; color: #00c9a7; background: #00c9a710; }
-.signal-card { background: #0a1628; border: 1px solid #0f2040; border-radius: 8px; padding: 14px; margin-bottom: 10px; cursor: pointer; transition: all 0.15s; position: relative; overflow: hidden; }
-.signal-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; }
-.signal-card.urgency-high::before { background: #ef4444; }
-.signal-card.urgency-med::before { background: #f59e0b; }
-.signal-card.urgency-low::before { background: #00c9a7; }
-.signal-card:hover { border-color: #00c9a740; transform: translateX(2px); }
-.signal-card.selected { border-color: #00c9a7; }
-.signal-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
-.signal-meta { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
-.signal-cat { font-size: 9px; letter-spacing: 0.1em; padding: 2px 6px; border-radius: 3px; background: #0f2040; color: #64748b; }
-.signal-cat.MACRO { color: #8b5cf6; background: #8b5cf615; }
-.signal-cat.COMMODITY { color: #f59e0b; background: #f59e0b15; }
-.signal-cat.SHIPPING { color: #3b82f6; background: #3b82f615; }
-.signal-cat.GEOPOLITICAL { color: #ef4444; background: #ef444415; }
-.signal-cat.CLIMATE { color: #00c9a7; background: #00c9a715; }
-.signal-cat.REGULATORY { color: #ec4899; background: #ec489915; }
-.signal-cat.SENTIMENT { color: #6366f1; background: #6366f115; }
-.signal-time { font-size: 10px; color: #475569; }
-.urgency-badge { font-size: 11px; font-weight: 700; padding: 1px 8px; border-radius: 4px; min-width: 26px; text-align: center; flex-shrink: 0; }
-.u9,.u10 { background: #ef444420; color: #ef4444; border: 1px solid #ef444440; }
-.u7,.u8 { background: #f59e0b20; color: #f59e0b; border: 1px solid #f59e0b40; }
-.u5,.u6 { background: #00c9a715; color: #00c9a7; border: 1px solid #00c9a730; }
-.u1,.u2,.u3,.u4 { background: #1e2940; color: #475569; border: 1px solid #0f2040; }
-.signal-headline { font-size: 13px; color: #e2e8f0; font-weight: 600; line-height: 1.4; margin-bottom: 6px; font-family: 'DM Sans', sans-serif; }
-.signal-summary { font-size: 11px; color: #94a3b8; line-height: 1.5; }
-.signal-assets { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 8px; }
-.asset-tag { font-size: 9px; padding: 1px 5px; border-radius: 3px; background: #0f2040; color: #475569; border: 1px solid #1e2940; }
-.panel { background: #080f1e; overflow-y: auto; }
-.panel-section { padding: 16px; border-bottom: 1px solid #0f2040; }
-.panel-title { font-size: 10px; color: #64748b; letter-spacing: 0.12em; margin-bottom: 12px; }
-.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.stat-box { background: #0a1628; border: 1px solid #0f2040; border-radius: 6px; padding: 10px; }
-.stat-val { font-size: 22px; font-weight: 700; color: #00c9a7; }
-.stat-label { font-size: 9px; color: #64748b; letter-spacing: 0.08em; margin-top: 2px; }
-.impl-row { display: flex; align-items: center; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid #0f204040; }
-.impl-row:last-child { border: none; }
-.impl-asset { font-size: 11px; color: #94a3b8; }
-.impl-badge { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 3px; }
-.impl-badge.BULLISH { color: #00c9a7; background: #00c9a715; }
-.impl-badge.BEARISH { color: #ef4444; background: #ef444415; }
-.impl-badge.NEUTRAL { color: #64748b; background: #1e2940; }
-.impl-badge.WATCH { color: #f59e0b; background: #f59e0b15; }
-.run-btn { width: 100%; padding: 10px; background: linear-gradient(135deg, #00c9a7, #0066ff); border: none; border-radius: 6px; color: white; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; cursor: pointer; font-family: 'DM Mono', monospace; transition: all 0.2s; }
-.run-btn:hover { opacity: 0.85; transform: translateY(-1px); }
-.run-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
-.run-btn.running { animation: blink 0.8s infinite; }
-@keyframes blink { 50% { opacity: 0.5; } }
-.run-status { font-size: 10px; color: #64748b; text-align: center; margin-top: 8px; letter-spacing: 0.08em; min-height: 14px; }
-.detail-box { background: #0a1628; border-radius: 6px; padding: 12px; font-size: 11px; color: #94a3b8; line-height: 1.6; }
-.detail-id { font-size: 10px; color: #475569; margin-bottom: 6px; }
-.detail-headline { font-size: 13px; font-weight: 700; color: #e2e8f0; margin-bottom: 8px; font-family: 'DM Sans', sans-serif; line-height: 1.4; }
-.loading { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 200px; gap: 12px; color: #64748b; font-size: 11px; letter-spacing: 0.1em; }
-.spinner { width: 24px; height: 24px; border: 2px solid #1e2940; border-top-color: #00c9a7; border-radius: 50%; animation: spin 0.8s linear infinite; }
-@keyframes spin { to { transform: rotate(360deg); } }
-.empty { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 240px; gap: 8px; color: #475569; text-align: center; }
-.empty-icon { font-size: 28px; opacity: 0.3; }
-::-webkit-scrollbar { width: 3px; }
-::-webkit-scrollbar-track { background: #050a14; }
-::-webkit-scrollbar-thumb { background: #1e2940; border-radius: 2px; }
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#050a14;color:#e2e8f0;font-family:'DM Mono',monospace;min-height:100vh;overflow:hidden}
+.header{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:#0a1628;border-bottom:1px solid #00c9a720}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-mark{width:26px;height:26px;background:linear-gradient(135deg,#00c9a7,#0066ff);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff}
+.logo-text{font-size:14px;font-weight:700;letter-spacing:.12em;color:#00c9a7}
+.logo-sub{font-size:9px;color:#475569;letter-spacing:.15em}
+.hdr-right{display:flex;align-items:center;gap:14px}
+.live{display:flex;align-items:center;gap:5px;font-size:10px;color:#00c9a7;letter-spacing:.1em}
+.dot{width:6px;height:6px;border-radius:50%;background:#00c9a7;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.clock{font-size:11px;color:#475569}
+.ticker-wrap{background:#0a1628;border-bottom:1px solid #0f2040;padding:6px 0;overflow:hidden;height:28px}
+.ticker{display:flex;gap:28px;animation:scroll 50s linear infinite;white-space:nowrap}
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ti{display:flex;align-items:center;gap:6px;font-size:10px}
+.tl{color:#64748b}.tv{color:#e2e8f0;font-weight:600}.tu{color:#00c9a7}.td{color:#ef4444}
+.main{display:grid;grid-template-columns:1fr 320px;height:calc(100vh - 82px)}
+.feed{padding:14px;overflow-y:auto;border-right:1px solid #0f2040}
+.fhdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.ftitle{font-size:10px;color:#64748b;letter-spacing:.12em}
+.fctrl{display:flex;gap:5px}
+.fb{padding:3px 8px;border-radius:3px;font-size:9px;letter-spacing:.06em;border:1px solid #0f2040;background:transparent;color:#64748b;cursor:pointer;transition:all .15s;font-family:'DM Mono',monospace}
+.fb.a,.fb:hover{border-color:#00c9a7;color:#00c9a7;background:#00c9a710}
+.sc{background:#0a1628;border:1px solid #0f2040;border-radius:7px;padding:12px 12px 12px 15px;margin-bottom:8px;cursor:pointer;transition:all .15s;position:relative;overflow:hidden}
+.sc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px}
+.sc.uh::before{background:#ef4444}
+.sc.um::before{background:#f59e0b}
+.sc.ul::before{background:#00c9a7}
+.sc:hover{border-color:#00c9a740;transform:translateX(2px)}
+.sc.sel{border-color:#00c9a7}
+.stop{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:7px}
+.smeta{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.scat{font-size:8px;letter-spacing:.1em;padding:2px 5px;border-radius:2px;background:#0f2040;color:#64748b}
+.scat.MACRO{color:#8b5cf6;background:#8b5cf610}
+.scat.COMMODITY{color:#f59e0b;background:#f59e0b10}
+.scat.SHIPPING{color:#3b82f6;background:#3b82f610}
+.scat.GEOPOLITICAL{color:#ef4444;background:#ef444410}
+.scat.CLIMATE{color:#00c9a7;background:#00c9a710}
+.scat.REGULATORY{color:#ec4899;background:#ec489910}
+.scat.SENTIMENT{color:#6366f1;background:#6366f110}
+.stime{font-size:9px;color:#475569}
+.ub{font-size:10px;font-weight:700;padding:1px 7px;border-radius:3px;min-width:24px;text-align:center;flex-shrink:0}
+.u9,.u10{background:#ef444420;color:#ef4444;border:1px solid #ef444440}
+.u7,.u8{background:#f59e0b20;color:#f59e0b;border:1px solid #f59e0b40}
+.u5,.u6{background:#00c9a715;color:#00c9a7;border:1px solid #00c9a730}
+.u1,.u2,.u3,.u4{background:#1e2940;color:#475569;border:1px solid #0f2040}
+.shl{font-size:12px;color:#e2e8f0;font-weight:600;line-height:1.4;margin-bottom:5px;font-family:'DM Sans',sans-serif}
+.ssum{font-size:10px;color:#94a3b8;line-height:1.5}
+.strade{font-size:10px;color:#00c9a7;margin-top:6px;padding:4px 8px;background:#00c9a708;border-radius:4px;border-left:2px solid #00c9a740}
+.sast{display:flex;gap:4px;flex-wrap:wrap;margin-top:7px}
+.at{font-size:8px;padding:1px 5px;border-radius:2px;background:#0f2040;color:#475569;border:1px solid #1e2940}
+.panel{background:#080f1e;overflow-y:auto}
+.ps{padding:14px;border-bottom:1px solid #0f2040}
+.ptitle{font-size:9px;color:#64748b;letter-spacing:.12em;margin-bottom:10px}
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.sb{background:#0a1628;border:1px solid #0f2040;border-radius:5px;padding:9px}
+.sv{font-size:20px;font-weight:700;color:#00c9a7}
+.sl{font-size:8px;color:#64748b;letter-spacing:.08em;margin-top:2px}
+.ir{display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid #0f204040}
+.ir:last-child{border:none}
+.ia{font-size:10px;color:#94a3b8}
+.ib{font-size:9px;font-weight:700;padding:1px 6px;border-radius:2px}
+.ib.BULLISH{color:#00c9a7;background:#00c9a715}
+.ib.BEARISH{color:#ef4444;background:#ef444415}
+.ib.NEUTRAL{color:#64748b;background:#1e2940}
+.ib.WATCH{color:#f59e0b;background:#f59e0b15}
+.rb{width:100%;padding:9px;background:linear-gradient(135deg,#00c9a7,#0066ff);border:none;border-radius:5px;color:#fff;font-size:11px;font-weight:700;letter-spacing:.08em;cursor:pointer;font-family:'DM Mono',monospace;transition:all .2s}
+.rb:hover{opacity:.85;transform:translateY(-1px)}
+.rb:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.rb.run{animation:blink .8s infinite}
+@keyframes blink{50%{opacity:.5}}
+.rst{font-size:9px;color:#64748b;text-align:center;margin-top:7px;min-height:12px;letter-spacing:.08em}
+.dbox{font-size:10px;color:#94a3b8;line-height:1.6}
+.did{font-size:9px;color:#475569;margin-bottom:5px;letter-spacing:.06em}
+.dhl{font-size:12px;font-weight:700;color:#e2e8f0;margin-bottom:7px;font-family:'DM Sans',sans-serif;line-height:1.4}
+.dtrade{padding:6px 10px;background:#00c9a710;border-radius:4px;border-left:2px solid #00c9a760;color:#00c9a7;font-size:10px;margin-bottom:8px}
+.dlabel{font-size:9px;color:#64748b;letter-spacing:.08em;margin:6px 0 2px}
+.loading{display:flex;flex-direction:column;align-items:center;justify-content:center;height:180px;gap:10px;color:#64748b;font-size:10px;letter-spacing:.1em}
+.spinner{width:20px;height:20px;border:2px solid #1e2940;border-top-color:#00c9a7;border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:200px;gap:7px;color:#475569;text-align:center;font-size:10px}
+.ei{font-size:24px;opacity:.25}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:#050a14}
+::-webkit-scrollbar-thumb{background:#1e2940;border-radius:2px}
 </style>
 </head>
 <body>
-<header class="header">
+<div class="header">
   <div class="logo">
     <div class="logo-mark">E</div>
     <div>
       <div class="logo-text">ECOYA INTELLIGENCE</div>
-      <div class="logo-sub">COMMODITY SIGNAL TERMINAL</div>
+      <div class="logo-sub">COMMODITY SIGNAL TERMINAL · HRM CORPORATION</div>
     </div>
   </div>
-  <div class="header-right">
-    <div class="live-badge"><div class="live-dot"></div>LIVE</div>
-    <div class="time-display" id="clock"></div>
+  <div class="hdr-right">
+    <div class="live"><div class="dot"></div>LIVE</div>
+    <div class="clock" id="clk"></div>
   </div>
-</header>
-<div class="ticker">
-  <div class="ticker-inner" id="ticker-inner">
-    <span class="ticker-item"><span class="ticker-label">LME AL</span>&nbsp;<span class="ticker-value">$2,387</span>&nbsp;<span class="ticker-up">+0.8%</span></span>
-    <span class="ticker-item"><span class="ticker-label">KRW/USD</span>&nbsp;<span class="ticker-value">1,441</span>&nbsp;<span class="ticker-down">-0.2%</span></span>
-    <span class="ticker-item"><span class="ticker-label">OCC PAPER</span>&nbsp;<span class="ticker-value">$142/MT</span>&nbsp;<span class="ticker-up">+1.2%</span></span>
-    <span class="ticker-item"><span class="ticker-label">WTI CRUDE</span>&nbsp;<span class="ticker-value">$71.4</span>&nbsp;<span class="ticker-down">-0.5%</span></span>
-    <span class="ticker-item"><span class="ticker-label">CNY/USD</span>&nbsp;<span class="ticker-value">7.24</span>&nbsp;<span class="ticker-up">+0.1%</span></span>
-    <span class="ticker-item"><span class="ticker-label">CONTAINER FREIGHT</span>&nbsp;<span class="ticker-value">$2,180</span>&nbsp;<span class="ticker-down">-1.1%</span></span>
-    <span class="ticker-item"><span class="ticker-label">LME COPPER</span>&nbsp;<span class="ticker-value">$9,124</span>&nbsp;<span class="ticker-up">+0.4%</span></span>
-    <span class="ticker-item"><span class="ticker-label">KOSPI</span>&nbsp;<span class="ticker-value">6,244</span>&nbsp;<span class="ticker-up">+0.6%</span></span>
-    <span class="ticker-item"><span class="ticker-label">LME AL</span>&nbsp;<span class="ticker-value">$2,387</span>&nbsp;<span class="ticker-up">+0.8%</span></span>
-    <span class="ticker-item"><span class="ticker-label">KRW/USD</span>&nbsp;<span class="ticker-value">1,441</span>&nbsp;<span class="ticker-down">-0.2%</span></span>
-    <span class="ticker-item"><span class="ticker-label">OCC PAPER</span>&nbsp;<span class="ticker-value">$142/MT</span>&nbsp;<span class="ticker-up">+1.2%</span></span>
-    <span class="ticker-item"><span class="ticker-label">WTI CRUDE</span>&nbsp;<span class="ticker-value">$71.4</span>&nbsp;<span class="ticker-down">-0.5%</span></span>
-    <span class="ticker-item"><span class="ticker-label">CNY/USD</span>&nbsp;<span class="ticker-value">7.24</span>&nbsp;<span class="ticker-up">+0.1%</span></span>
-    <span class="ticker-item"><span class="ticker-label">CONTAINER FREIGHT</span>&nbsp;<span class="ticker-value">$2,180</span>&nbsp;<span class="ticker-down">-1.1%</span></span>
-    <span class="ticker-item"><span class="ticker-label">LME COPPER</span>&nbsp;<span class="ticker-value">$9,124</span>&nbsp;<span class="ticker-up">+0.4%</span></span>
-    <span class="ticker-item"><span class="ticker-label">KOSPI</span>&nbsp;<span class="ticker-value">6,244</span>&nbsp;<span class="ticker-up">+0.6%</span></span>
+</div>
+<div class="ticker-wrap">
+  <div class="ticker" id="tkr">
+    <span class="ti"><span class="tl">LME AL</span>&nbsp;<span class="tv" id="t-al">—</span>&nbsp;<span class="tu" id="t-al-c"></span></span>
+    <span class="ti"><span class="tl">KRW/USD</span>&nbsp;<span class="tv" id="t-krw">—</span>&nbsp;<span class="td" id="t-krw-c"></span></span>
+    <span class="ti"><span class="tl">OCC PAPER</span>&nbsp;<span class="tv">$142/MT</span>&nbsp;<span class="tu">+1.2%</span></span>
+    <span class="ti"><span class="tl">WTI CRUDE</span>&nbsp;<span class="tv" id="t-wti">—</span>&nbsp;<span class="tu" id="t-wti-c"></span></span>
+    <span class="ti"><span class="tl">CNY/USD</span>&nbsp;<span class="tv" id="t-cny">—</span>&nbsp;<span class="td" id="t-cny-c"></span></span>
+    <span class="ti"><span class="tl">CONTAINER FREIGHT</span>&nbsp;<span class="tv">$2,180</span>&nbsp;<span class="td">-1.1%</span></span>
+    <span class="ti"><span class="tl">KOSPI</span>&nbsp;<span class="tv">6,244</span>&nbsp;<span class="tu">+0.6%</span></span>
+    <span class="ti"><span class="tl">LME COPPER</span>&nbsp;<span class="tv">$9,124</span>&nbsp;<span class="tu">+0.4%</span></span>
+    <span class="ti"><span class="tl">LME AL</span>&nbsp;<span class="tv">$2,387</span>&nbsp;<span class="tu">+0.8%</span></span>
+    <span class="ti"><span class="tl">KRW/USD</span>&nbsp;<span class="tv">1,510</span>&nbsp;<span class="td">-0.5%</span></span>
+    <span class="ti"><span class="tl">OCC PAPER</span>&nbsp;<span class="tv">$142/MT</span>&nbsp;<span class="tu">+1.2%</span></span>
+    <span class="ti"><span class="tl">WTI CRUDE</span>&nbsp;<span class="tv">$104.69</span>&nbsp;<span class="tu">+3.4%</span></span>
+    <span class="ti"><span class="tl">CNY/USD</span>&nbsp;<span class="tv">6.91</span>&nbsp;<span class="td">-0.2%</span></span>
+    <span class="ti"><span class="tl">CONTAINER FREIGHT</span>&nbsp;<span class="tv">$2,180</span>&nbsp;<span class="td">-1.1%</span></span>
+    <span class="ti"><span class="tl">KOSPI</span>&nbsp;<span class="tv">6,244</span>&nbsp;<span class="tu">+0.6%</span></span>
+    <span class="ti"><span class="tl">LME COPPER</span>&nbsp;<span class="tv">$9,124</span>&nbsp;<span class="tu">+0.4%</span></span>
   </div>
 </div>
 <div class="main">
   <div class="feed">
-    <div class="feed-header">
-      <div class="feed-title">SIGNAL FEED</div>
-      <div class="feed-controls">
-        <button class="filter-btn active" onclick="setFilter('ALL',this)">ALL</button>
-        <button class="filter-btn" onclick="setFilter('MACRO',this)">MACRO</button>
-        <button class="filter-btn" onclick="setFilter('COMMODITY',this)">COMMODITY</button>
-        <button class="filter-btn" onclick="setFilter('SHIPPING',this)">SHIPPING</button>
-        <button class="filter-btn" onclick="setFilter('GEOPOLITICAL',this)">GEO</button>
-        <button class="filter-btn" onclick="setFilter('CLIMATE',this)">CLIMATE</button>
+    <div class="fhdr">
+      <div class="ftitle">SIGNAL FEED</div>
+      <div class="fctrl">
+        <button class="fb a" onclick="sf('ALL',this)">ALL</button>
+        <button class="fb" onclick="sf('MACRO',this)">MACRO</button>
+        <button class="fb" onclick="sf('COMMODITY',this)">COMMODITY</button>
+        <button class="fb" onclick="sf('SHIPPING',this)">SHIPPING</button>
+        <button class="fb" onclick="sf('GEOPOLITICAL',this)">GEO</button>
+        <button class="fb" onclick="sf('CLIMATE',this)">CLIMATE</button>
       </div>
     </div>
-    <div id="feed"></div>
+    <div id="feed"><div class="loading"><div class="spinner"></div>LOADING SIGNALS...</div></div>
   </div>
   <div class="panel">
-    <div class="panel-section">
-      <div class="panel-title">TERMINAL STATUS</div>
-      <div class="stats-grid">
-        <div class="stat-box"><div class="stat-val" id="s-total">—</div><div class="stat-label">TOTAL SIGNALS</div></div>
-        <div class="stat-box"><div class="stat-val" id="s-high" style="color:#ef4444">—</div><div class="stat-label">HIGH URGENCY</div></div>
-        <div class="stat-box"><div class="stat-val">3</div><div class="stat-label">DATA SOURCES</div></div>
-        <div class="stat-box"><div class="stat-val" style="color:#00c9a7;font-size:14px">CLAUDE</div><div class="stat-label">AI ENGINE</div></div>
+    <div class="ps">
+      <div class="ptitle">TERMINAL STATUS</div>
+      <div class="sg">
+        <div class="sb"><div class="sv" id="st">—</div><div class="sl">TOTAL SIGNALS</div></div>
+        <div class="sb"><div class="sv" id="sh" style="color:#ef4444">—</div><div class="sl">HIGH URGENCY</div></div>
+        <div class="sb"><div class="sv">3</div><div class="sl">DATA SOURCES</div></div>
+        <div class="sb"><div class="sv" style="color:#00c9a7;font-size:13px">CLAUDE</div><div class="sl">AI ENGINE</div></div>
       </div>
     </div>
-    <div class="panel-section">
-      <div class="panel-title">PIPELINE CONTROL</div>
-      <button class="run-btn" id="run-btn" onclick="runPipeline()">⚡ RUN PIPELINE NOW</button>
-      <div class="run-status" id="run-status"></div>
+    <div class="ps">
+      <div class="ptitle">PIPELINE CONTROL</div>
+      <button class="rb" id="rb" onclick="runPipeline()">⚡ RUN PIPELINE NOW</button>
+      <div class="rst" id="rst"></div>
     </div>
-    <div class="panel-section">
-      <div class="panel-title">TRADE IMPLICATIONS</div>
-      <div id="implications">
-        <div class="impl-row"><span class="impl-asset">LME ALUMINUM</span><span class="impl-badge NEUTRAL">NEUTRAL</span></div>
-        <div class="impl-row"><span class="impl-asset">KRW/USD</span><span class="impl-badge NEUTRAL">NEUTRAL</span></div>
-        <div class="impl-row"><span class="impl-asset">OCC PAPER</span><span class="impl-badge NEUTRAL">NEUTRAL</span></div>
-        <div class="impl-row"><span class="impl-asset">CONTAINER FREIGHT</span><span class="impl-badge NEUTRAL">NEUTRAL</span></div>
-        <div class="impl-row"><span class="impl-asset">WTI CRUDE</span><span class="impl-badge NEUTRAL">NEUTRAL</span></div>
+    <div class="ps">
+      <div class="ptitle">TRADE IMPLICATIONS</div>
+      <div id="impl">
+        <div class="ir"><span class="ia">LME ALUMINUM</span><span class="ib NEUTRAL">NEUTRAL</span></div>
+        <div class="ir"><span class="ia">KRW/USD</span><span class="ib NEUTRAL">NEUTRAL</span></div>
+        <div class="ir"><span class="ia">OCC PAPER</span><span class="ib NEUTRAL">NEUTRAL</span></div>
+        <div class="ir"><span class="ia">CONTAINER FREIGHT</span><span class="ib NEUTRAL">NEUTRAL</span></div>
+        <div class="ir"><span class="ia">WTI CRUDE</span><span class="ib NEUTRAL">NEUTRAL</span></div>
       </div>
     </div>
-    <div class="panel-section" id="detail-panel" style="display:none">
-      <div class="panel-title">SIGNAL DETAIL</div>
-      <div id="detail-content"></div>
+    <div class="ps" id="dp" style="display:none">
+      <div class="ptitle">SIGNAL DETAIL</div>
+      <div id="dc"></div>
     </div>
   </div>
 </div>
 <script>
-const API = 'https://ecoya-intelligence-production.up.railway.app';
-let signals = [], filter = 'ALL';
+const API='https://ecoya-intelligence-production.up.railway.app';
+let sigs=[],filt='ALL';
 
-setInterval(() => {
-  document.getElementById('clock').textContent = new Date().toLocaleTimeString('en-US',{hour12:false,timeZone:'Asia/Seoul'}) + ' KST';
-}, 1000);
+setInterval(()=>{
+  document.getElementById('clk').textContent=new Date().toLocaleTimeString('en-US',{hour12:false,timeZone:'Asia/Seoul'})+' KST';
+},1000);
 
-async function load() {
-  try {
-    const r = await fetch(API + '/api/signals?limit=50');
-    const d = await r.json();
-    signals = d.signals || [];
+async function load(){
+  try{
+    const r=await fetch(API+'/api/signals?limit=100');
+    const d=await r.json();
+    sigs=d.signals||[];
     render();
     updateStats();
-  } catch(e) {
-    document.getElementById('feed').innerHTML = '<div class="empty"><div class="empty-icon">⚠</div><div>API CONNECTION ERROR</div><div style="font-size:10px;margin-top:4px">' + e.message + '</div></div>';
+    updateTicker();
+  }catch(e){
+    document.getElementById('feed').innerHTML='<div class="empty"><div class="ei">⚠</div><div>API CONNECTION ERROR</div><div style="margin-top:4px;font-size:9px">'+e.message+'</div></div>';
   }
 }
 
-function render() {
-  const feed = document.getElementById('feed');
-  const list = filter === 'ALL' ? signals : signals.filter(s => s.category === filter);
-  if (!list.length) {
-    feed.innerHTML = '<div class="empty"><div class="empty-icon">📡</div><div>NO SIGNALS YET</div><div style="font-size:10px;margin-top:4px">CLICK RUN PIPELINE TO COLLECT DATA</div></div>';
+function updateTicker(){
+  // KRW/USD 실시간 업데이트
+  const krwSig = sigs.find(s=>s.headline&&s.headline.includes('Korean Won')||s.headline&&s.headline.includes('KRW'));
+  if(krwSig){
+    const m=krwSig.headline.match(/[d,]+.d+/);
+    if(m){document.getElementById('t-krw').textContent=m[0];}
+  }
+  // WTI 업데이트
+  const wtiSig=sigs.find(s=>s.headline&&s.headline.includes('WTI')||s.headline&&s.headline.includes('Crude'));
+  if(wtiSig){
+    const m=wtiSig.headline.match(/\$[\d.]+/);
+    if(m){document.getElementById('t-wti').textContent=m[0];}
+  }
+  // CNY 업데이트
+  const cnySig=sigs.find(s=>s.headline&&s.headline.includes('Yuan')||s.headline&&s.headline.includes('CNY'));
+  if(cnySig){
+    const m=cnySig.headline.match(/[\d.]+/g);
+    if(m&&m.length>0){document.getElementById('t-cny').textContent=m[m.length-1];}
+  }
+}
+
+function render(){
+  const feed=document.getElementById('feed');
+  const list=filt==='ALL'?sigs:sigs.filter(s=>s.category===filt);
+  if(!list.length){
+    feed.innerHTML='<div class="empty"><div class="ei">📡</div><div>NO SIGNALS YET</div><div style="margin-top:4px;font-size:9px">CLICK RUN PIPELINE TO COLLECT DATA</div></div>';
     return;
   }
-  feed.innerHTML = list.map(s => {
-    const u = s.urgency_score || 5;
-    const uc = u >= 7 ? 'urgency-high' : u >= 5 ? 'urgency-med' : 'urgency-low';
-    const t = s.created_at ? new Date(s.created_at).toLocaleTimeString('en-US',{hour12:false,timeZone:'Asia/Seoul'}) : '';
-    const assets = (s.affected_assets||[]).slice(0,4).map(a=>'<span class="asset-tag">'+a+'</span>').join('');
-    return '<div class="signal-card '+uc+'" onclick="selectSignal(''+s.signal_id+'')">'+
-      '<div class="signal-top">'+
-      '<div class="signal-meta"><span class="signal-cat '+(s.category||'')+'">'+(s.category||'SIGNAL')+'</span><span class="signal-time">'+t+'</span></div>'+
-      '<div class="urgency-badge u'+u+'">'+u+'</div>'+
+  feed.innerHTML=list.map(s=>{
+    const u=s.urgency_score||5;
+    const uc=u>=7?'uh':u>=5?'um':'ul';
+    const t=s.created_at?new Date(s.created_at).toLocaleTimeString('en-US',{hour12:false,timeZone:'Asia/Seoul'}):'';
+    const ast=(s.affected_assets||[]).slice(0,4).map(a=>'<span class="at">'+a+'</span>').join('');
+    const trade=s.trade_implication?'<div class="strade">→ '+s.trade_implication+'</div>':'';
+    return '<div class="sc '+uc+('" onclick="selSig(''+s.signal_id+'')">')+
+      '<div class="stop">'+
+      '<div class="smeta"><span class="scat '+(s.category||'')+'">'+(s.category||'SIG')+'</span><span class="stime">'+t+'</span></div>'+
+      '<div class="ub u'+u+'">'+u+'</div>'+
       '</div>'+
-      '<div class="signal-headline">'+(s.headline||'—')+'</div>'+
-      '<div class="signal-summary">'+(s.summary||'').substring(0,120)+(((s.summary||'').length>120)?'...':'')+'</div>'+
-      '<div class="signal-assets">'+assets+'</div>'+
+      '<div class="shl">'+(s.headline||'—')+'</div>'+
+      '<div class="ssum">'+(s.summary||'').substring(0,140)+(((s.summary||'').length>140)?'...':'')+'</div>'+
+      trade+
+      '<div class="sast">'+ast+'</div>'+
       '</div>';
   }).join('');
 }
 
-function updateStats() {
-  document.getElementById('s-total').textContent = signals.length;
-  document.getElementById('s-high').textContent = signals.filter(s=>s.urgency_score>=7).length;
-  const a = {'LME_ALUMINUM':'NEUTRAL','KRW_USD':'NEUTRAL','OCC_PAPER':'NEUTRAL','CONTAINER_FREIGHT':'NEUTRAL','WTI_CRUDE':'NEUTRAL'};
-  signals.forEach(s => {
-    if (s.urgency_score >= 6 && s.affected_assets) {
-      s.affected_assets.forEach(x => {
-        if (x.includes('ALUM')||x.includes('_AL')) a['LME_ALUMINUM'] = s.urgency_score>=8?'BEARISH':'WATCH';
-        if (x.includes('KRW')) a['KRW_USD'] = 'WATCH';
-        if (x.includes('PAPER')||x.includes('OCC')) a['OCC_PAPER'] = 'WATCH';
-        if (x.includes('FREIGHT')||x.includes('CONTAINER')) a['CONTAINER_FREIGHT'] = 'WATCH';
-        if (x.includes('CRUDE')||x.includes('OIL')||x.includes('WTI')) a['WTI_CRUDE'] = 'WATCH';
+function updateStats(){
+  document.getElementById('st').textContent=sigs.length;
+  document.getElementById('sh').textContent=sigs.filter(s=>s.urgency_score>=7).length;
+  const a={LME_ALUMINUM:'NEUTRAL',KRW_USD:'NEUTRAL',OCC_PAPER:'NEUTRAL',CONTAINER_FREIGHT:'NEUTRAL',WTI_CRUDE:'NEUTRAL'};
+  sigs.forEach(s=>{
+    if(s.urgency_score>=5&&s.affected_assets){
+      s.affected_assets.forEach(x=>{
+        if(x.includes('ALUM')||x==='LME_ALUMINUM')a.LME_ALUMINUM=s.urgency_score>=8?'BEARISH':'WATCH';
+        if(x.includes('KRW'))a.KRW_USD=s.urgency_score>=7?'WATCH':'NEUTRAL';
+        if(x.includes('PAPER')||x.includes('OCC'))a.OCC_PAPER='WATCH';
+        if(x.includes('FREIGHT')||x.includes('CONTAINER'))a.CONTAINER_FREIGHT='WATCH';
+        if(x.includes('CRUDE')||x.includes('WTI')||x.includes('OIL'))a.WTI_CRUDE=s.urgency_score>=7?'BEARISH':'WATCH';
       });
     }
   });
-  document.getElementById('implications').innerHTML = Object.entries(a).map(([k,v]) =>
-    '<div class="impl-row"><span class="impl-asset">'+k.replace(/_/g,' ')+'</span><span class="impl-badge '+v+'">'+v+'</span></div>'
+  document.getElementById('impl').innerHTML=Object.entries(a).map(([k,v])=>
+    '<div class="ir"><span class="ia">'+k.replace(/_/g,' ')+'</span><span class="ib '+v+'">'+v+'</span></div>'
   ).join('');
 }
 
-function setFilter(f, btn) {
-  filter = f;
-  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
+function sf(f,btn){
+  filt=f;
+  document.querySelectorAll('.fb').forEach(b=>b.classList.remove('a'));
+  btn.classList.add('a');
   render();
 }
 
-function selectSignal(id) {
-  const s = signals.find(x=>x.signal_id===id);
-  if (!s) return;
-  document.querySelectorAll('.signal-card').forEach(c=>c.classList.remove('selected'));
-  event.currentTarget.classList.add('selected');
-  const p = document.getElementById('detail-panel');
-  p.style.display = 'block';
-  document.getElementById('detail-content').innerHTML =
-    '<div class="detail-id">'+s.signal_id+'</div>'+
-    '<div class="detail-headline">'+s.headline+'</div>'+
-    '<div class="detail-box">'+
-    '<div style="margin-bottom:8px">'+( s.summary||'')+'</div>'+
-    '<div style="color:#64748b;font-size:10px;margin-bottom:3px">GEOGRAPHY</div>'+
-    '<div style="margin-bottom:8px">'+JSON.stringify(s.geography||{})+'</div>'+
-    '<div style="color:#64748b;font-size:10px;margin-bottom:3px">SOURCE · CONFIDENCE</div>'+
-    '<div>'+(s.data_source||'')+ ' · '+(s.confidence||'')+'</div>'+
+function selSig(id){
+  const s=sigs.find(x=>x.signal_id===id);
+  if(!s)return;
+  document.querySelectorAll('.sc').forEach(c=>c.classList.remove('sel'));
+  event.currentTarget.classList.add('sel');
+  const dp=document.getElementById('dp');
+  dp.style.display='block';
+  const trade=s.trade_implication?'<div class="dtrade">→ '+s.trade_implication+'</div>':'';
+  const geo=s.geography?JSON.stringify(s.geography):'N/A';
+  const assets=(s.affected_assets||[]).map(a=>'<span class="at" style="font-size:9px;padding:2px 6px">'+a+'</span>').join(' ');
+  document.getElementById('dc').innerHTML=
+    '<div class="did">'+s.signal_id+'</div>'+
+    '<div class="dhl">'+s.headline+'</div>'+
+    trade+
+    '<div class="dbox">'+
+    '<div class="dlabel">SUMMARY</div>'+
+    '<div style="margin-bottom:8px">'+(s.summary||'')+'</div>'+
+    '<div class="dlabel">AFFECTED ASSETS</div>'+
+    '<div style="margin-bottom:8px;display:flex;gap:4px;flex-wrap:wrap">'+assets+'</div>'+
+    '<div class="dlabel">GEOGRAPHY</div>'+
+    '<div style="margin-bottom:8px">'+geo+'</div>'+
+    '<div class="dlabel">SOURCE · CONFIDENCE</div>'+
+    '<div>'+(s.data_source||'')+' · '+(s.confidence||'MEDIUM')+'</div>'+
     '</div>';
 }
 
-async function runPipeline() {
-  const btn = document.getElementById('run-btn');
-  const st = document.getElementById('run-status');
-  btn.disabled = true; btn.classList.add('running');
-  btn.textContent = '⚡ RUNNING...';
-  st.textContent = 'COLLECTING · ANALYZING · STORING...';
-  try {
+async function runPipeline(){
+  const btn=document.getElementById('rb');
+  const st=document.getElementById('rst');
+  btn.disabled=true;btn.classList.add('run');
+  btn.textContent='⚡ RUNNING...';
+  st.textContent='COLLECTING · ANALYZING · STORING...';
+  try{
     await fetch(API+'/api/signals/run',{method:'POST'});
-    st.textContent = 'PIPELINE TRIGGERED — REFRESHING IN 30s...';
+    st.textContent='PIPELINE TRIGGERED — LOADING IN 30s...';
     setTimeout(()=>{load();st.textContent='✓ COMPLETE';},30000);
-  } catch(e) {
-    st.textContent = 'ERROR: '+e.message;
-  } finally {
-    setTimeout(()=>{btn.disabled=false;btn.classList.remove('running');btn.textContent='⚡ RUN PIPELINE NOW';},6000);
-  }
+  }catch(e){st.textContent='ERROR: '+e.message;}
+  finally{setTimeout(()=>{btn.disabled=false;btn.classList.remove('run');btn.textContent='⚡ RUN PIPELINE NOW';},6000);}
 }
 
-setInterval(load, 300000);
+setInterval(load,300000);
 load();
 </script>
 </body>
