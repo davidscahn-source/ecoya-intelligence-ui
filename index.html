@@ -111,7 +111,7 @@ body{background:#06101e;color:#f1f5f9;font-family:"DM Sans",sans-serif;height:10
 ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:#06101e}::-webkit-scrollbar-thumb{background:#1e3a5f;border-radius:2px}
 </style></head><body>
 <div class="hdr"><div class="logo"><div class="lm">E</div>
-<div><div class="lt">ECOYA INTELLIGENCE</div><div class="ls">COMMODITY SIGNAL TERMINAL · HRM CORPORATION</div></div></div>
+<div><div class="lt">ECOYA INTELLIGENCE</div><div class="ls">COMMODITY SIGNAL TERMINAL Â· HRM CORPORATION</div></div></div>
 <div class="hr2"><div class="lpill"><div class="ldot"></div>LIVE</div>
 <div class="rring" id="rr"><svg viewBox="0 0 28 28" width="28" height="28">
 <circle class="rbg" cx="14" cy="14" r="11"/>
@@ -121,11 +121,11 @@ body{background:#06101e;color:#f1f5f9;font-family:"DM Sans",sans-serif;height:10
 <div class="tvw"><div class="tradingview-widget-container">
 <div class="tradingview-widget-container__widget"></div>
 <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-{"symbols":[{"proName":"KRX:KOSPI","title":"KOSPI"},{"proName":"KRX:KOSDAQ","title":"KOSDAQ"},{"proName":"INDEX:SPX","title":"S&P 500"},{"proName":"NASDAQ:NDX","title":"NASDAQ 100"},{"proName":"INDEX:NKY","title":"NIKKEI 225"},{"proName":"INDEX:HSI","title":"HANG SENG"},{"proName":"SSE:000001","title":"상하이종합"},{"proName":"INDEX:DEU","title":"DAX"},{"proName":"CBOE:UK100","title":"FTSE 100"},{"proName":"FX:USDKRW","title":"USD/KRW"},{"proName":"FX:USDCNY","title":"USD/CNY"},{"proName":"FX:USDJPY","title":"USD/JPY"},{"proName":"FX:EURUSD","title":"EUR/USD"},{"proName":"FX:GBPUSD","title":"GBP/USD"},{"proName":"COMEX:GC1!","title":"Gold"},{"proName":"COMEX:HG1!","title":"COMEX Copper"},{"proName":"NYMEX:CL1!","title":"WTI Crude"},{"proName":"NYMEX:NG1!","title":"Nat Gas"},{"proName":"SHFE:AL","title":"상하이AL"},{"proName":"SHFE:CU","title":"상하이CU"},{"proName":"TVC:STEEL","title":"Steel"}],"showSymbolLogo":false,"isTransparent":true,"displayMode":"adaptive","colorTheme":"dark","locale":"en"}
+{"symbols":[{"proName":"KRX:KOSPI","title":"KOSPI"},{"proName":"KRX:KOSDAQ","title":"KOSDAQ"},{"proName":"INDEX:SPX","title":"S&P 500"},{"proName":"NASDAQ:NDX","title":"NASDAQ 100"},{"proName":"INDEX:NKY","title":"NIKKEI 225"},{"proName":"INDEX:HSI","title":"HANG SENG"},{"proName":"SSE:000001","title":"ìíì´ì¢í©"},{"proName":"INDEX:DEU","title":"DAX"},{"proName":"CBOE:UK100","title":"FTSE 100"},{"proName":"FX:USDKRW","title":"USD/KRW"},{"proName":"FX:USDCNY","title":"USD/CNY"},{"proName":"FX:USDJPY","title":"USD/JPY"},{"proName":"FX:EURUSD","title":"EUR/USD"},{"proName":"FX:GBPUSD","title":"GBP/USD"},{"proName":"COMEX:GC1!","title":"Gold"},{"proName":"COMEX:HG1!","title":"COMEX Copper"},{"proName":"NYMEX:CL1!","title":"WTI Crude"},{"proName":"NYMEX:NG1!","title":"Nat Gas"},{"proName":"SHFE:AL","title":"ìíì´AL"},{"proName":"SHFE:CU","title":"ìíì´CU"},{"proName":"TVC:STEEL","title":"Steel"}],"showSymbolLogo":false,"isTransparent":true,"displayMode":"adaptive","colorTheme":"dark","locale":"en"}
 </script></div></div>
 <div class="sb2">
-<input class="si" id="si" type="text" placeholder="시그널 검색... (aluminum, KRW, paper, BDI)">
-<div class="xb" id="xc">X 초기화</div>
+<input class="si" id="si" type="text" placeholder="ìê·¸ë ê²ì... (aluminum, KRW, paper, BDI)">
+<div class="xb" id="xc">X ì´ê¸°í</div>
 <div class="xb" id="xp">Export</div></div>
 <div class="bdy"><div class="fcol">
 <div class="fhd"><div class="ftt" id="fc">SIGNAL FEED</div>
@@ -159,7 +159,7 @@ body{background:#06101e;color:#f1f5f9;font-family:"DM Sans",sans-serif;height:10
 <div class="ir"><span class="ia">PLASTIC SCRAP</span><span class="ib NEUTRAL">NEUTRAL</span></div>
 </div></div>
 <div class="ps"><div class="pt">Signal Sources</div>
-<div id="srcs"><div style="font-size:9px;color:#1e3a5f;font-family:DM Mono,monospace">파이프라인 실행 후 표시</div></div></div>
+<div id="srcs"><div style="font-size:9px;color:#1e3a5f;font-family:DM Mono,monospace">íì´íë¼ì¸ ì¤í í íì</div></div></div>
 <div class="ps"><div class="pt">Pipeline Control</div>
 <button class="rb" id="rb">RUN PIPELINE NOW</button>
 <div class="rst" id="rst"></div></div>
@@ -226,7 +226,7 @@ function render(){
   var list=sigs.filter(function(s){return mf(s)&&ms(s);});
   var fc=document.getElementById("fc");
   if(fc)fc.textContent="SIGNAL FEED "+list.length+"/"+sigs.length+(sq?" \""+sq+"\"":"");
-  if(!list.length){feed.innerHTML="<div class=\"mt\"><div>시그널 없음</div></div>";return;}
+  if(!list.length){feed.innerHTML="<div class=\"mt\"><div>ìê·¸ë ìì</div></div>";return;}
   var now=Date.now(),html="";
   for(var i=0;i<list.length;i++){
     var s=list[i],u=s.urgency_score||5;
@@ -282,7 +282,7 @@ document.getElementById("xp").addEventListener("click",function(){
   var list=sigs.filter(function(s){return mf(s)&&ms(s);});
   var txt="ECOYA INTELLIGENCE Export\n"+new Date().toISOString()+"\n\n";
   for(var i=0;i<list.length;i++){txt+="["+list[i].urgency_score+"/10] "+list[i].category+"\n"+list[i].headline+"\n"+(list[i].summary||"")+"\n-> "+(list[i].trade_implication||"")+"\n\n";}
-  navigator.clipboard.writeText(txt).then(function(){var b=document.getElementById("xp");b.textContent="Copied!";setTimeout(function(){b.textContent="Export";},2000);}).catch(function(){alert("클립보드를 허용해주세요.");});
+  navigator.clipboard.writeText(txt).then(function(){var b=document.getElementById("xp");b.textContent="Copied!";setTimeout(function(){b.textContent="Export";},2000);}).catch(function(){alert("í´ë¦½ë³´ëë¥¼ íì©í´ì£¼ì¸ì.");});
 });
 function selSig(id){
   var s=null;for(var i=0;i<sigs.length;i++){if(sigs[i].signal_id===id){s=sigs[i];break;}}if(!s)return;
@@ -292,17 +292,17 @@ function selSig(id){
   var tr=s.trade_implication?"<div class=\"dtr\">"+s.trade_implication+"</div>":"";
   var ast="";if(s.affected_assets){for(var k=0;k<s.affected_assets.length;k++){ast+="<span class=\"at\" style=\"font-size:8px;padding:2px 6px\">"+s.affected_assets[k].replace(/_/g," ")+"</span>";}}
   var geo=s.geography?(s.geography.primary||"N/A"):"N/A";
-  var lnk=url?"<div class=\"dlb\">원문 링크</div><div><a class=\"dlk\" href=\""+url+"\" target=\"_blank\">기사 원문 열기</a></div>":"";
+  var lnk=url?"<div class=\"dlb\">ìë¬¸ ë§í¬</div><div><a class=\"dlk\" href=\""+url+"\" target=\"_blank\">ê¸°ì¬ ìë¬¸ ì´ê¸°</a></div>":"";
   var dc=document.getElementById("dc");
-  if(dc)dc.innerHTML="<div class=\"did\">"+s.signal_id+" · "+s.data_source+"</div><div class=\"dhl\">"+s.headline+"</div>"+tr+"<div class=\"dsm\">"+(s.summary||"")+"</div><div class=\"dlb\">영향 자산</div><div class=\"das\">"+ast+"</div><div class=\"dlb\">지역</div><div style=\"font-size:10px;color:#94a3b8;margin-bottom:6px\">"+geo+"</div>"+lnk;
+  if(dc)dc.innerHTML="<div class=\"did\">"+s.signal_id+" Â· "+s.data_source+"</div><div class=\"dhl\">"+s.headline+"</div>"+tr+"<div class=\"dsm\">"+(s.summary||"")+"</div><div class=\"dlb\">ìí¥ ìì°</div><div class=\"das\">"+ast+"</div><div class=\"dlb\">ì§ì­</div><div style=\"font-size:10px;color:#94a3b8;margin-bottom:6px\">"+geo+"</div>"+lnk;
 }
 document.getElementById("rb").addEventListener("click",function(){
   var btn=this,rst=document.getElementById("rst");
   btn.disabled=true;btn.classList.add("run");btn.textContent="RUNNING...";
-  if(rst)rst.textContent="수집중 · AI 분석 중...";
-  fetch(API+"/api/signals/run",{method:"POST"})
-  .then(function(){if(rst)rst.textContent="35초 후 업데이트...";setTimeout(function(){load();if(rst)rst.textContent="완료!";},35000);})
-  .catch(function(e){if(rst)rst.textContent="오류: "+e.message;})
+  if(rst)rst.textContent="ìì§ì¤ Â· AI ë¶ì ì¤...";
+  fetch(API+"/api/signals/run",{method:"POST",headers:{"X-API-Key":"ecoya-hrm-pipeline-guowjh5e"}})
+  .then(function(){if(rst)rst.textContent="35ì´ í ìë°ì´í¸...";setTimeout(function(){load();if(rst)rst.textContent="ìë£!";},35000);})
+  .catch(function(e){if(rst)rst.textContent="ì¤ë¥: "+e.message;})
   .finally(function(){setTimeout(function(){btn.disabled=false;btn.classList.remove("run");btn.textContent="RUN PIPELINE NOW";},7000);});
 });
 startRing();load();
