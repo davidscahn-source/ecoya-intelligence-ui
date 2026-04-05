@@ -1,321 +1,314 @@
-<!DOCTYPE html><html lang="en"><head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>ECOYA Intelligence</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#06101e;--bg2:#0b1a2e;--bg3:#0d1f38;--border:#1e3a5f;--teal:#00c9a7;--amber:#f59e0b;--red:#ef4444;--text:#f1f5f9;--muted:#94a3b8;--dim:#475569}
-body{background:var(--bg);color:var(--text);font-family:"DM Sans",sans-serif;height:100dvh;display:flex;flex-direction:column;overflow:hidden}
-.hdr{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--bg2);border-bottom:2px solid var(--teal);flex-shrink:0;gap:8px}
-.logo{display:flex;align-items:center;gap:8px;min-width:0}
-.lm{width:28px;height:28px;background:linear-gradient(135deg,var(--teal),#0066ff);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fff;flex-shrink:0}
-.lt{font-size:13px;font-weight:700;letter-spacing:.08em;color:var(--teal);font-family:"DM Mono",monospace;white-space:nowrap}
-.ls{font-size:7px;color:var(--dim);letter-spacing:.1em;white-space:nowrap}
-.hdr-r{display:flex;align-items:center;gap:8px;flex-shrink:0}
-.lpill{display:flex;align-items:center;gap:4px;background:#00c9a712;border:1px solid #00c9a740;padding:3px 8px;border-radius:20px;font-size:8px;color:var(--teal);font-weight:700;font-family:"DM Mono",monospace}
-.ldot{width:5px;height:5px;border-radius:50%;background:var(--teal);animation:pulse 1.5s infinite}
+:root{--bg:#06101e;--bg2:#0b1a2e;--bg3:#0d1f38;--bd:#1e3a5f;--tl:#00c9a7;--am:#f59e0b;--rd:#ef4444;--tx:#f1f5f9;--mt:#94a3b8;--dm:#475569}
+body{background:var(--bg);color:var(--tx);font-family:"DM Sans",sans-serif;height:100dvh;display:flex;flex-direction:column;overflow:hidden}
+.hdr{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--bg2);border-bottom:2px solid var(--tl);flex-shrink:0;gap:8px}
+.logo{display:flex;align-items:center;gap:8px}
+.lm{width:28px;height:28px;background:linear-gradient(135deg,var(--tl),#0066ff);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fff}
+.lt{font-size:13px;font-weight:700;color:var(--tl);font-family:"DM Mono",monospace}
+.ls{font-size:7px;color:var(--dm)}
+.hr2{display:flex;align-items:center;gap:8px}
+.lpill{display:flex;align-items:center;gap:4px;background:#00c9a712;border:1px solid #00c9a740;padding:3px 8px;border-radius:20px;font-size:8px;color:var(--tl);font-weight:700;font-family:"DM Mono",monospace}
+.ldot{width:5px;height:5px;border-radius:50%;background:var(--tl);animation:pulse 1.5s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.clk{font-size:10px;color:var(--muted);font-family:"DM Mono",monospace}
-.rring{position:relative;width:26px;height:26px;cursor:pointer;flex-shrink:0}
-.rring svg{transform:rotate(-90deg)}
-.rbg{fill:none;stroke:var(--border);stroke-width:2.5}
-.rpg{fill:none;stroke:var(--teal);stroke-width:2.5;stroke-linecap:round;transition:stroke-dashoffset 1s linear}
-.rlb{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:7px;color:var(--muted);font-family:"DM Mono",monospace}
-.setbtn{width:28px;height:28px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;transition:border-color .15s;flex-shrink:0}
-.setbtn:hover{border-color:var(--teal)}
-.setbtn.on{border-color:var(--teal);background:#00c9a715}
-.tvw{flex-shrink:0;background:var(--bg2);border-bottom:1px solid var(--border)}
-.tradingview-widget-container{height:40px}.tradingview-widget-container__widget{height:40px}
+.clk{font-size:10px;color:var(--mt);font-family:"DM Mono",monospace}
+.setbtn{width:28px;height:28px;background:var(--bg3);border:1px solid var(--bd);border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px}
+.setbtn:hover,.setbtn.on{border-color:var(--tl);background:#00c9a715}
+.tvw{flex-shrink:0}
+.tradingview-widget-container{height:40px}
+.tradingview-widget-container__widget{height:40px}
 .main{display:flex;flex:1;overflow:hidden;min-height:0;position:relative}
-.setpanel{position:absolute;top:0;right:0;bottom:0;width:300px;background:#08162a;border-left:1px solid var(--border);z-index:100;overflow-y:auto;transform:translateX(100%);transition:transform .25s ease;padding:16px}
-.setpanel.open{transform:translateX(0)}
-.spt{font-size:12px;font-weight:700;color:var(--teal);letter-spacing:.1em;font-family:"DM Mono",monospace;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.spp{position:absolute;top:0;right:0;bottom:0;width:300px;background:#08162a;border-left:1px solid var(--bd);z-index:100;overflow-y:auto;transform:translateX(100%);transition:transform .25s ease;padding:16px}
+.spp.open{transform:translateX(0)}
+.spt{font-size:11px;font-weight:700;color:var(--tl);font-family:"DM Mono",monospace;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--bd)}
 .spg{margin-bottom:16px}
-.spgl{font-size:9px;color:var(--dim);letter-spacing:.1em;font-family:"DM Mono",monospace;margin-bottom:8px;text-transform:uppercase}
+.spgl{font-size:8px;color:var(--dm);letter-spacing:.1em;font-family:"DM Mono",monospace;margin-bottom:8px;text-transform:uppercase}
 .chips{display:flex;flex-wrap:wrap;gap:5px}
-.chip{padding:4px 10px;border-radius:20px;font-size:10px;font-weight:600;border:1px solid var(--border);color:var(--dim);cursor:pointer;transition:all .15s;font-family:"DM Mono",monospace;user-select:none}
-.chip:hover{border-color:var(--teal);color:var(--teal)}
-.chip.on{border-color:var(--teal);color:var(--teal);background:#00c9a715}
-.chip.am.on{border-color:var(--amber);color:var(--amber);background:#f59e0b15}
-.slider-wrap{margin-top:6px}
-.slider-val{font-size:18px;font-weight:700;color:var(--teal);font-family:"DM Mono",monospace}
-.slider{width:100%;margin-top:6px;-webkit-appearance:none;height:4px;border-radius:2px;background:var(--border);outline:none}
-.slider::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--teal);cursor:pointer}
-.sp-actions{display:flex;gap:8px;margin-top:16px}
-.sp-rst{flex:1;padding:8px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;color:var(--muted);font-size:11px;cursor:pointer;font-family:"DM Mono",monospace;font-weight:600}
-.sp-rst:hover{border-color:var(--teal);color:var(--teal)}
-.sp-apl{flex:2;padding:8px;background:linear-gradient(135deg,var(--teal),#0066ff);border:none;border-radius:6px;color:#fff;font-size:11px;font-weight:700;cursor:pointer;font-family:"DM Mono",monospace;letter-spacing:.06em}
+.chip{padding:4px 10px;border-radius:20px;font-size:10px;font-weight:600;border:1px solid var(--bd);color:var(--dm);cursor:pointer;transition:all .15s;font-family:"DM Mono",monospace;user-select:none}
+.chip.on{border-color:var(--tl);color:var(--tl);background:#00c9a715}
+.chip.am.on{border-color:var(--am);color:var(--am);background:#f59e0b15}
+.sv2{font-size:18px;font-weight:700;color:var(--tl);font-family:"DM Mono",monospace}
+.sl2{width:100%;margin-top:6px;-webkit-appearance:none;height:4px;border-radius:2px;background:var(--bd);outline:none}
+.sl2::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--tl);cursor:pointer}
+.spact{display:flex;gap:8px;margin-top:16px}
+.sprst{flex:1;padding:8px;background:var(--bg3);border:1px solid var(--bd);border-radius:6px;color:var(--mt);font-size:11px;cursor:pointer;font-family:"DM Mono",monospace}
+.spapl{flex:2;padding:8px;background:linear-gradient(135deg,var(--tl),#0066ff);border:none;border-radius:6px;color:#fff;font-size:11px;font-weight:700;cursor:pointer;font-family:"DM Mono",monospace}
+.spnote{margin-top:14px;font-size:8px;color:#334155;font-family:"DM Mono",monospace;line-height:1.7}
 .fcol{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
-.fbar{padding:6px 12px;background:var(--bg2);border-bottom:1px solid #14223640;display:flex;align-items:center;gap:6px;flex-shrink:0;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.fbar{padding:6px 12px;background:var(--bg2);border-bottom:1px solid #14223640;display:flex;align-items:center;gap:6px;flex-shrink:0;overflow-x:auto}
 .fbar::-webkit-scrollbar{display:none}
-.fb{padding:4px 10px;border-radius:20px;font-size:10px;font-weight:600;border:1px solid var(--border);background:transparent;color:var(--dim);cursor:pointer;white-space:nowrap;font-family:"DM Mono",monospace;transition:all .15s;flex-shrink:0}
-.fb:hover{border-color:var(--teal);color:var(--teal)}
-.fb.a{border-color:var(--teal);color:var(--teal);background:#00c9a712;font-weight:700}
-.fb.ha.a{border-color:var(--red);color:var(--red);background:#ef444412}
-.sbar{padding:6px 12px;background:var(--bg2);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px;flex-shrink:0}
-.si{flex:1;background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:5px 12px;color:var(--text);font-size:11px;font-family:"DM Mono",monospace;outline:none}
-.si::placeholder{color:#334155}.si:focus{border-color:var(--teal)}
-.xb{font-size:9px;color:var(--dim);cursor:pointer;padding:4px 8px;background:var(--bg3);border-radius:4px;border:1px solid var(--border);font-family:"DM Mono",monospace;white-space:nowrap;flex-shrink:0}
-.xb:hover{color:var(--teal);border-color:var(--teal)}
-.fcount{padding:5px 12px 4px;font-size:9px;color:var(--dim);font-family:"DM Mono",monospace;flex-shrink:0;display:flex;justify-content:space-between;align-items:center}
-.pref-active{font-size:9px;color:var(--amber);font-family:"DM Mono",monospace}
-.feed{flex:1;overflow-y:auto;padding:6px 10px 10px;display:flex;flex-direction:column;gap:5px}
-.feed::-webkit-scrollbar{width:2px}.feed::-webkit-scrollbar-track{background:var(--bg)}.feed::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
-.sc{border-radius:8px;padding:11px 13px 9px;cursor:pointer;position:relative;border:1px solid transparent;transition:border-color .15s,transform .1s}
+.fb{padding:4px 10px;border-radius:20px;font-size:10px;font-weight:600;border:1px solid var(--bd);background:transparent;color:var(--dm);cursor:pointer;white-space:nowrap;font-family:"DM Mono",monospace;flex-shrink:0}
+.fb.a{border-color:var(--tl);color:var(--tl);background:#00c9a712}
+.fb.ha.a{border-color:var(--rd);color:var(--rd);background:#ef444412}
+.sbar{padding:6px 12px;background:var(--bg2);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:6px;flex-shrink:0}
+.si{flex:1;background:var(--bg);border:1px solid var(--bd);border-radius:20px;padding:5px 12px;color:var(--tx);font-size:11px;font-family:"DM Mono",monospace;outline:none}
+.si:focus{border-color:var(--tl)}
+.xb{font-size:9px;color:var(--dm);cursor:pointer;padding:4px 8px;background:var(--bg3);border-radius:4px;border:1px solid var(--bd);font-family:"DM Mono",monospace;flex-shrink:0}
+.xb:hover{color:var(--tl);border-color:var(--tl)}
+.fcnt{padding:5px 12px 4px;font-size:9px;color:var(--dm);font-family:"DM Mono",monospace;flex-shrink:0;display:flex;justify-content:space-between}
+.plbl{color:var(--am)}
+.feed{flex:1;overflow-y:auto;padding:6px 10px;display:flex;flex-direction:column;gap:5px}
+.feed::-webkit-scrollbar{width:2px}
+.feed::-webkit-scrollbar-thumb{background:var(--bd)}
+.sc{border-radius:8px;padding:11px 13px 9px;cursor:pointer;position:relative;border:1px solid transparent;transition:all .15s}
 .sc:hover{transform:translateX(2px)}
-.sc.sel{box-shadow:0 0 0 2px #00c9a780}
-.sc.u9,.sc.u10{background:#1a0606;border-color:#ef444430}.sc.u9:hover,.sc.u10:hover{border-color:var(--red)}
-.sc.u7,.sc.u8{background:#1a1306;border-color:#f59e0b28}.sc.u7:hover,.sc.u8:hover{border-color:var(--amber)}
-.sc.u5,.sc.u6{background:#0a1913;border-color:#00c9a720}.sc.u5:hover,.sc.u6:hover{border-color:var(--teal)}
-.sc.u1,.sc.u2,.sc.u3,.sc.u4{background:var(--bg3);border-color:#1e3a5f18}
+.sc.u9,.sc.u10{background:#1a0606;border-color:#ef444430}
+.sc.u7,.sc.u8{background:#1a1306;border-color:#f59e0b28}
+.sc.u5,.sc.u6{background:#0a1913;border-color:#00c9a720}
+.sc.u1,.sc.u2,.sc.u3,.sc.u4{background:var(--bg3)}
 .sc::before{content:"";position:absolute;left:0;top:6px;bottom:6px;width:3px;border-radius:0 2px 2px 0}
-.sc.u9::before,.sc.u10::before{background:var(--red)}.sc.u7::before,.sc.u8::before{background:var(--amber)}
-.sc.u5::before,.sc.u6::before{background:var(--teal)}.sc.u1::before,.sc.u2::before,.sc.u3::before,.sc.u4::before{background:#2d4a6a}
+.sc.u9::before,.sc.u10::before{background:var(--rd)}
+.sc.u7::before,.sc.u8::before{background:var(--am)}
+.sc.u5::before,.sc.u6::before{background:var(--tl)}
+.sc.u1::before,.sc.u2::before,.sc.u3::before,.sc.u4::before{background:#2d4a6a}
 .sct{display:flex;align-items:flex-start;justify-content:space-between;gap:6px;margin-bottom:5px}
 .smt{display:flex;align-items:center;gap:4px;flex-wrap:wrap;flex:1;min-width:0}
-.ct{font-size:7px;letter-spacing:.1em;padding:2px 5px;border-radius:3px;font-weight:700;font-family:"DM Mono",monospace;border:1px solid;white-space:nowrap}
+.ct{font-size:7px;padding:2px 5px;border-radius:3px;font-weight:700;font-family:"DM Mono",monospace;border:1px solid}
 .ct.MACRO{color:#a78bfa;background:#7c3aed12;border-color:#7c3aed28}
 .ct.COMMODITY{color:#fbbf24;background:#d9770612;border-color:#d9770628}
 .ct.SHIPPING{color:#60a5fa;background:#2563eb12;border-color:#2563eb28}
 .ct.GEOPOLITICAL{color:#f87171;background:#dc262612;border-color:#dc262628}
 .ct.CLIMATE{color:#34d399;background:#05966912;border-color:#05966928}
 .ct.REGULATORY{color:#f472b6;background:#db277712;border-color:#db277728}
-.ct.SENTIMENT{color:#818cf8;background:#4338ca12;border-color:#4338ca28}
-.srcb{font-size:7px;color:var(--dim);padding:1px 4px;border:1px solid var(--border);border-radius:3px;font-family:"DM Mono",monospace;white-space:nowrap}
-.nb{font-size:7px;color:#07111f;background:var(--teal);padding:1px 4px;border-radius:3px;font-weight:700;font-family:"DM Mono",monospace}
-.tb{font-size:8px;color:var(--dim);font-family:"DM Mono",monospace;white-space:nowrap}
+.srcb{font-size:7px;color:var(--dm);padding:1px 4px;border:1px solid var(--bd);border-radius:3px;font-family:"DM Mono",monospace}
+.nb{font-size:7px;color:#07111f;background:var(--tl);padding:1px 4px;border-radius:3px;font-weight:700;font-family:"DM Mono",monospace}
+.tb{font-size:8px;color:var(--dm);font-family:"DM Mono",monospace}
 .ub{font-size:11px;font-weight:700;min-width:26px;height:22px;display:flex;align-items:center;justify-content:center;border-radius:4px;flex-shrink:0;font-family:"DM Mono",monospace}
-.uc{background:var(--red);color:#fff}.uh{background:var(--amber);color:#07111f}.um{background:var(--teal);color:#07111f}.ul{background:var(--border);color:var(--dim)}
-.shl{font-size:13px;color:var(--text);font-weight:700;line-height:1.3;margin-bottom:4px}
-.shl a{color:inherit;text-decoration:none}.shl a:hover{color:var(--teal);text-decoration:underline}
-.ssm{font-size:11px;color:var(--muted);line-height:1.5;margin-bottom:4px}
-.str{font-size:10px;color:var(--teal);padding:4px 8px;background:#00c9a710;border-left:2px solid var(--teal);border-radius:0 4px 4px 0;font-weight:500;line-height:1.4;margin-bottom:4px}
+.uc{background:var(--rd);color:#fff}.uh{background:var(--am);color:#07111f}.um{background:var(--tl);color:#07111f}.ul{background:var(--bd);color:var(--dm)}
+.shl{font-size:13px;color:var(--tx);font-weight:700;line-height:1.3;margin-bottom:4px}
+.shl a{color:inherit;text-decoration:none}
+.shl a:hover{color:var(--tl)}
+.ssm{font-size:11px;color:var(--mt);line-height:1.5;margin-bottom:4px}
+.str{font-size:10px;color:var(--tl);padding:4px 8px;background:#00c9a710;border-left:2px solid var(--tl);border-radius:0 4px 4px 0;margin-bottom:4px}
 .sas{display:flex;gap:3px;flex-wrap:wrap}
-.at{font-size:7px;padding:2px 5px;border-radius:3px;background:#0a1626;color:var(--dim);border:1px solid var(--border);font-family:"DM Mono",monospace}
-.panel{width:260px;background:#0a1626;overflow-y:auto;flex-shrink:0;border-left:1px solid var(--border)}
-.panel::-webkit-scrollbar{width:2px}.panel::-webkit-scrollbar-thumb{background:var(--border)}
+.at{font-size:7px;padding:2px 5px;border-radius:3px;background:#0a1626;color:var(--dm);border:1px solid var(--bd);font-family:"DM Mono",monospace}
+.panel{width:260px;background:#0a1626;overflow-y:auto;flex-shrink:0;border-left:1px solid var(--bd)}
 .ps{padding:12px;border-bottom:1px solid #14223640}
-.pt{font-size:8px;color:var(--dim);letter-spacing:.14em;margin-bottom:9px;font-family:"DM Mono",monospace;font-weight:500;text-transform:uppercase}
+.pt{font-size:8px;color:var(--dm);letter-spacing:.14em;margin-bottom:9px;font-family:"DM Mono",monospace;text-transform:uppercase}
 .sg{display:grid;grid-template-columns:1fr 1fr;gap:5px}
-.sbox{background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:8px}
-.sv{font-size:20px;font-weight:700;font-family:"DM Mono",monospace;color:var(--teal);line-height:1}
-.sv.dn{color:var(--red)}.sl{font-size:7px;color:var(--dim);letter-spacing:.08em;margin-top:3px;font-family:"DM Mono",monospace}
+.sbox{background:var(--bg3);border:1px solid var(--bd);border-radius:6px;padding:8px}
+.sv{font-size:20px;font-weight:700;font-family:"DM Mono",monospace;color:var(--tl)}
+.sv.dn{color:var(--rd)}
+.sl{font-size:7px;color:var(--dm);margin-top:3px;font-family:"DM Mono",monospace}
 .ir{display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #14223440}
-.ir:last-child{border:none}.ia{font-size:10px;color:var(--muted);font-weight:500}
+.ir:last-child{border:none}
+.ia{font-size:10px;color:var(--mt)}
 .ib{font-size:8px;font-weight:700;padding:2px 6px;border-radius:3px;font-family:"DM Mono",monospace;border:1px solid}
-.ib.BULLISH{color:var(--teal);background:#00c9a712;border-color:#00c9a740}
-.ib.BEARISH{color:var(--red);background:#ef444412;border-color:#ef444440}
-.ib.NEUTRAL{color:var(--dim);background:#142236;border-color:var(--border)}
-.ib.WATCH{color:var(--amber);background:#f59e0b12;border-color:#f59e0b40}
-.sri{margin-bottom:6px}.srr{display:flex;justify-content:space-between;margin-bottom:2px}
-.srn{font-size:8px;color:var(--muted);font-family:"DM Mono",monospace}
-.src2{font-size:8px;color:var(--teal);font-weight:700;font-family:"DM Mono",monospace}
-.srb{height:3px;background:var(--border);border-radius:2px}.srf{height:3px;background:linear-gradient(90deg,var(--teal),#0066ff);border-radius:2px;transition:width .6s}
-.rb{width:100%;padding:9px;background:linear-gradient(135deg,var(--teal),#0066ff);border:none;border-radius:6px;color:#fff;font-size:10px;font-weight:700;letter-spacing:.08em;cursor:pointer;font-family:"DM Mono",monospace;transition:all .2s}
-.rb:hover{opacity:.85;transform:translateY(-1px)}.rb:disabled{opacity:.4;cursor:not-allowed;transform:none}
-.rb.run{animation:blink 1s infinite}@keyframes blink{50%{opacity:.5}}
-.rst{font-size:8px;color:var(--dim);text-align:center;margin-top:6px;min-height:12px;font-family:"DM Mono",monospace}
-.did{font-size:8px;color:#334155;font-family:"DM Mono",monospace;margin-bottom:4px}
-.dhl{font-size:11px;font-weight:700;color:var(--text);margin-bottom:6px;line-height:1.35}
-.dtr{padding:5px 8px;background:#00c9a710;border-left:2px solid var(--teal);border-radius:0 4px 4px 0;color:var(--teal);font-size:9px;margin-bottom:7px;font-weight:500}
-.dsm{font-size:9px;color:var(--muted);line-height:1.5;margin-bottom:7px}
-.dlb{font-size:7px;color:#334155;letter-spacing:.1em;margin:5px 0 3px;font-family:"DM Mono",monospace;text-transform:uppercase}
-.dlk{font-size:9px;color:#3b82f6;text-decoration:none;word-break:break-all}.dlk:hover{text-decoration:underline;color:#60a5fa}
-.das{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:5px}
-.alb{position:fixed;top:0;left:0;right:0;z-index:9999;background:linear-gradient(90deg,var(--red),#dc2626);color:#fff;padding:8px 16px;font-size:10px;font-weight:700;letter-spacing:.06em;cursor:pointer;font-family:"DM Mono",monospace;animation:sldn .3s;box-shadow:0 4px 20px #ef444460}
-@keyframes sldn{from{transform:translateY(-100%)}to{transform:none}}
+.ib.BULLISH{color:var(--tl);background:#00c9a712;border-color:#00c9a740}
+.ib.BEARISH{color:var(--rd);background:#ef444412;border-color:#ef444440}
+.ib.NEUTRAL{color:var(--dm);background:#142236;border-color:var(--bd)}
+.ib.WATCH{color:var(--am);background:#f59e0b12;border-color:#f59e0b40}
+.sri{margin-bottom:6px}
+.srr{display:flex;justify-content:space-between;margin-bottom:2px}
+.srn{font-size:8px;color:var(--mt);font-family:"DM Mono",monospace}
+.src2{font-size:8px;color:var(--tl);font-weight:700;font-family:"DM Mono",monospace}
+.srb{height:3px;background:var(--bd);border-radius:2px}
+.srf{height:3px;background:linear-gradient(90deg,var(--tl),#0066ff);border-radius:2px;transition:width .6s}
+.rb{width:100%;padding:9px;background:linear-gradient(135deg,var(--tl),#0066ff);border:none;border-radius:6px;color:#fff;font-size:10px;font-weight:700;cursor:pointer;font-family:"DM Mono",monospace}
+.rb:disabled{opacity:.4;cursor:not-allowed}
+.rst{font-size:8px;color:var(--dm);text-align:center;margin-top:6px;font-family:"DM Mono",monospace}
 .ld{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:48px;color:#334155;font-size:10px;letter-spacing:.1em;font-family:"DM Mono",monospace}
-.sp2{width:20px;height:20px;border:2px solid var(--border);border-top-color:var(--teal);border-radius:50%;animation:spin .7s linear infinite}
+.sp2{width:20px;height:20px;border:2px solid var(--bd);border-top-color:var(--tl);border-radius:50%;animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-.mt{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:48px;color:#2d4a6a;text-align:center;font-family:"DM Mono",monospace;font-size:10px}
-@media(max-width:768px){
-.ls{display:none}
-.panel{display:none}
-.setpanel{width:100%}
-.shl{font-size:12px}
-.ssm{font-size:10px}
-.str{font-size:10px}
-}
-@media(min-width:769px){
-.clk{display:flex}
-}
-</style></head><body>
+.mt2{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:48px;color:#2d4a6a;text-align:center;font-family:"DM Mono",monospace;font-size:10px}
+@media(max-width:768px){.ls{display:none}.panel{display:none}.spp{width:100%}.shl{font-size:12px}}
+</style>
+</head>
+<body>
 <div class="hdr">
-<div class="logo"><div class="lm">E</div><div><div class="lt">ECOYA INTELLIGENCE</div><div class="ls">COMMODITY SIGNAL TERMINAL · HRM CORPORATION</div></div></div>
-<div class="hdr-r">
-<div class="lpill"><div class="ldot"></div>LIVE</div>
-<div class="rring" id="rr"><svg viewBox="0 0 26 26" width="26" height="26"><circle class="rbg" cx="13" cy="13" r="10"/><circle class="rpg" id="rp" cx="13" cy="13" r="10" stroke-dasharray="62.8" stroke-dashoffset="0"/></svg><div class="rlb" id="rl">5m</div></div>
-<div class="clk" id="clk"></div>
-<div class="setbtn" id="setbtn" title="개인화 설정">⚙</div>
-</div></div>
-<div class="tvw"><div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
-<script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-{"symbols":[{"proName":"KRX:KOSPI","title":"KOSPI"},{"proName":"KRX:KOSDAQ","title":"KOSDAQ"},{"proName":"INDEX:SPX","title":"S&P 500"},{"proName":"NASDAQ:NDX","title":"NASDAQ"},{"proName":"INDEX:NKY","title":"NIKKEI"},{"proName":"INDEX:HSI","title":"HSI"},{"proName":"SSE:000001","title":"상하이"},{"proName":"INDEX:DEU","title":"DAX"},{"proName":"CBOE:UK100","title":"FTSE"},{"proName":"FX:USDKRW","title":"USD/KRW"},{"proName":"FX:USDCNY","title":"USD/CNY"},{"proName":"FX:USDJPY","title":"USD/JPY"},{"proName":"FX:EURUSD","title":"EUR/USD"},{"proName":"COMEX:GC1!","title":"Gold"},{"proName":"COMEX:HG1!","title":"Copper"},{"proName":"NYMEX:CL1!","title":"WTI"},{"proName":"SHFE:AL","title":"AL"},{"proName":"SHFE:CU","title":"CU"},{"proName":"TVC:STEEL","title":"Steel"}],"showSymbolLogo":false,"isTransparent":true,"displayMode":"adaptive","colorTheme":"dark","locale":"en"}</script></div></div>
+  <div class="logo">
+    <div class="lm">E</div>
+    <div><div class="lt">ECOYA INTELLIGENCE</div><div class="ls">COMMODITY SIGNAL TERMINAL - HRM CORPORATION</div></div>
+  </div>
+  <div class="hr2">
+    <div class="lpill"><div class="ldot"></div>LIVE</div>
+    <div class="clk" id="clk"></div>
+    <div class="setbtn" id="setbtn">&#9881;</div>
+  </div>
+</div>
+<div class="tvw">
+  <div class="tradingview-widget-container">
+    <div class="tradingview-widget-container__widget"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+    {"symbols":[{"proName":"KRX:KOSPI","title":"KOSPI"},{"proName":"KRX:KOSDAQ","title":"KOSDAQ"},{"proName":"INDEX:SPX","title":"S&P 500"},{"proName":"NASDAQ:NDX","title":"NASDAQ"},{"proName":"INDEX:NKY","title":"NIKKEI"},{"proName":"FX:USDKRW","title":"USD/KRW"},{"proName":"FX:USDCNY","title":"USD/CNY"},{"proName":"COMEX:GC1!","title":"Gold"},{"proName":"COMEX:HG1!","title":"Copper"},{"proName":"NYMEX:CL1!","title":"WTI"},{"proName":"SHFE:AL","title":"AL"},{"proName":"TVC:STEEL","title":"Steel"}],"showSymbolLogo":false,"isTransparent":true,"displayMode":"adaptive","colorTheme":"dark","locale":"en"}
+    </script>
+  </div>
+</div>
 <div class="main">
-<div class="setpanel" id="spp">
-<div class="spt">⚙ 개인화 설정 — MY PREFERENCES</div>
-<div class="spg"><div class="spgl">관심 원자재</div><div class="chips" id="chip-comm">
-<div class="chip on" data-g="comm">알루미늄(UBC)</div>
-<div class="chip on" data-g="comm">OCC 종이</div>
-<div class="chip on" data-g="comm">SOP 종이</div>
-<div class="chip on" data-g="comm">PET/플라스틱</div>
-<div class="chip on" data-g="comm">구리</div>
-<div class="chip on" data-g="comm">철강</div>
-<div class="chip on" data-g="comm">WTI 원유</div>
-<div class="chip on" data-g="comm">천연가스</div>
-<div class="chip on" data-g="comm">금</div>
-</div></div>
-<div class="spg"><div class="spgl">관심 지역</div><div class="chips" id="chip-reg">
-<div class="chip on" data-g="reg">한국</div>
-<div class="chip on" data-g="reg">중국</div>
-<div class="chip on" data-g="reg">동남아시아</div>
-<div class="chip on" data-g="reg">미국</div>
-<div class="chip on" data-g="reg">유럽</div>
-<div class="chip on" data-g="reg">중동</div>
-<div class="chip on" data-g="reg">일본</div>
-<div class="chip on" data-g="reg">인도</div>
-</div></div>
-<div class="spg"><div class="spgl">데이터 소스</div><div class="chips" id="chip-src">
-<div class="chip am on" data-g="src" data-v="FX_LIVE">FX_LIVE</div>
-<div class="chip am on" data-g="src" data-v="RSS">RSS</div>
-<div class="chip am on" data-g="src" data-v="BDI">BDI</div>
-<div class="chip am on" data-g="src" data-v="GDELT">GDELT</div>
-<div class="chip am on" data-g="src" data-v="FRED">FRED</div>
-<div class="chip am on" data-g="src" data-v="WORLDBANK">WORLDBANK</div>
-<div class="chip am on" data-g="src" data-v="NASA_FIRMS">NASA_FIRMS</div>
-</div></div>
-<div class="spg"><div class="spgl">최소 긴급도 필터</div>
-<div class="slider-wrap"><div class="slider-val" id="urgval">3+</div>
-<input class="slider" type="range" id="urgslider" min="1" max="9" value="3">
-</div></div>
-<div class="sp-actions">
-<button class="sp-rst" id="sprst">초기화</button>
-<button class="sp-apl" id="spapl">✓ 적용하기</button>
-</div>
-<div style="margin-top:16px;font-size:9px;color:#334155;font-family:DM Mono,monospace;line-height:1.6">
-* 설정은 이 브라우저에 저장됩니다<br>* 관심 원자재 기반으로 시그널 우선 정렬<br>* 소스 해제 시 해당 데이터 숨김
-</div></div>
-<div class="fcol">
-<div class="fbar">
-<button class="fb a" data-f="ALL">ALL</button>
-<button class="fb" data-f="MACRO">MACRO</button>
-<button class="fb" data-f="COMMODITY">METALS</button>
-<button class="fb" data-f="SHIPPING">FREIGHT/BDI</button>
-<button class="fb" data-f="GEOPOLITICAL">GEO</button>
-<button class="fb" data-f="CLIMATE">CLIMATE</button>
-<button class="fb" data-f="REGULATORY">POLICY</button>
-<button class="fb ha" data-f="HIGH">🔴 URGENT</button>
-</div>
-<div class="sbar">
-<input class="si" id="si" type="text" placeholder="시그널 검색... (aluminum, KRW, OCC, BDI)">
-<div class="xb" id="xc">✕</div>
-<div class="xb" id="xp">Export</div>
-</div>
-<div class="fcount"><span id="fc">SIGNAL FEED</span><span class="pref-active" id="pref-lbl"></span></div>
-<div class="feed" id="feed"><div class="ld"><div class="sp2"></div>LOADING SIGNALS...</div></div>
-</div>
-<div class="panel">
-<div class="ps"><div class="pt">Terminal Status</div><div class="sg">
-<div class="sbox"><div class="sv" id="st">0</div><div class="sl">TOTAL SIGNALS</div></div>
-<div class="sbox"><div class="sv dn" id="sh">0</div><div class="sl">URGENT</div></div>
-<div class="sbox"><div class="sv">7</div><div class="sl">SOURCES</div></div>
-<div class="sbox"><div class="sv" style="color:var(--teal);font-size:10px;padding-top:2px">CLAUDE<br>SONNET</div><div class="sl">AI ENGINE</div></div>
-</div></div>
-<div class="ps"><div class="pt">Trade Implications</div><div id="impl">
-<div class="ir"><span class="ia">LME ALUMINUM</span><span class="ib NEUTRAL">NEUTRAL</span></div>
-<div class="ir"><span class="ia">KRW/USD</span><span class="ib NEUTRAL">NEUTRAL</span></div>
-<div class="ir"><span class="ia">OCC PAPER</span><span class="ib NEUTRAL">NEUTRAL</span></div>
-<div class="ir"><span class="ia">BDI</span><span class="ib NEUTRAL">NEUTRAL</span></div>
-<div class="ir"><span class="ia">WTI CRUDE</span><span class="ib NEUTRAL">NEUTRAL</span></div>
-<div class="ir"><span class="ia">PLASTIC SCRAP</span><span class="ib NEUTRAL">NEUTRAL</span></div>
-</div></div>
-<div class="ps"><div class="pt">Signal Sources</div><div id="srcs"><div style="font-size:8px;color:#1e3a5f;font-family:DM Mono,monospace">파이프라인 실행 후 표시</div></div></div>
-<div class="ps"><div class="pt">Pipeline Control</div>
-<button class="rb" id="rb">⚡ RUN PIPELINE NOW</button>
-<div class="rst" id="rst"></div></div>
-<div class="ps" id="dp" style="display:none"><div class="pt">Signal Detail</div><div id="dc"></div></div>
-</div>
+  <div class="spp" id="spp">
+    <div class="spt">&#9881; MY PREFERENCES</div>
+    <div class="spg">
+      <div class="spgl">관심 원자재</div>
+      <div class="chips">
+        <div class="chip on" data-g="comm">알루미늄(UBC)</div>
+        <div class="chip on" data-g="comm">OCC 종이</div>
+        <div class="chip on" data-g="comm">SOP 종이</div>
+        <div class="chip on" data-g="comm">PET/플라스틱</div>
+        <div class="chip on" data-g="comm">구리</div>
+        <div class="chip on" data-g="comm">WTI 원유</div>
+        <div class="chip on" data-g="comm">철강</div>
+      </div>
+    </div>
+    <div class="spg">
+      <div class="spgl">관심 지역</div>
+      <div class="chips">
+        <div class="chip on" data-g="reg">한국</div>
+        <div class="chip on" data-g="reg">중국</div>
+        <div class="chip on" data-g="reg">동남아시아</div>
+        <div class="chip on" data-g="reg">미국</div>
+        <div class="chip on" data-g="reg">유럽</div>
+        <div class="chip on" data-g="reg">중동</div>
+        <div class="chip" data-g="reg">일본</div>
+      </div>
+    </div>
+    <div class="spg">
+      <div class="spgl">데이터 소스</div>
+      <div class="chips">
+        <div class="chip am on" data-g="src" data-v="FX_LIVE">FX_LIVE</div>
+        <div class="chip am on" data-g="src" data-v="RSS">RSS</div>
+        <div class="chip am on" data-g="src" data-v="BDI">BDI</div>
+        <div class="chip am on" data-g="src" data-v="GDELT">GDELT</div>
+        <div class="chip am on" data-g="src" data-v="FRED">FRED</div>
+        <div class="chip am on" data-g="src" data-v="WORLDBANK">WORLDBANK</div>
+        <div class="chip am" data-g="src" data-v="NASA_FIRMS">NASA_FIRMS</div>
+      </div>
+    </div>
+    <div class="spg">
+      <div class="spgl">최소 긴급도</div>
+      <div class="sv2" id="urgval">3+</div>
+      <input class="sl2" type="range" id="urgslider" min="1" max="9" value="3">
+    </div>
+    <div class="spact">
+      <button class="sprst" id="sprst">초기화</button>
+      <button class="spapl" id="spapl">적용하기</button>
+    </div>
+    <div class="spnote">* 설정은 이 브라우저에 저장됩니다<br>* 소스 해제시 해당 시그널 숨김</div>
+  </div>
+  <div class="fcol">
+    <div class="fbar">
+      <button class="fb a" data-f="ALL">ALL</button>
+      <button class="fb" data-f="MACRO">MACRO</button>
+      <button class="fb" data-f="COMMODITY">METALS</button>
+      <button class="fb" data-f="SHIPPING">FREIGHT/BDI</button>
+      <button class="fb" data-f="GEOPOLITICAL">GEO</button>
+      <button class="fb" data-f="CLIMATE">CLIMATE</button>
+      <button class="fb" data-f="REGULATORY">POLICY</button>
+      <button class="fb ha" data-f="HIGH">URGENT</button>
+    </div>
+    <div class="sbar">
+      <input class="si" id="si" type="text" placeholder="시그널 검색... (aluminum, KRW, OCC, BDI)">
+      <div class="xb" id="xc">X</div>
+      <div class="xb" id="xp">Export</div>
+    </div>
+    <div class="fcnt"><span id="fc">SIGNAL FEED</span><span class="plbl" id="plbl"></span></div>
+    <div class="feed" id="feed"><div class="ld"><div class="sp2"></div>LOADING SIGNALS...</div></div>
+  </div>
+  <div class="panel">
+    <div class="ps">
+      <div class="pt">Terminal Status</div>
+      <div class="sg">
+        <div class="sbox"><div class="sv" id="st">0</div><div class="sl">TOTAL SIGNALS</div></div>
+        <div class="sbox"><div class="sv dn" id="sh">0</div><div class="sl">URGENT</div></div>
+        <div class="sbox"><div class="sv">7</div><div class="sl">SOURCES</div></div>
+        <div class="sbox"><div class="sv" style="color:var(--tl);font-size:10px">CLAUDE SONNET</div><div class="sl">AI ENGINE</div></div>
+      </div>
+    </div>
+    <div class="ps"><div class="pt">Trade Implications</div><div id="impl">
+      <div class="ir"><span class="ia">LME ALUMINUM</span><span class="ib NEUTRAL">NEUTRAL</span></div>
+      <div class="ir"><span class="ia">KRW/USD</span><span class="ib NEUTRAL">NEUTRAL</span></div>
+      <div class="ir"><span class="ia">OCC PAPER</span><span class="ib NEUTRAL">NEUTRAL</span></div>
+      <div class="ir"><span class="ia">BDI</span><span class="ib NEUTRAL">NEUTRAL</span></div>
+      <div class="ir"><span class="ia">WTI CRUDE</span><span class="ib NEUTRAL">NEUTRAL</span></div>
+      <div class="ir"><span class="ia">PLASTIC SCRAP</span><span class="ib NEUTRAL">NEUTRAL</span></div>
+    </div></div>
+    <div class="ps"><div class="pt">Signal Sources</div><div id="srcs"><div style="font-size:8px;color:#1e3a5f;font-family:DM Mono,monospace">파이프라인 실행 후 표시</div></div></div>
+    <div class="ps"><div class="pt">Pipeline Control</div>
+      <button class="rb" id="rb">RUN PIPELINE NOW</button>
+      <div class="rst" id="rst"></div>
+    </div>
+    <div class="ps" id="dp" style="display:none"><div class="pt">Signal Detail</div><div id="dc"></div></div>
+  </div>
 </div>
 <script>
 var API="https://ecoya-intelligence-production.up.railway.app";
-var PIPE_KEY="ecoya-hrm-pipeline-guowjh5e";
+var PKEY="ecoya-hrm-pipeline-guowjh5e";
 var sigs=[],filt="ALL",sq="",stats={},rsecs=300,rtmr=null;
-var prefs={minUrgency:3,hiddenSrcs:[],keywords:[]};
-try{var sp=localStorage.getItem("ecoya_prefs");if(sp){prefs=JSON.parse(sp);}}catch(e){}
+var prefs={minUrgency:3,hiddenSrcs:[]};
+try{var sp=localStorage.getItem("ecoya_prefs");if(sp)prefs=JSON.parse(sp);}catch(e){}
+
 setInterval(function(){var e=document.getElementById("clk");if(e)e.textContent=new Date().toLocaleTimeString("ko-KR",{hour12:false,timeZone:"Asia/Seoul"})+" KST";},1000);
-document.getElementById("rr").addEventListener("click",function(){load();});
-function startRing(){clearInterval(rtmr);rsecs=300;rtmr=setInterval(function(){rsecs--;var rp=document.getElementById("rp"),rl=document.getElementById("rl");if(rp)rp.style.strokeDashoffset=(62.8*(1-rsecs/300)).toString();if(rl)rl.textContent=rsecs<=60?rsecs+"s":Math.ceil(rsecs/60)+"m";if(rsecs<=0)load();},1000);}
+
+function startRing(){clearInterval(rtmr);rsecs=300;rtmr=setInterval(function(){rsecs--;if(rsecs<=0)load();},1000);}
+
 document.getElementById("setbtn").addEventListener("click",function(){
-  var p=document.getElementById("spp"),b=document.getElementById("setbtn");
-  p.classList.toggle("open");b.classList.toggle("on");
+  var p=document.getElementById("spp");p.classList.toggle("open");this.classList.toggle("on");
   if(p.classList.contains("open"))syncPrefsUI();
 });
-document.querySelectorAll(".chip").forEach(function(c){
-  c.addEventListener("click",function(){this.classList.toggle("on");});
-});
-document.getElementById("urgslider").addEventListener("input",function(){
-  document.getElementById("urgval").textContent=this.value+"+";
-});
+
+document.querySelectorAll(".chip").forEach(function(c){c.addEventListener("click",function(){this.classList.toggle("on");});});
+document.getElementById("urgslider").addEventListener("input",function(){document.getElementById("urgval").textContent=this.value+"+";});
+
 function syncPrefsUI(){
-  var sl=document.getElementById("urgslider");
-  sl.value=prefs.minUrgency||3;
+  var sl=document.getElementById("urgslider");sl.value=prefs.minUrgency||3;
   document.getElementById("urgval").textContent=sl.value+"+";
-  var hidSet=new Set(prefs.hiddenSrcs||[]);
-  document.querySelectorAll(".chip[data-g=src]").forEach(function(c){
-    c.classList.toggle("on",!hidSet.has(c.dataset.v));
-  });
+  var h=new Set(prefs.hiddenSrcs||[]);
+  document.querySelectorAll(".chip[data-g=src]").forEach(function(c){c.classList.toggle("on",!h.has(c.dataset.v));});
 }
+
 document.getElementById("spapl").addEventListener("click",function(){
   prefs.minUrgency=parseInt(document.getElementById("urgslider").value)||3;
   prefs.hiddenSrcs=[];
-  document.querySelectorAll(".chip[data-g=src]").forEach(function(c){
-    if(!c.classList.contains("on"))prefs.hiddenSrcs.push(c.dataset.v);
-  });
+  document.querySelectorAll(".chip[data-g=src]").forEach(function(c){if(!c.classList.contains("on"))prefs.hiddenSrcs.push(c.dataset.v);});
   try{localStorage.setItem("ecoya_prefs",JSON.stringify(prefs));}catch(e){}
-  document.getElementById("spp").classList.remove("open");
-  document.getElementById("setbtn").classList.remove("on");
+  document.getElementById("spp").classList.remove("open");document.getElementById("setbtn").classList.remove("on");
   render();updatePrefLabel();
 });
+
 document.getElementById("sprst").addEventListener("click",function(){
-  prefs={minUrgency:3,hiddenSrcs:[],keywords:[]};
-  try{localStorage.removeItem("ecoya_prefs");}catch(e){}
+  prefs={minUrgency:3,hiddenSrcs:[]};try{localStorage.removeItem("ecoya_prefs");}catch(e){}
   syncPrefsUI();render();updatePrefLabel();
 });
+
 function updatePrefLabel(){
-  var pl=document.getElementById("pref-lbl");if(!pl)return;
+  var pl=document.getElementById("plbl");if(!pl)return;
   var parts=[];
-  if(prefs.minUrgency>1)parts.push("긴급도 "+prefs.minUrgency+"+");
-  if((prefs.hiddenSrcs||[]).length)parts.push(prefs.hiddenSrcs.length+"개 소스 숨김");
-  pl.textContent=parts.length?"⚙ "+parts.join(" · "):"";
+  if(prefs.minUrgency>1)parts.push("urgency "+prefs.minUrgency+"+");
+  if((prefs.hiddenSrcs||[]).length)parts.push(prefs.hiddenSrcs.length+" hidden");
+  pl.textContent=parts.length?"* "+parts.join(" / "):"";
 }
+
 function load(){
   fetch(API+"/api/signals?limit=100").then(function(r){return r.json();}).then(function(s){
     var pi={};for(var i=0;i<sigs.length;i++)pi[sigs[i].signal_id]=true;
-    var ns=s.signals||[];
-    for(var j=0;j<ns.length;j++){if(!pi[ns[j].signal_id])ns[j]._nw=true;}
-    sigs=ns;render();updateStats();checkAlert();startRing();updatePrefLabel();
-  }).catch(function(e){document.getElementById("feed").innerHTML="<div class=\"mt\"><div>⚠ API Error</div><div style=\"font-size:9px;margin-top:4px\">"+e.message+"</div></div>";});
+    var ns=s.signals||[];for(var j=0;j<ns.length;j++){if(!pi[ns[j].signal_id])ns[j]._nw=true;}
+    sigs=ns;render();updateStats();startRing();updatePrefLabel();
+  }).catch(function(e){document.getElementById("feed").innerHTML='<div class="mt2"><div>API Error</div><div style="font-size:9px">'+e.message+'</div></div>';});
   fetch(API+"/api/signals/stats").then(function(r){return r.json();}).then(function(st){stats=st||{};updateSrc();}).catch(function(){});
 }
-function checkAlert(){var u=sigs.filter(function(s){return s.urgency_score>=8&&s._nw;});if(!u.length)return;var b=document.querySelector(".alb");if(b)b.remove();b=document.createElement("div");b.className="alb";b.textContent="🔴 URGENT "+u.length+"건 · ["+u[0].urgency_score+"/10] "+u[0].headline.substring(0,50)+"...";b.addEventListener("click",function(){b.remove();setF("HIGH");});document.body.appendChild(b);setTimeout(function(){if(b.parentNode)b.remove();},7000);}
+
 function mf(s){
   if(s.urgency_score<(prefs.minUrgency||1))return false;
   if((prefs.hiddenSrcs||[]).indexOf(s.data_source)>=0)return false;
   if(filt==="ALL")return true;
   if(filt==="HIGH")return s.urgency_score>=7;
-  if(filt==="SHIPPING")return s.category==="SHIPPING"||s.data_source==="BDI"||(s.affected_assets||[]).some(function(a){return a.indexOf("FREIGHT")>=0||a.indexOf("BDI")>=0;});
+  if(filt==="SHIPPING")return s.category==="SHIPPING"||s.data_source==="BDI";
   return s.category===filt;
 }
 function ms(s){if(!sq)return true;return((s.headline||"")+(s.summary||"")+(s.category||"")+(s.data_source||"")).toLowerCase().indexOf(sq.toLowerCase())>=0;}
-function sortSigs(list){
-  return list.slice().sort(function(a,b){return b.urgency_score-a.urgency_score;});
-}
+
 function render(){
   var feed=document.getElementById("feed");
-  var list=sortSigs(sigs.filter(function(s){return mf(s)&&ms(s);}));
+  var list=sigs.filter(function(s){return mf(s)&&ms(s);}).slice().sort(function(a,b){return b.urgency_score-a.urgency_score;});
   var fc=document.getElementById("fc");
-  if(fc)fc.textContent="SIGNAL FEED "+list.length+"/"+sigs.length+(sq?" · \""+sq+"\"":"");
-  if(!list.length){feed.innerHTML="<div class=\"mt\"><div>📡</div><div>시그널 없음</div><div style=\"font-size:9px;margin-top:3px\">설정 변경 또는 파이프라인 실행</div></div>";return;}
+  if(fc)fc.textContent="SIGNAL FEED "+list.length+"/"+sigs.length;
+  if(!list.length){feed.innerHTML='<div class="mt2"><div>시그널 없음</div></div>';return;}
   var now=Date.now(),html="";
   for(var i=0;i<list.length;i++){
     var s=list[i],u=s.urgency_score||5;
@@ -323,41 +316,104 @@ function render(){
     var t=s.created_at?new Date(s.created_at).toLocaleTimeString("ko-KR",{hour12:false,timeZone:"Asia/Seoul"}):"";
     var nw=s._nw||(s.created_at&&(now-new Date(s.created_at).getTime())<1800000);
     var url=(s.source&&s.source.url)?s.source.url:"";
-    var hl=url?"<a href=\""+url+"\" target=\"_blank\" onclick=\"event.stopPropagation()\">"+s.headline+"</a>":s.headline;
-    var tr=s.trade_implication?"<div class=\"str\">→ "+s.trade_implication+"</div>":"";
-    var ast="";if(s.affected_assets){for(var j=0;j<Math.min(s.affected_assets.length,5);j++){ast+="<span class=\"at\">"+s.affected_assets[j].replace(/_/g," ")+"</span>";}}
-    html+="<div class=\"sc "+uc+"\" data-id=\""+s.signal_id+"\">"+
-      "<div class=\"sct\"><div class=\"smt\">";
-    html+="<span class=\"ct "+(s.category||"")+"\">"+( s.category||"SIG")+"</span>";
-    if(s.data_source)html+="<span class=\"srcb\">"+s.data_source+"</span>";
-    if(nw)html+="<span class=\"nb\">NEW</span>";
-    html+="<span class=\"tb\">"+t+"</span>";
-    html+="</div><div class=\"ub "+ubc+"\">"+u+"</div></div>";
-    html+="<div class=\"shl\">"+hl+"</div>";
-    html+="<div class=\"ssm\">"+(s.summary||"").substring(0,155)+((s.summary||"").length>155?"...":"")+"</div>";
+    var hl=url?'<a href="'+url+'" target="_blank" onclick="event.stopPropagation()">'+s.headline+'</a>':s.headline;
+    var tr=s.trade_implication?'<div class="str">'+s.trade_implication+'</div>':"";
+    var ast="";if(s.affected_assets){for(var j=0;j<Math.min(s.affected_assets.length,5);j++){ast+='<span class="at">'+s.affected_assets[j].replace(/_/g," ")+'</span>';}}
+    html+='<div class="sc '+uc+'" data-id="'+s.signal_id+'">';
+    html+='<div class="sct"><div class="smt"><span class="ct '+(s.category||"")+'">'+( s.category||"SIG")+'</span>';
+    if(s.data_source)html+='<span class="srcb">'+s.data_source+'</span>';
+    if(nw)html+='<span class="nb">NEW</span>';
+    html+='<span class="tb">'+t+'</span></div><div class="ub '+ubc+'">'+u+'</div></div>';
+    html+='<div class="shl">'+hl+'</div>';
+    html+='<div class="ssm">'+(s.summary||"").substring(0,155)+'</div>';
     if(tr)html+=tr;
-    if(ast)html+="<div class=\"sas\">"+ast+"</div>";
-    html+="</div>";
+    if(ast)html+='<div class="sas">'+ast+'</div>';
+    html+='</div>';
   }
   feed.innerHTML=html;
   feed.querySelectorAll(".sc").forEach(function(c){c.addEventListener("click",function(){selSig(this.dataset.id);});});
 }
-function updateStats(){var st=document.getElementById("st"),sh=document.getElementById("sh");if(st)st.textContent=sigs.length;if(sh)sh.textContent=sigs.filter(function(s){return s.urgency_score>=7;}).length;var a={"LME ALUMINUM":"NEUTRAL","KRW/USD":"NEUTRAL","OCC PAPER":"NEUTRAL","BDI":"NEUTRAL","WTI CRUDE":"NEUTRAL","PLASTIC SCRAP":"NEUTRAL"};sigs.forEach(function(s){if(s.urgency_score<5)return;(s.affected_assets||[]).forEach(function(x){if(x.indexOf("ALUM")>=0)a["LME ALUMINUM"]=s.urgency_score>=8?"BEARISH":"WATCH";if(x.indexOf("KRW")>=0)a["KRW/USD"]="WATCH";if(x.indexOf("PAPER")>=0||x.indexOf("OCC")>=0)a["OCC PAPER"]="WATCH";if(x.indexOf("BDI")>=0)a["BDI"]="WATCH";if(x.indexOf("CRUDE")>=0||x.indexOf("WTI")>=0)a["WTI CRUDE"]=s.urgency_score>=7?"BEARISH":"WATCH";if(x.indexOf("PLASTIC")>=0)a["PLASTIC SCRAP"]="WATCH";});});var impl=document.getElementById("impl");if(!impl)return;var html="",keys=Object.keys(a);for(var k=0;k<keys.length;k++){html+="<div class=\"ir\"><span class=\"ia\">"+keys[k]+"</span><span class=\"ib "+a[keys[k]]+"\">" +a[keys[k]]+"</span></div>";}impl.innerHTML=html;}
-function updateSrc(){var by=stats.by_source||{},keys=Object.keys(by);if(!keys.length)return;var tot=0;for(var i=0;i<keys.length;i++)tot+=by[keys[i]];if(!tot)tot=1;var ord=["FX_LIVE","RSS","BDI","GDELT","FRED","WORLDBANK","NASA_FIRMS"],srt=[];for(var j=0;j<ord.length;j++){if(by[ord[j]])srt.push(ord[j]);}for(var k=0;k<keys.length;k++){if(ord.indexOf(keys[k])<0&&by[keys[k]])srt.push(keys[k]);}var html="";for(var m=0;m<srt.length;m++){var key=srt[m],pct=Math.min(Math.round(by[key]/tot*100),100);html+="<div class=\"sri\"><div class=\"srr\"><span class=\"srn\">"+key+"</span><span class=\"src2\">"+by[key]+"</span></div><div class=\"srb\"><div class=\"srf\" style=\"width:"+pct+"%\"></div></div></div>";}var el=document.getElementById("srcs");if(el)el.innerHTML=html;}
-function setF(f){filt=f;document.querySelectorAll(".fb").forEach(function(b){b.classList.remove("a");if(b.dataset.f===f)b.classList.add("a");});render();}
+
+function updateStats(){
+  var st=document.getElementById("st"),sh=document.getElementById("sh");
+  if(st)st.textContent=sigs.length;
+  if(sh)sh.textContent=sigs.filter(function(s){return s.urgency_score>=7;}).length;
+  var a={"LME ALUMINUM":"NEUTRAL","KRW/USD":"NEUTRAL","OCC PAPER":"NEUTRAL","BDI":"NEUTRAL","WTI CRUDE":"NEUTRAL","PLASTIC SCRAP":"NEUTRAL"};
+  sigs.forEach(function(s){
+    if(s.urgency_score<5)return;
+    (s.affected_assets||[]).forEach(function(x){
+      if(x.indexOf("ALUM")>=0)a["LME ALUMINUM"]=s.urgency_score>=8?"BEARISH":"WATCH";
+      if(x.indexOf("KRW")>=0)a["KRW/USD"]="WATCH";
+      if(x.indexOf("PAPER")>=0||x.indexOf("OCC")>=0)a["OCC PAPER"]="WATCH";
+      if(x.indexOf("BDI")>=0)a["BDI"]="WATCH";
+      if(x.indexOf("CRUDE")>=0||x.indexOf("WTI")>=0)a["WTI CRUDE"]=s.urgency_score>=7?"BEARISH":"WATCH";
+      if(x.indexOf("PLASTIC")>=0)a["PLASTIC SCRAP"]="WATCH";
+    });
+  });
+  var impl=document.getElementById("impl");if(!impl)return;
+  var html="",keys=Object.keys(a);
+  for(var k=0;k<keys.length;k++)html+='<div class="ir"><span class="ia">'+keys[k]+'</span><span class="ib '+a[keys[k]]+'">'+a[keys[k]]+'</span></div>';
+  impl.innerHTML=html;
+}
+
+function updateSrc(){
+  var by=stats.by_source||{},keys=Object.keys(by);if(!keys.length)return;
+  var tot=0;for(var i=0;i<keys.length;i++)tot+=by[keys[i]];if(!tot)tot=1;
+  var html="";
+  for(var k=0;k<keys.length;k++){
+    var pct=Math.min(Math.round(by[keys[k]]/tot*100),100);
+    html+='<div class="sri"><div class="srr"><span class="srn">'+keys[k]+'</span><span class="src2">'+by[keys[k]]+'</span></div><div class="srb"><div class="srf" style="width:'+pct+'%"></div></div></div>';
+  }
+  var el=document.getElementById("srcs");if(el)el.innerHTML=html;
+}
+
+function setF(f){
+  filt=f;
+  document.querySelectorAll(".fb").forEach(function(b){b.classList.remove("a");if(b.dataset.f===f)b.classList.add("a");});
+  render();
+}
 document.querySelectorAll(".fb").forEach(function(b){b.addEventListener("click",function(){setF(this.dataset.f);});});
 document.getElementById("si").addEventListener("input",function(){sq=this.value.trim();render();});
 document.getElementById("xc").addEventListener("click",function(){document.getElementById("si").value="";sq="";render();});
-document.getElementById("xp").addEventListener("click",function(){var list=sigs.filter(function(s){return mf(s)&&ms(s);});var txt="ECOYA INTELLIGENCE Export
+document.getElementById("xp").addEventListener("click",function(){
+  var list=sigs.filter(function(s){return mf(s)&&ms(s);});
+  var txt="ECOYA INTELLIGENCE Export
 "+new Date().toISOString()+"
 
-";for(var i=0;i<list.length;i++){txt+="["+list[i].urgency_score+"/10] "+list[i].category+"
-"+list[i].headline+"
-"+(list[i].summary||"")+"
--> "+(list[i].trade_implication||"")+"
+";
+  for(var i=0;i<list.length;i++)txt+="["+list[i].urgency_score+"/10] "+list[i].headline+"
+"+(list[i].trade_implication||"")+"
 
-";}navigator.clipboard.writeText(txt).then(function(){var b=document.getElementById("xp");b.textContent="✓";setTimeout(function(){b.textContent="Export";},2000);}).catch(function(){alert("클립보드를 허용해주세요.");});});
-function selSig(id){var s=null;for(var i=0;i<sigs.length;i++){if(sigs[i].signal_id===id){s=sigs[i];break;}}if(!s)return;document.querySelectorAll(".sc").forEach(function(c){c.classList.toggle("sel",c.dataset.id===id);});var dp=document.getElementById("dp");if(dp)dp.style.display="block";var url=(s.source&&s.source.url)?s.source.url:"";var tr=s.trade_implication?"<div class=\"dtr\">→ "+s.trade_implication+"</div>":"";var ast="";if(s.affected_assets){for(var k=0;k<s.affected_assets.length;k++){ast+="<span class=\"at\" style=\"font-size:7px;padding:2px 5px\">"+s.affected_assets[k].replace(/_/g," ")+"</span>";}}var geo=s.geography?(s.geography.primary||"N/A"):"N/A";var lnk=url?"<div class=\"dlb\">원문 링크</div><div><a class=\"dlk\" href=\""+url+"\" target=\"_blank\">🔗 기사 원문 →</a></div>":"";var dc=document.getElementById("dc");if(dc){dc.innerHTML="<div class=\"did\">"+s.signal_id+" · "+s.data_source+"</div><div class=\"dhl\">"+s.headline+"</div>"+tr+"<div class=\"dsm\">"+(s.summary||"")+"</div><div class=\"dlb\">영향 자산</div><div class=\"das\">"+ast+"</div><div class=\"dlb\">지역</div><div style=\"font-size:9px;color:var(--muted);margin-bottom:5px\">"+geo+"</div>"+lnk;}}
-document.getElementById("rb").addEventListener("click",function(){var btn=this,rst=document.getElementById("rst");btn.disabled=true;btn.classList.add("run");btn.textContent="RUNNING...";if(rst)rst.textContent="수집중 · AI 분석 중...";fetch(API+"/api/signals/run",{method:"POST",headers:{"X-API-Key":PIPE_KEY}}).then(function(){if(rst)rst.textContent="35초 후 업데이트...";setTimeout(function(){load();if(rst)rst.textContent="✓ 완료!";},35000);}).catch(function(e){if(rst)rst.textContent="오류: "+e.message;}).finally(function(){setTimeout(function(){btn.disabled=false;btn.classList.remove("run");btn.textContent="⚡ RUN PIPELINE NOW";},7000);});});
+";
+  navigator.clipboard.writeText(txt).then(function(){var b=document.getElementById("xp");b.textContent="Copied!";setTimeout(function(){b.textContent="Export";},2000);}).catch(function(){alert("clipboard denied");});
+});
+
+function selSig(id){
+  var s=null;for(var i=0;i<sigs.length;i++){if(sigs[i].signal_id===id){s=sigs[i];break;}}if(!s)return;
+  document.querySelectorAll(".sc").forEach(function(c){c.classList.toggle("sel",c.dataset.id===id);});
+  var dp=document.getElementById("dp");if(dp)dp.style.display="block";
+  var dc=document.getElementById("dc");
+  if(dc){
+    var url=(s.source&&s.source.url)?s.source.url:"";
+    var lnk=url?'<div style="margin-top:6px"><a style="color:#3b82f6;font-size:9px" href="'+url+'" target="_blank">기사 원문</a></div>':"";
+    dc.innerHTML='<div style="font-size:8px;color:#334155;font-family:DM Mono,monospace;margin-bottom:4px">'+s.signal_id+'</div>'
+      +'<div style="font-size:11px;font-weight:700;color:var(--tx);margin-bottom:6px">'+s.headline+'</div>'
+      +(s.trade_implication?'<div class="str">'+s.trade_implication+'</div>':"")
+      +'<div style="font-size:9px;color:var(--mt);">'+(s.summary||"")+'</div>'+lnk;
+  }
+}
+
+document.getElementById("rb").addEventListener("click",function(){
+  var btn=this,rst=document.getElementById("rst");
+  btn.disabled=true;btn.textContent="RUNNING...";
+  if(rst)rst.textContent="수집중...";
+  fetch(API+"/api/signals/run",{method:"POST",headers:{"X-API-Key":PKEY}})
+    .then(function(){if(rst)rst.textContent="35초 후 업데이트...";setTimeout(function(){load();if(rst)rst.textContent="완료!";},35000);})
+    .catch(function(e){if(rst)rst.textContent="오류: "+e.message;})
+    .finally(function(){setTimeout(function(){btn.disabled=false;btn.textContent="RUN PIPELINE NOW";},7000);});
+});
+
 syncPrefsUI();startRing();load();
-</script></body></html>
+</script>
+</body>
+</html>
