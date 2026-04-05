@@ -379,7 +379,7 @@ document.getElementById("xp").addEventListener("click",function(){
   var list=sigs.filter(function(s){return mf(s)&&ms(s);});
   list.sort(function(a,b){return b.urgency_score-a.urgency_score;});
   var txt="ECOYA INTELLIGENCE Export\n"+new Date().toISOString()+"\n\n";
-  for(var i=0;i<list.length;i++){txt+="["+list[i].urgency_score+"/10] "+(list[i].category||"")+"\n"+list[i].headline+"\n"+(list[i].summary||"")+"\n-> "+(list[i].trade_implication||"")+"\n\n";}
+  for(var i=0;i<list.length;i++){txt+="["+list[i].urgency_score+"/10] "+list[i].headline+"\n"+(list[i].trade_implication||"")+"\n\n";}
   navigator.clipboard.writeText(txt).then(function(){var b=document.getElementById("xp");b.textContent="Copied!";setTimeout(function(){b.textContent="Export";},2000);}).catch(function(){alert("클립보드를 허용해주세요");});
 });
 
