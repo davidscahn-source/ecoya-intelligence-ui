@@ -202,7 +202,10 @@ main{padding-top:var(--hdr);min-height:100vh;position:relative;z-index:1}
 
 <script>
 const API='https://ecoya-intelligence-production-149b.up.railway.app';
-const PK='ecoya-pipeline-2026-hrm-secure-x7k9';
+// SECURITY: pipeline-trigger API key removed from client.
+// Phase 1 kill switch: the RUN PIPELINE button is disabled; backend also blocks
+// the previously-leaked key value explicitly (see ecoya-intelligence SECURITY.md).
+// Phase 2: Supabase JWT or session-scoped ephemeral token.
 let sigs=[],filter='all';
 
 setInterval(()=>{document.getElementById('hdrTime').textContent=new Date().toUTCString().slice(17,25)+' UTC';},1000);
@@ -253,11 +256,12 @@ function render(){
 function setFilter(cat,btn){filter=cat;document.querySelectorAll('.f-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');render();}
 
 async function runPipeline(){
-  const ico=document.getElementById('runIco');
-  ico.innerHTML='<span class="spin">⟳</span>';
-  try{await fetch(API+'/api/signals/run',{method:'POST',headers:{'Content-Type':'application/json','X-API-Key':PK}});showToast('✓ Pipeline started');setTimeout(load,8000);}
-  catch(e){showToast('⚠ Error');}
-  finally{setTimeout(()=>ico.innerHTML='▶',5000);}
+  // Phase 1 kill switch: pipeline trigger disabled until auth rework lands.
+  // Defensive: even if invoked (e.g. via DevTools), surface a clear toast and
+  // do NOT send the previous X-API-Key header — the key has been revoked
+  // server-side (see ecoya-intelligence SECURITY.md).
+  showToast('⛔ Pipeline trigger temporarily disabled — auth rework in progress');
+  return;
 }
 
 function showToast(m){document.querySelectorAll('.toast').forEach(t=>t.remove());const t=document.createElement('div');t.className='toast';t.textContent=m;document.body.appendChild(t);setTimeout(()=>t.remove(),4000);}
@@ -267,7 +271,7 @@ function timeAgo(d){const diff=Date.now()-new Date(d).getTime(),m=Math.floor(dif
 const SHEETS={
   fx:{title:'FX Markets',html:'<div class="fx-row"><div><div class="fx-pair">USD/KRW</div><div style="font-size:9px;color:var(--dim)">Korean Won</div></div><div style="text-align:right"><div class="fx-rate">1,364.2</div><div class="fx-chg up">+0.32%</div></div></div><div class="fx-row"><div><div class="fx-pair">USD/CNY</div><div style="font-size:9px;color:var(--dim)">Yuan</div></div><div style="text-align:right"><div class="fx-rate">7.248</div><div class="fx-chg dn">-0.12%</div></div></div><div class="fx-row"><div><div class="fx-pair">USD/JPY</div><div style="font-size:9px;color:var(--dim)">Yen</div></div><div style="text-align:right"><div class="fx-rate">148.6</div><div class="fx-chg up">+0.18%</div></div></div><div class="fx-row"><div><div class="fx-pair">EUR/USD</div><div style="font-size:9px;color:var(--dim)">Euro</div></div><div style="text-align:right"><div class="fx-rate">1.0842</div><div class="fx-chg dn">-0.09%</div></div></div>'},
   market:{title:'Commodity Prices',html:'<div class="m-row"><div class="m-name">OCC Paper</div><div class="m-val" style="color:var(--teal)">$142/MT</div></div><div class="m-row"><div class="m-name">UBC Aluminum</div><div class="m-val" style="color:var(--amber)">$1,850/MT</div></div><div class="m-row"><div class="m-name">SOP Grade</div><div class="m-val" style="color:var(--mid)">$89/MT</div></div><div class="m-row"><div class="m-name">rPET</div><div class="m-val" style="color:var(--teal)">$1,240/MT</div></div><div class="m-row"><div class="m-name">ADC12</div><div class="m-val" style="color:var(--amber)">$1,920/MT</div></div><div class="m-row"><div class="m-name">LDPE</div><div class="m-val" style="color:var(--red)">$980/MT</div></div><div class="m-row"><div class="m-name">Brent Crude</div><div class="m-val" style="color:var(--red)">$74.2</div></div><div class="m-row"><div class="m-name">Baltic Index</div><div class="m-val" style="color:var(--teal)">1,840</div></div>'},
-  system:{title:'System Status',html:'<div class="m-row"><div class="m-name">API Status</div><div class="m-val" style="color:var(--teal)">ONLINE</div></div><div class="m-row"><div class="m-name">AI Engine</div><div class="m-val" style="color:var(--blue)">claude-sonnet-4</div></div><div class="m-row"><div class="m-name">DB</div><div class="m-val" style="color:var(--teal)">Supabase PRO</div></div><div class="m-row"><div class="m-name">Scheduler</div><div class="m-val" style="color:var(--teal)">ACTIVE</div></div><div class="m-row"><div class="m-name">Region</div><div class="m-val" style="color:var(--mid)">us-west2</div></div><div style="margin-top:14px"><button class="run-btn" onclick="runPipeline();closeSheet()">▶ &nbsp;RUN PIPELINE</button></div>'}
+  system:{title:'System Status',html:'<div class="m-row"><div class="m-name">API Status</div><div class="m-val" style="color:var(--teal)">ONLINE</div></div><div class="m-row"><div class="m-name">AI Engine</div><div class="m-val" style="color:var(--blue)">claude-sonnet-4</div></div><div class="m-row"><div class="m-name">DB</div><div class="m-val" style="color:var(--teal)">Supabase PRO</div></div><div class="m-row"><div class="m-name">Scheduler</div><div class="m-val" style="color:var(--teal)">ACTIVE</div></div><div class="m-row"><div class="m-name">Region</div><div class="m-val" style="color:var(--mid)">us-west2</div></div><div style="margin-top:14px"><button class="run-btn" disabled style="opacity:0.45;cursor:not-allowed" title="Pipeline trigger temporarily disabled — auth rework in progress (Phase 2)">▶ &nbsp;RUN PIPELINE (disabled)</button></div>'}
 };
 
 function openSheet(key){
